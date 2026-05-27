@@ -1,0 +1,62 @@
+{
+  "slug": "dane-telecom",
+  "index": "04",
+  "title": "Dane Telecom",
+  "tagline": "The client knew their design system lacked scalability. They did not know what to do about it. I was invited on-site in Copenhagen to find out.",
+  "role": "Senior Product Designer, Design Systems",
+  "location": "On-site, Copenhagen",
+  "year": "2023",
+  "roleDetail": "Led design system restructure working directly with the client's UX lead and UI designers. Introduced a three-tier token architecture, established component governance with a sandbox-to-master promotion workflow, and aligned the system roadmap with product delivery priorities across the team.",
+  "impactSummary": "Handoff time dropped from two weeks to one week, consistently. 32% velocity increase on concept production across the team. Component library restructured from an ungoverned collection to a token-based system with a documented promotion process.",
+  "metrics": [
+    { "value": "50%", "label": "Faster handoff. Two weeks to one week, consistently. Measured against the team's own release log before and after restructure." },
+    { "value": "32%", "label": "Velocity increase on concept production across the team, tracked across three feature cycles post-restructure." },
+    { "value": "3mo", "label": "On-site in Copenhagen. Proximity was not optional. This restructure required daily design and engineering coordination." }
+  ],
+  "context": "The client's UX lead reached out directly for help with design system optimisation. The system existed and covered the basics. The problem was that it had not been built with the product roadmap in mind. New features were forcing designers to solve the same problems locally, repeatedly, with no path back to the shared system. Before proposing any fixes, I needed to understand what the system actually contained and what it would need to support next.",
+  "sections": [
+    {
+      "title": "What I found on day one",
+      "pullquote": "I arrived expecting mature governance. What I found was a component library with significant gaps and no process for deciding what belonged in the system.",
+      "body": [
+        "My first assumption was wrong. The client was a large, well-established company in Denmark. I arrived expecting a mature design system with clear governance. What I found was a component library with significant gaps, no documentation, and no process for deciding what belonged in the system versus what stayed local to a feature.",
+        "That assumption cost me time. I spent the first week oriented to the wrong problem before the inventory work made the real situation clear. From that point, I ran a full audit mapping every component, every token reference, every deviation before proposing anything. The audit was the most important output of the first three weeks. Without it, any restructure would have been built on the same incomplete picture."
+      ],
+      "screens": [
+        { "src": "/dane/inventory.png", "caption": "Component inventory audit. 10 components mapped against Q4 roadmap, classified by status and priority. Illustrative representation of system documentation." }
+      ]
+    },
+    {
+      "title": "Mapping the gap between system and roadmap",
+      "pullquote": "",
+      "body": [
+        "The first thing I proposed to the UX lead was a roadmap comparison. My argument was straightforward: before fixing what exists, we need to know what the product will require in the next quarter. A component that works for current features may not work for what is coming. If we restructure without that visibility, we will solve today's problem and create tomorrow's.",
+        "That conversation gave the project its direction. The gaps between current system state and near-future product needs became the prioritisation framework. Components that would be stressed by the roadmap got restructured first. Components that were stable got documented and left alone."
+      ],
+      "screens": []
+    },
+    {
+      "title": "Token architecture and governance",
+      "pullquote": "",
+      "body": [
+        "The restructure introduced three token tiers: primitive tokens (raw values: color, spacing, radius, type scale), semantic tokens (purpose-mapped aliases: surface, text, border, action), and component tokens (component-scoped overrides). This separation meant that a brand color change touched one primitive, propagated through semantic aliases, and updated every component automatically. Before the restructure, the same change required hunting through local overrides across dozens of components.",
+        "The governance model was equally important. I introduced a sandbox-to-master workflow: new components and token changes were built in isolation in a sandbox file, validated against active handoffs, reviewed by the UX lead, and only promoted to the master library once confirmed safe. Engineering was not involved in the promotion decision. Component governance stayed a design call. That boundary mattered. It kept the process fast.",
+        "The scope was larger than one person could cover on the timeline we had. I coordinated with other designers to split the work into batches, each assigned and tracked against the roadmap milestones. That coordination was the part of the project that most required the on-site presence. Remote collaboration on a restructure of this complexity, across a team that was also shipping features, would have been significantly harder."
+      ],
+      "screens": [
+        { "src": "/dane/component-audit.png", "caption": "Before and after token restructure. Three inconsistent button variants unified under a semantic token layer. Illustrative system documentation." },
+        { "src": "/dane/token-architecture.png", "caption": "Three-tier token architecture and sandbox-to-master governance workflow. Illustrative representation of the restructure approach." }
+      ]
+    },
+    {
+      "title": "What I would do differently",
+      "pullquote": "",
+      "body": [
+        "I would map the system state and the roadmap on day one, before any other work. My assumption that a company of this scale would have mature governance was the single thing that cost the most time. The lesson is not specific to this engagement: the bigger the company, the more important it is to verify rather than assume. Large organisations accumulate technical and design debt the same way smaller ones do, often more invisibly."
+      ],
+      "screens": []
+    }
+  ],
+  "metaTitle": "Dane Telecom: Design System Restructure / Felipe Cruz",
+  "metaDescription": "Led a production design system restructure for a major Danish telecom. Token architecture, component governance, sandbox-to-master workflow. 50% faster handoff."
+}

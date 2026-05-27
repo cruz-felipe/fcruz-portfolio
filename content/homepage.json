@@ -1,0 +1,139 @@
+{
+  "heroHeadline": "I design for the moment when complexity is no longer manageable and someone has to make it work.",
+  "heroRedWords": "make,it,work",
+  "heroBio": "Eleven years designing enterprise products at global scale in BSS/OSS telecom infrastructure, B2B and B2C across 9 countries. I lead local design team, run the cross-functional process and deliver the kind of system that engineers can actually build and business stakeholders can explain.",
+  "heroCurrentLabel": "Currently",
+  "heroCurrentRole": "Senior UI Designer · Team Lead, Brazil",
+  "heroCurrentCompany": "@ Netcracker Technology",
+  "aboutBio1": "I'm Felipe. I've been at this long enough to know that most design problems are really communication failures. Between design and engineering, between what was decided and what actually shipped.",
+  "aboutBio2": "I lead a team in Brazil and contribute as an IC to global products. My job is to build systems that stay consistent at scale and make sure every design decision survives contact with the engineers, analysts and stakeholders who have to deliver it.",
+  "aboutBio3": "Working across cultures taught me that good process may not be universal, but clear communication is.",
+  "aboutBeyondLabel": "Beyond the work",
+  "aboutBeyond1": "I'm Brazilian. I grew up building things with whatever was available, which probably explains why I'm more interested in constraints than in ideal conditions.",
+  "aboutBeyond2": "Outside of screens I'm a 2nd degree black belt in ITF Taekwondo. Not because I wanted to fight, but because I needed to know I could keep going when things stopped being comfortable (but fighting is pretty cool). I've also been drawing since before I can remember, illustration and concept art are where I think without KPIs. I got published at MSP Estúdios, the studio behind Turma da Mônica, Brazil's most enduring comics universe.",
+  "aboutBeyond3": "I also have a genuine obsession with dinosaurs. Can you imagine how something so complex, so dominant, left behind just enough evidence for us to piece together the whole picture. That's not so different from what we do with products, is it?",
+  "aboutBeyond4": "",
+  "skills": [
+    "Product Design",
+    "Design Systems",
+    "BSS / OSS",
+    "Team Leadership",
+    "Cross-functional Influence",
+    "UX Research",
+    "Interaction Design",
+    "Design Ops",
+    "Telecom B2B & B2C",
+    "Stakeholder Management",
+    "Figma",
+    "Illustration & Concept Art"
+  ],
+  "experience": [
+    {
+      "role": "Senior UI Designer → Group Leader",
+      "company": "Netcracker Technology",
+      "period": "Aug 2023 — Present",
+      "note": "Joined as Senior UI Designer. Took on Group Leader responsibilities for the Brazil design team. Cross-functional alignment, design system governance, and IC work on global OSS/BSS products."
+    },
+    {
+      "role": "Senior Experience Designer",
+      "company": "EPAM Systems",
+      "period": "Aug 2022 — Aug 2023",
+      "note": "UX strategy and interaction design for enterprise clients across industries. Design systems, usability evaluations, and alignment between design, product and engineering teams."
+    },
+    {
+      "role": "UX/UI Designer → Group Leader",
+      "company": "Netcracker Technology",
+      "period": "Dec 2018 — Aug 2022",
+      "note": "Started as UX/UI Designer, promoted to Group Leader. Full-cycle product design on OSS/BSS telecom platforms across multiple countries."
+    },
+    {
+      "role": "UX Mentor",
+      "company": "CareerFoundry",
+      "period": "Feb 2021 — Feb 2026",
+      "note": "Mentored designers through career transitions with portfolio reviews, interview preparation and feedback on what the industry actually rewards."
+    },
+    {
+      "role": "Penciler",
+      "company": "MSP Estúdios",
+      "period": "Apr 2026 — Present",
+      "note": "Working within the visual language and narrative universe of established IP."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Interaction Design",
+      "school": "UC San Diego"
+    },
+    {
+      "degree": "Bachelor, Industrial Design",
+      "school": "Estácio"
+    }
+  ],
+  "contactHeadline": "Get in touch.",
+  "contactEmail": "fcruz@outlook.com",
+  "contactLinkedIn": "https://linkedin.com/in/fmcruz",
+  "contactIllustration": "https://www.artstation.com/felipecruz",
+  "footerTagline": "Senior UI Designer · Team Lead · São Paulo, Brazil",
+  "workCards": [
+    {
+      "id": "predictive-support-hub",
+      "index": "01",
+      "title": "Predictive Support Hub",
+      "blurb": "3,000 support agents navigating 32 legacy tools on every call. I replaced the ecosystem with a single AI-integrated workspace.",
+      "metric1": "70% AHT reduction",
+      "metric2": "32→1 consolidation",
+      "tag": "AI System Design · Telecom · 2022",
+      "weight": "featured",
+      "personal": false,
+      "image": "/hub/workspace.png"
+    },
+    {
+      "id": "b2b-sales-rescue",
+      "index": "02",
+      "title": "B2B Sales Rescue",
+      "blurb": "Sales agents needed 7 tools and 3 days of training to close one deal. I reduced that to a single flow and half a day.",
+      "metric1": "75% quote acceleration",
+      "metric2": "83% faster onboarding",
+      "tag": "Enterprise UX · Research · 2023",
+      "weight": "primary",
+      "personal": false,
+      "image": ""
+    },
+    {
+      "id": "quota-management",
+      "index": "03",
+      "title": "Quota Management",
+      "blurb": "A greenfield B2B asset management platform. No prior product. Designed from workshop sessions to production-ready flows as the solo designer.",
+      "metric1": "13 flows",
+      "metric2": "3 modules",
+      "tag": "Greenfield Product · BSS · 2024",
+      "weight": "primary",
+      "personal": false,
+      "image": ""
+    },
+    {
+      "id": "dane-telecom",
+      "index": "04",
+      "title": "Dane Telecom",
+      "blurb": "Three months on-site in Copenhagen. The client did not need better components. They needed a designer who understood what was coming next.",
+      "metric1": "50% faster handoff",
+      "metric2": "32% velocity boost",
+      "tag": "Design System · Copenhagen · 2023",
+      "weight": "secondary",
+      "personal": false,
+      "image": ""
+    },
+    {
+      "id": "vocabulary",
+      "index": "05",
+      "title": "Vocabulary",
+      "blurb": "Every flashcard app I tried was built around someone else's curriculum. I wanted one thing: a fast, honest way to learn words. So I built it.",
+      "metric1": "4 languages",
+      "metric2": "2 learning modes",
+      "tag": "Personal · Next.js · Claude API",
+      "weight": "secondary",
+      "personal": true,
+      "image": ""
+    }
+  ]
+}
