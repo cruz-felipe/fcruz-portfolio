@@ -9,9 +9,18 @@
   "roleDetail": "End-to-end ownership from field research and systemic audit to AI orchestration design and agent workflow redesign. I reframed the problem, built the infrastructure cost model that unlocked the investment, and led the solution architecture.",
   "impactSummary": "AHT reduced from 10 minutes to 3 minutes per call (70% reduction, measured across the post-launch agent cohort). 32 legacy tools replaced by one intelligent workspace. At 3,000 agents handling an average of 40 calls per day, the 7-minute AHT saving per call represents roughly 14,000 agent-hours recovered daily. New agent onboarding cut from 3 days to under half a day.",
   "metrics": [
-    { "value": "70%", "label": "AHT reduction. From 10 min to 3 min per call, measured post-launch across the agent cohort. At 3,000 agents × 40 calls/day, this is ~14,000 agent-hours recovered daily." },
-    { "value": "32→1", "label": "Legacy tools consolidated into one intelligent workspace. Tool count audited pre-project; consolidation confirmed at launch." },
-    { "value": "3→½d", "label": "New agent onboarding time. Baseline from ops documentation; post-launch figure from first onboarding cohort on the new system." }
+    {
+      "value": "70%",
+      "label": "AHT reduction. From 10 min to 3 min per call, measured post-launch across the agent cohort. At 3,000 agents × 40 calls/day, this is ~14,000 agent-hours recovered daily."
+    },
+    {
+      "value": "32→1",
+      "label": "Legacy tools consolidated into one intelligent workspace. Tool count audited pre-project; consolidation confirmed at launch."
+    },
+    {
+      "value": "3→½d",
+      "label": "New agent onboarding time. Baseline from ops documentation; post-launch figure from first onboarding cohort on the new system."
+    }
   ],
   "context": "I was brought in to redesign the support experience for a global telecom with 3,000 agents across multiple countries. The initial brief was UX improvement. What the audit revealed was that every customer call required agents to context-switch across an average of 32 separate legacy tools to find billing history, technical data and open tickets. There was no single source of truth. The problem was not the interface.",
   "sections": [
@@ -23,15 +32,21 @@
         "The two screens below are from the legacy environment. One is a raw account management tool that agents used to look up customer data. Dense, technical, built for system administrators rather than support agents. The other is a bill detail view accessed through a separate portal. These are two of the 32 tools an agent was expected to navigate mid-call."
       ],
       "screens": [
-        { "src": "/hub/before2.png", "caption": "Legacy account management tool. Agent lookup for customer data built for sysadmins, not support agents on a live call." },
-        { "src": "/hub/before1.png", "caption": "Legacy bill detail view accessed through a separate portal. One of many tools an agent toggled between per call." }
+        {
+          "src": "/hub/before2.png",
+          "caption": "Legacy account management tool. Agent lookup for customer data built for sysadmins, not support agents on a live call."
+        },
+        {
+          "src": "/hub/before1.png",
+          "caption": "Legacy bill detail view accessed through a separate portal. One of many tools an agent toggled between per call."
+        }
       ]
     },
     {
       "title": "Into the field",
       "pullquote": "",
       "body": [
-        "I conducted remote research sessions with agents in Egypt and Jamaica, observing their screens and listening to live calls. Then I went on-site to call centers in New York and Texas to shadow agents in person. Remote observation shows you what people do. On-site observation shows you why.",
+        "Remote sessions in Egypt and Jamaica. Then on-site in New York and Texas. Remote shows you what people do. On-site shows you why.",
         "What became clear across every location was that the tools were actively fighting each other. The institutional knowledge that should have lived in the system lived on paper instead. New agents spent months just learning the map. When I brought this back to the client, the picture was new to them. They understood the fragmentation but had not seen it mapped as a cost. That conversation reframed the project from interface improvement to infrastructure investment."
       ],
       "screens": []
@@ -40,8 +55,8 @@
       "title": "Reframing the problem",
       "pullquote": "This was not a UX problem. It was an infrastructure problem wearing a UX mask.",
       "body": [
-        "My first presentation was met with scepticism. The client understood the fragmentation but was not yet convinced that consolidation was the right investment. Arguing about interface quality was not going to move the room.",
-        "I built a cost model instead. The inputs were public: average AHT of 10 minutes per call, call volume across 3,000 agents, average agent cost per hour. The output was a single number: the annual cost of the fragmentation in lost agent time, compared against the projected engineering cost of consolidation. The infrastructure investment looked cheap by comparison. That number changed the conversation. Engineering stopped being asked to approve a design preference and started being asked to evaluate an infrastructure ROI. They became partners."
+        "The client understood the fragmentation. They were not convinced it justified the investment.",
+        "I built a cost model. The inputs were public: average AHT of 10 minutes per call, call volume across 3,000 agents, cost per agent-hour. The output was a single number — the annual cost of the fragmentation in lost agent time, compared against the projected engineering cost of consolidation. Engineering stopped being asked to approve a design preference and started being asked to evaluate an infrastructure ROI. They became partners."
       ],
       "screens": []
     },
@@ -53,7 +68,10 @@
         "The auto-identification panel is the first screen an agent sees when a call connects. By the time they say hello, they already know who they are talking to, why that customer likely called and what the last three agents did."
       ],
       "screens": [
-        { "src": "/hub/auto-id.png", "caption": "Auto-identification panel on call connect. Customer history, IVR path and authentication surfaced before the agent speaks." }
+        {
+          "src": "/hub/auto-id.png",
+          "caption": "Auto-identification panel on call connect. Customer history, IVR path and authentication surfaced before the agent speaks."
+        }
       ]
     },
     {
@@ -63,8 +81,14 @@
         "The full unified workspace. Every data source previously spread across 32 tools available in a single view, mid-call. The agent's job becomes the customer. Not the system."
       ],
       "screens": [
-        { "src": "/hub/workspace.png", "caption": "Unified agent workspace. Customer context, suggested interaction, services, devices and billing. One screen, mid-call." },
-        { "src": "/hub/workspace2.png", "caption": "Workspace with bill payment modal active. Action completed without leaving the interface." }
+        {
+          "src": "/hub/workspace.png",
+          "caption": "Unified agent workspace. Customer context, suggested interaction, services, devices and billing. One screen, mid-call."
+        },
+        {
+          "src": "/hub/workspace2.png",
+          "caption": "Workspace with bill payment modal active. Action completed without leaving the interface."
+        }
       ]
     },
     {
@@ -72,7 +96,7 @@
       "pullquote": "",
       "body": [
         "3,000 agents is a different design problem than 300. Every interaction pattern decision compounds. A 2-second inefficiency per call, multiplied across 3,000 agents doing 40 calls a day, is 240,000 seconds of lost productivity daily, nearly 67 agent-hours. That arithmetic shaped every micro-decision: the number of clicks to reach a record, the placement of the most-used action, the time it takes the auto-id panel to render.",
-        "It also shaped the rollout strategy. At this scale, a bad deploy does not affect a team. It affects an operations center. I designed for progressive rollout from the start: the workspace was built to coexist with the legacy tools, not replace them in a single cutover. Agents could be migrated cohort by cohort, with the legacy tools still accessible during the transition window. That architecture decision was made during the design phase, not handed back to engineering as a deployment problem.",
+        "At this scale, a bad deploy does not affect a team. It affects an operations center. The workspace was built to coexist with the legacy tools, not replace them in a single cutover. Agents migrated cohort by cohort, with the legacy tools still accessible during the transition window. That architecture decision was made during the design phase.",
         "The table below maps how the same design discipline translates from 3,000 agents to 10M users. The numbers are different. The framing is identical: every design decision is a business outcome decision. At 10M users, a confusing onboarding screen isn't a UX problem; it's a churn number. A 100ms improvement to the most-used action isn't a performance win; it's a retention lever. The discipline of making those connections explicit before the design decision is made, not after launch, is what scales."
       ],
       "screens": []
@@ -81,7 +105,7 @@
       "title": "What I would do differently",
       "pullquote": "",
       "body": [
-        "If I were doing this again I would have pushed harder for a pilot with a single agent cohort before the full rollout. The system worked, but a controlled pilot with a defined group would have surfaced edge cases earlier and given us stronger data for the internal conversation about full deployment. A pilot with 50 agents over four weeks would have cost almost nothing relative to the infrastructure investment and would have made the rollout case much harder to resist."
+        "A pilot with a single agent cohort before the full rollout. 50 agents, four weeks. The system worked, but that controlled group would have surfaced edge cases earlier and made the full deployment case much harder to resist."
       ],
       "screens": []
     }

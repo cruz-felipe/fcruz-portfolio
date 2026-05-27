@@ -39,7 +39,7 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
   }, []);
 
   return (
-    <div ref={ref} style={{
+    <div ref={ref} className="work-item" style={{
       borderBottom: "1px solid var(--border)",
       paddingTop: "4rem", paddingBottom: "4rem",
       opacity: vis ? 1 : 0,
@@ -117,7 +117,56 @@ export default function Page({ data }: { data: PageData }) {
             >{label}</a>
           ))}
         </nav>
+        {/* Mobile menu button */}
+        <button className="nav-hamburger" aria-label="Open menu"
+          onClick={() => {
+            const m = document.getElementById("mobile-nav");
+            if (m) m.style.display = m.style.display === "flex" ? "none" : "flex";
+          }}
+          style={{
+            display: "none", background: "none", border: "none",
+            cursor: "pointer", padding: "4px", justifyContent: "flex-end",
+          }}>
+          <svg width="20" height="14" viewBox="0 0 20 14" fill="none">
+            <line x1="0" y1="1" x2="20" y2="1" stroke="var(--ink)" strokeWidth="1.5"/>
+            <line x1="0" y1="7" x2="14" y2="7" stroke="var(--ink)" strokeWidth="1.5"/>
+            <line x1="0" y1="13" x2="20" y2="13" stroke="var(--ink)" strokeWidth="1.5"/>
+          </svg>
+        </button>
       </header>
+      {/* Mobile nav overlay */}
+      <div id="mobile-nav" style={{
+        display: "none", position: "fixed", inset: 0, zIndex: 200,
+        background: "var(--ink)", flexDirection: "column",
+        justifyContent: "center", padding: "var(--pad)",
+      }}
+        onClick={() => { const m = document.getElementById("mobile-nav"); if (m) m.style.display = "none"; }}
+      >
+        <button aria-label="Close menu" style={{
+          position: "absolute", top: "1.5rem", right: "var(--pad)",
+          background: "none", border: "none", cursor: "pointer",
+          fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.14em",
+          textTransform: "uppercase", color: "rgba(245,240,232,0.5)",
+        }}>close</button>
+        {[["work", "#work"], ["about", "#about"], ["contact", "#contact"]].map(([label, href], i) => (
+          <a key={label} href={href}
+            onClick={() => { const m = document.getElementById("mobile-nav"); if (m) m.style.display = "none"; }}
+            style={{
+              fontFamily: "var(--font-display)", fontSize: "clamp(3rem, 15vw, 5rem)",
+              lineHeight: 1, letterSpacing: "0.01em",
+              color: "#F5F0E8", textDecoration: "none",
+              display: "block", padding: "0.5rem 0",
+              opacity: 0, animation: `mobileNavIn 0.3s ease ${i * 60}ms forwards`,
+            }}
+          >{label.toUpperCase()}</a>
+        ))}
+        <style>{`
+          @keyframes mobileNavIn {
+            from { opacity: 0; transform: translateX(-12px); }
+            to   { opacity: 1; transform: none; }
+          }
+        `}</style>
+      </div>
 
       {/* HERO
           Grid: 1fr 1fr 1fr
@@ -147,7 +196,7 @@ export default function Page({ data }: { data: PageData }) {
           {[
             { value: "11", label: "years building enterprise products" },
             { value: "9", label: "countries" },
-            { value: "1M+", label: "end users across B2C telecom" },
+            { value: "1M+", label: "end users on products I have contributed to" },
             { value: "32\u21921", label: "legacy tools into one workspace" },
           ].map(({ value, label }) => (
             <div key={value} style={{ marginBottom: "1.75rem" }}>

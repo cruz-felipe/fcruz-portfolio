@@ -8,8 +8,21 @@
   "year": "2025",
   "roleDetail": "Solo product from concept to deployment. Designed the full interaction system, built in Next.js with the Claude API, shipped to a private URL. Used daily by me and a small group of friends learning Spanish, Russian, French and Italian. Every product decision was mine: architecture, AI integration, interaction design, scope.",
   "impactSummary": "",
-  "metrics": [],
-  "context": "I was using Duolingo to study Spanish and Russian. It works for gamified progress but not for what I actually needed: sitting down with a set of words and drilling them until they stick. Every dedicated flashcard app I found had too much friction, too much structure I didn't ask for, or none of the vocabulary I needed for work. Building my own was faster than settling.",
+  "metrics": [
+    {
+      "value": "4",
+      "label": "Languages: Spanish, Russian, French and Italian. Tech vocabulary category built separately for work terminology."
+    },
+    {
+      "value": "2",
+      "label": "Learning modes: recognition (source word to translation) and recall (type the original from the translation). Recall is harder and stickier."
+    },
+    {
+      "value": "Daily",
+      "label": "Used every day by me and a small group of friends. The only success metric that mattered for a tool built to scratch my own itch."
+    }
+  ],
+  "context": "I was using Duolingo to study Spanish and Russian. It works for gamified progress but not for what I actually needed: sitting down with a set of words and drilling them until they stick. Every dedicated flashcard app I tried had too much friction, too much structure I did not ask for, or none of the vocabulary I needed for work. Building my own was faster than settling.",
   "sections": [
     {
       "title": "Two modes, one honest reason",
@@ -19,9 +32,18 @@
         "Recognition mode shows the source word and flips to reveal the translation. Recall mode shows the translated word and requires you to type the original. Recall is harder because typing forces active retrieval rather than passive recognition. The synonym layer exists because marking a valid synonym as wrong is counterproductive. The app accepts it and notes the distinction."
       ],
       "screens": [
-        { "src": "/vocabulary/Screenshot_2026-05-25_at_13_19_22.png", "caption": "Home screen. Streak counter, continue prompt, language list with level gates." },
-        { "src": "/vocabulary/Screenshot_2026-05-25_at_13_19_01.png", "caption": "Recognition mode. Portuguese word shown, tap to flip." },
-        { "src": "/vocabulary/Screenshot_2026-05-25_at_13_19_06.png", "caption": "Card revealed. Translation on language-color background with usage example." }
+        {
+          "src": "/vocabulary/Screenshot_2026-05-25_at_13_19_22.png",
+          "caption": "Home screen. Streak counter, continue prompt, language list with level gates."
+        },
+        {
+          "src": "/vocabulary/Screenshot_2026-05-25_at_13_19_01.png",
+          "caption": "Recognition mode. Portuguese word shown, tap to flip."
+        },
+        {
+          "src": "/vocabulary/Screenshot_2026-05-25_at_13_19_06.png",
+          "caption": "Card revealed. Translation on language-color background with usage example."
+        }
       ]
     },
     {
@@ -32,9 +54,18 @@
         "The category screen uses the language color as a full-bleed header, which acts as a persistent identifier. Spanish is red, Russian is blue, Italian is green. Switching languages does not require relearning the navigation."
       ],
       "screens": [
-        { "src": "/vocabulary/Screenshot_2026-05-25_at_13_19_31.png", "caption": "Recall mode. Spanish word shown, type the Portuguese equivalent." },
-        { "src": "/vocabulary/Screenshot_2026-05-25_at_13_19_37.png", "caption": "Correct. Green border, cultural tip surfaces." },
-        { "src": "/vocabulary/Screenshot_2026-05-25_at_13_19_53.png", "caption": "Wrong. Red border, correct form shown with context." }
+        {
+          "src": "/vocabulary/Screenshot_2026-05-25_at_13_19_31.png",
+          "caption": "Recall mode. Spanish word shown, type the Portuguese equivalent."
+        },
+        {
+          "src": "/vocabulary/Screenshot_2026-05-25_at_13_19_37.png",
+          "caption": "Correct. Green border, cultural tip surfaces."
+        },
+        {
+          "src": "/vocabulary/Screenshot_2026-05-25_at_13_19_53.png",
+          "caption": "Wrong. Red border, correct form shown with context."
+        }
       ]
     },
     {
@@ -45,19 +76,38 @@
         "Cultural tips are Claude-powered and opt-in. They surface usage context, register notes and memorable associations. The design decision: AI works at the edge as an enrichment layer, not as the core mechanic. Users who want to drill fast should not wait for or dismiss AI output. That distinction shapes how I think about AI integration in larger products too."
       ],
       "screens": [
-        { "src": "/vocabulary/russian-category.png", "caption": "Russian category screen. Blue as the language identifier consistent across recognition and recall modes." },
-        { "src": "/vocabulary/Screenshot_2026-05-25_at_13_21_04.png", "caption": "Russian tech card. Cyrillic, phonetic transcription, cultural note." },
-        { "src": "/vocabulary/Screenshot_2026-05-25_at_13_22_05.png", "caption": "Recall mode, Russian tech. Correct answer with UX documentation context." }
+        {
+          "src": "/vocabulary/russian-category.png",
+          "caption": "Russian category screen. Blue as the language identifier consistent across recognition and recall modes."
+        },
+        {
+          "src": "/vocabulary/Screenshot_2026-05-25_at_13_21_04.png",
+          "caption": "Russian tech card. Cyrillic, phonetic transcription, cultural note."
+        },
+        {
+          "src": "/vocabulary/Screenshot_2026-05-25_at_13_22_05.png",
+          "caption": "Recall mode, Russian tech. Correct answer with UX documentation context."
+        }
       ]
     },
     {
       "title": "What this project is actually about",
       "pullquote": "",
       "body": [
-        "Building a consumer product solo end-to-end (design, engineering, deployment, real daily use) is a different discipline from enterprise UX. Every decision is yours with no stakeholder to validate against, no QA to catch it, and no one to blame when it ships broken.",
-        "The AI integration judgment here is the part I'd point to in a larger product context: Claude operates at the edge, not at the center. The core mechanic is instant and offline-capable. The AI layer adds value only when the user opts in. That distinction is a product architecture decision as much as a UX one, and it's one I'd apply the same way at scale."
+        "Building solo end-to-end — design, engineering, deployment, daily use — is a different discipline from enterprise UX. Every decision is yours with no stakeholder to validate against, no QA to catch it, no one to blame when it ships broken.",
+        "The AI integration judgment is the part I would point to in a larger product context. Claude operates at the edge, not at the centre. The core mechanic is instant and offline-capable. The AI layer adds value only when the user opts in. That is a product architecture decision as much as a UX one, and it scales."
       ],
       "screens": []
+    },
+    {
+      "title": "What this taught me about AI in products",
+      "pullquote": "AI as enrichment, not dependency. The app works without it. The AI layer adds value only when the user opts in.",
+      "body": [
+        "The cultural tip feature is opt-in. It surfaces usage context, register notes, memorable associations. The core mechanic does not need it.",
+        "That distinction is a product architecture decision as much as a UX one. An AI layer that sits in the critical path of every interaction creates latency, dependency and a worse experience when the API is slow. An AI layer at the edge adds value without imposing it. I would apply the same principle at enterprise scale: AI enriches the workflow at the moment the user chooses, not at every moment by default."
+      ],
+      "screens": [],
+      "narrowScreens": true
     }
   ],
   "metaTitle": "Vocabulary / Felipe Cruz",

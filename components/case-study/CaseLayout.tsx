@@ -91,7 +91,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
     <main id="main-content" style={{ background: "var(--bg)", color: "var(--ink)", minHeight: "100vh", width: "100%", overflowX: "hidden" }}>
 
       {/* NAV */}
-      <header style={{
+      <header className="case-nav" style={{
         position: "sticky", top: 0, zIndex: 100,
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
@@ -125,7 +125,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
             all work
           </a>
         </div>
-        <div />
+        <div className="case-nav-middle" />
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.12em", color: "var(--faint)" }}>
             {data.index} / 05
