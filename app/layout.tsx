@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ResponsiveStyles from "@/components/ResponsiveStyles";
+import ScrollProgress from "@/components/ScrollProgress";
 
 export const metadata: Metadata = {
   title: "Felipe Cruz — Senior Product Designer",
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <ResponsiveStyles />
+        <ScrollProgress />
         <a href="#main-content" className="skip-link" aria-label="Skip to main content">Skip to content</a>
         {children}
       </body>

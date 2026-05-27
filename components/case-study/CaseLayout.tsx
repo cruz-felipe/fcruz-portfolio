@@ -96,15 +96,31 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         borderBottom: "1px solid var(--border)",
         padding: "1.5rem var(--pad)", alignItems: "center",
       }}>
-        <a href="/" style={{
-          fontFamily: "var(--font-body)", fontSize: "13px",
-          color: "var(--ink)", textDecoration: "none", transition: "opacity 0.15s",
-        }}
-          onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.45"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
-        >
-          felipe cruz
-        </a>
+        <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+          <a href="/" style={{
+            fontFamily: "var(--font-body)", fontSize: "13px",
+            color: "var(--ink)", textDecoration: "none", transition: "opacity 0.15s",
+          }}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.45"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
+          >
+            felipe cruz
+          </a>
+          <a href="/" style={{
+            display: "flex", alignItems: "center", gap: "0.4rem",
+            fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+            letterSpacing: "0.14em", textTransform: "uppercase" as const,
+            color: "var(--muted)", textDecoration: "none", transition: "color 0.15s",
+          }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = "var(--ink)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = "var(--muted)"; }}
+          >
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+              <path d="M9 4H1M4 1L1 4l3 3" stroke="currentColor" strokeWidth="1.1" strokeLinecap="square"/>
+            </svg>
+            all work
+          </a>
+        </div>
         <div />
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.12em", color: "var(--faint)" }}>
@@ -355,7 +371,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                 color: "rgba(245,240,232,0.25)", minWidth: "2.5rem", flexShrink: 0,
                 letterSpacing: "0.08em",
               }}>{work.index}</span>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flex: 1 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                 <span style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(1.8rem, 3vw, 3rem)",
@@ -364,6 +380,12 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                 }}>
                   {work.title.toUpperCase()}
                 </span>
+                {!isCurrent && (
+                  <svg className="work-arrow" width="20" height="12" viewBox="0 0 20 12" fill="none"
+                    style={{ flexShrink: 0, opacity: 0, transition: "opacity 0.15s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1)" }}>
+                    <path d="M0 6h18M12 1l6 5-6 5" stroke="rgba(245,240,232,0.7)" strokeWidth="1.2" strokeLinecap="square"/>
+                  </svg>
+                )}
                 {isNext && (
                   <span style={{
                     fontFamily: "var(--font-mono)", fontSize: "8px",

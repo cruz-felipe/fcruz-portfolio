@@ -57,15 +57,9 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
         }}
       >
         <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", marginBottom: "0.5rem" }}>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.12em", color: "var(--faint)" }}>
-            {card.index}
-          </span>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "var(--faint)" }}>
-            {card.tag}
-          </span>
-          {card.personal && (
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "var(--faint)", opacity: 0.7 }}>personal</span>
-          )}
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.12em", color: "var(--faint)" }}>{card.index}</span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "var(--faint)" }}>{card.tag}</span>
+          {card.personal && <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--faint)", opacity: 0.7 }}>personal</span>}
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "2rem", marginBottom: "0.75rem" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
@@ -105,9 +99,7 @@ export default function Page({ data }: { data: PageData }) {
         borderBottom: "1px solid var(--border)",
         padding: "1.5rem var(--pad)", alignItems: "center",
       }}>
-        <div style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--ink)" }}>
-          felipe cruz
-        </div>
+        <div style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--ink)" }}>felipe cruz</div>
         <div />
         <nav className="nav-links" style={{ display: "flex", gap: "2.5rem", justifyContent: "flex-end" }}>
           {[["work", "#work"], ["about", "#about"], ["contact", "#contact"]].map(([label, href]) => (
@@ -123,13 +115,18 @@ export default function Page({ data }: { data: PageData }) {
         </nav>
       </header>
 
-      {/* HERO */}
+      {/* HERO
+          Grid: 1fr 1fr 1fr
+          Col1: bio + currently (top-aligned)
+          Col2: numbers label + stats (top-aligned)
+          Col3: quote BOTTOM-aligned, flush to section bottom border
+      */}
       <section className="hero-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
         padding: "3rem var(--pad)",
+        alignItems: "stretch",
       }}>
-        {/* Col 1 */}
         <div style={{ paddingRight: "3rem" }}>
           <Label>bio</Label>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", lineHeight: 1.72, color: "rgba(10,10,10,0.72)", marginBottom: "2.5rem", textWrap: "pretty" }}>
@@ -141,7 +138,6 @@ export default function Page({ data }: { data: PageData }) {
           </p>
         </div>
 
-        {/* Col 2 */}
         <div className="hero-col2" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem", paddingRight: "3rem" }}>
           <Label>numbers</Label>
           {[
@@ -157,15 +153,22 @@ export default function Page({ data }: { data: PageData }) {
           ))}
         </div>
 
-        {/* Col 3 - quote only, no skills list */}
-        <div className="hero-col3" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem" }}>
+        {/* Col 3: quote bottom-aligned */}
+        <div className="hero-col3" style={{
+          borderLeft: "1px solid var(--border)", paddingLeft: "3rem",
+          display: "flex", flexDirection: "column", justifyContent: "flex-end",
+        }}>
           <p style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "clamp(0.9rem, 1.1vw, 1rem)", lineHeight: 1.75, color: "rgba(10,10,10,0.5)", textWrap: "pretty" }}>
             &ldquo;{data.heroHeadline}&rdquo;
           </p>
         </div>
       </section>
 
-      {/* WORK BLEED */}
+      {/* WORK BLEED
+          Same 1fr 1fr 1fr grid.
+          Col3 borderLeft aligns exactly with hero col3 borderLeft.
+          Col3: selected projects label + description, bottom-aligned.
+      */}
       <div id="work" className="bleed-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
@@ -221,7 +224,6 @@ export default function Page({ data }: { data: PageData }) {
         borderBottom: "1px solid var(--border)",
         padding: "4rem var(--pad)",
       }}>
-        {/* Col 1 */}
         <div style={{ paddingRight: "3rem" }}>
           <Label>long bio</Label>
           {[data.aboutBio1, data.aboutBio2, data.aboutBio3].map((t, i) => (
@@ -235,7 +237,6 @@ export default function Page({ data }: { data: PageData }) {
           </div>
         </div>
 
-        {/* Col 2 */}
         <div className="about-col2" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem", paddingRight: "3rem" }}>
           <Label>experience</Label>
           {data.experience.map((job, i) => (
@@ -260,27 +261,30 @@ export default function Page({ data }: { data: PageData }) {
           </div>
         </div>
 
-        {/* Col 3 - photo only, no skills list */}
+        {/* Col 3: photo only */}
         <div className="about-col3" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem" }}>
           <img src="/photo.jpg" alt="Felipe Cruz" style={{ width: "100%", display: "block", objectFit: "cover", objectPosition: "center top", aspectRatio: "3/4" }} />
         </div>
       </section>
 
-      {/* CONTACT - flush to about, no gap */}
+      {/* CONTACT - flush to about, no top gap, no border between them */}
       <section id="contact" style={{ background: "var(--ink)" }}>
-        {/* LET'S TALK - no border, no padding top, connects directly to about */}
         <div className="contact-bleed" style={{
           display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
           padding: "0 var(--pad)", overflow: "hidden",
         }}>
-          <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)", lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8", paddingBottom: "0.06em", marginTop: "-15px" }}>
+          <div style={{
+            fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)",
+            lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8",
+            paddingBottom: "0.06em", marginTop: "-15px",
+          }}>
             LET&apos;S<br />TALK
           </div>
           <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)" }} />
           <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)" }} />
         </div>
 
-        {/* Links - single column, no labels, email me then linkedin then illustration */}
+        {/* Single column links - no labels, no dividers */}
         <div style={{ padding: "3rem var(--pad) 4rem" }}>
           <a href={`mailto:${data.contactEmail}`} style={{
             display: "block", fontFamily: "var(--font-body)", fontStyle: "italic",
@@ -302,7 +306,6 @@ export default function Page({ data }: { data: PageData }) {
           ))}
         </div>
 
-        {/* Footer */}
         <div style={{ padding: "1.25rem var(--pad)" }}>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "rgba(245,240,232,0.25)" }}>
             Felipe Cruz &mdash; Product Designer &mdash; {year}
