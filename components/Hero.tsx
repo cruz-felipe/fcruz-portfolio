@@ -30,7 +30,7 @@ export default function Hero({ data }: { data: any }) {
         textWrap: "balance",
       }}>
         {/* Headline split to show red accent on last three words */}
-        I design for the moment when complexity is no longer manageable and someone has to{" "}
+        I design for the moment when someone has to{" "}
         <span style={{ color: "var(--red)" }}>make it work.</span>
       </h1>
 
