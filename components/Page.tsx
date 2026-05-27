@@ -19,13 +19,12 @@ interface PageData {
   workCards: WorkCard[];
 }
 
-function Label({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
+function Label({ children }: { children: React.ReactNode }) {
   return (
     <div style={{
       fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
       letterSpacing: "0.18em", textTransform: "uppercase" as const,
-      color: light ? "rgba(245,240,232,0.35)" : "rgba(10,10,10,0.4)",
-      marginBottom: "0.65rem",
+      color: "rgba(10,10,10,0.4)", marginBottom: "0.65rem",
     }}>{children}</div>
   );
 }
@@ -42,7 +41,7 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
   return (
     <div ref={ref} style={{
       borderBottom: "1px solid var(--border)",
-      paddingTop: "3rem", paddingBottom: "3rem",
+      paddingTop: "4rem", paddingBottom: "4rem",
       opacity: vis ? 1 : 0,
       transform: vis ? "none" : "translateY(12px)",
       transition: `opacity 0.45s ease ${i * 55}ms, transform 0.45s ease ${i * 55}ms`,
@@ -68,7 +67,7 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
             <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "var(--faint)", opacity: 0.7 }}>personal</span>
           )}
         </div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "2rem", marginBottom: "1rem" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "2rem", marginBottom: "0.75rem" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.4rem, 4.5vw, 4.8rem)", lineHeight: 0.92, letterSpacing: "0.01em", color: "var(--ink)" }}>
               {card.title.toUpperCase()}
@@ -84,7 +83,7 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
             ))}
           </div>
         </div>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", lineHeight: 1.65, color: "var(--muted)", maxWidth: "560px", textWrap: "pretty" }}>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", lineHeight: 1.6, color: "var(--muted)", maxWidth: "480px", textWrap: "pretty" }}>
           {card.blurb}
         </p>
       </Link>
@@ -124,13 +123,13 @@ export default function Page({ data }: { data: PageData }) {
         </nav>
       </header>
 
-      {/* HERO - three columns, flush to nav */}
+      {/* HERO */}
       <section className="hero-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
         padding: "3rem var(--pad)",
       }}>
-        {/* Col 1: bio + currently */}
+        {/* Col 1 */}
         <div style={{ paddingRight: "3rem" }}>
           <Label>bio</Label>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", lineHeight: 1.72, color: "rgba(10,10,10,0.72)", marginBottom: "2.5rem", textWrap: "pretty" }}>
@@ -142,7 +141,7 @@ export default function Page({ data }: { data: PageData }) {
           </p>
         </div>
 
-        {/* Col 2: numbers */}
+        {/* Col 2 */}
         <div className="hero-col2" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem", paddingRight: "3rem" }}>
           <Label>numbers</Label>
           {[
@@ -158,21 +157,15 @@ export default function Page({ data }: { data: PageData }) {
           ))}
         </div>
 
-        {/* Col 3: quote + skills */}
+        {/* Col 3 - quote only, no skills list */}
         <div className="hero-col3" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem" }}>
-          <p style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "clamp(0.9rem, 1.1vw, 1rem)", lineHeight: 1.75, color: "rgba(10,10,10,0.5)", marginBottom: "2rem", textWrap: "pretty" }}>
+          <p style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "clamp(0.9rem, 1.1vw, 1rem)", lineHeight: 1.75, color: "rgba(10,10,10,0.5)", textWrap: "pretty" }}>
             &ldquo;{data.heroHeadline}&rdquo;
           </p>
-          <Label>skills</Label>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.2rem" }}>
-            {data.skills.map(s => (
-              <span key={s} style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "rgba(10,10,10,0.58)", lineHeight: 1.7 }}>{s}</span>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* WORK BLEED - WORK col1, empty col2, description col3 */}
+      {/* WORK BLEED */}
       <div id="work" className="bleed-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
@@ -186,9 +179,7 @@ export default function Page({ data }: { data: PageData }) {
         }}>
           WORK
         </div>
-        {/* Col 2: empty */}
         <div className="bleed-col2" style={{ borderLeft: "1px solid var(--border)" }} />
-        {/* Col 3: description, bottom-aligned */}
         <div className="bleed-col3" style={{
           borderLeft: "1px solid var(--border)", paddingLeft: "3rem",
           display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: "1.5rem",
@@ -208,7 +199,7 @@ export default function Page({ data }: { data: PageData }) {
         ))}
       </section>
 
-      {/* ABOUT BLEED - ABOUT col1, empty col2, empty col3 */}
+      {/* ABOUT BLEED */}
       <div id="about" className="bleed-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
@@ -228,9 +219,9 @@ export default function Page({ data }: { data: PageData }) {
       <section className="about-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
-        padding: "3rem var(--pad)",
+        padding: "4rem var(--pad)",
       }}>
-        {/* Col 1: bio + beyond */}
+        {/* Col 1 */}
         <div style={{ paddingRight: "3rem" }}>
           <Label>long bio</Label>
           {[data.aboutBio1, data.aboutBio2, data.aboutBio3].map((t, i) => (
@@ -244,7 +235,7 @@ export default function Page({ data }: { data: PageData }) {
           </div>
         </div>
 
-        {/* Col 2: experience + education */}
+        {/* Col 2 */}
         <div className="about-col2" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem", paddingRight: "3rem" }}>
           <Label>experience</Label>
           {data.experience.map((job, i) => (
@@ -269,69 +260,49 @@ export default function Page({ data }: { data: PageData }) {
           </div>
         </div>
 
-        {/* Col 3: photo + skills */}
+        {/* Col 3 - photo only, no skills list */}
         <div className="about-col3" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem" }}>
-          <div style={{ marginBottom: "2rem" }}>
-            <img src="/photo.jpg" alt="Felipe Cruz" style={{ width: "100%", display: "block", objectFit: "cover", objectPosition: "center top", aspectRatio: "3/4" }} />
-          </div>
-          <Label>expertise</Label>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.2rem" }}>
-            {data.skills.map(s => (
-              <span key={s} style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "rgba(10,10,10,0.6)", lineHeight: 1.7 }}>{s}</span>
-            ))}
-          </div>
+          <img src="/photo.jpg" alt="Felipe Cruz" style={{ width: "100%", display: "block", objectFit: "cover", objectPosition: "center top", aspectRatio: "3/4" }} />
         </div>
       </section>
 
-      {/* CONTACT */}
+      {/* CONTACT - flush to about, no gap */}
       <section id="contact" style={{ background: "var(--ink)" }}>
-        {/* LET'S TALK bleed - same pattern, no col2/col3 content */}
+        {/* LET'S TALK - no border, no padding top, connects directly to about */}
         <div className="contact-bleed" style={{
           display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-          borderBottom: "1px solid rgba(245,240,232,0.08)",
           padding: "0 var(--pad)", overflow: "hidden",
         }}>
-          <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)", lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8", paddingBottom: "0.06em", marginTop: "-15px", }}>
+          <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)", lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8", paddingBottom: "0.06em", marginTop: "-15px" }}>
             LET&apos;S<br />TALK
           </div>
           <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)" }} />
           <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)" }} />
         </div>
 
-        {/* Links - two cols: email left, elsewhere right */}
-        <div className="contact-grid" style={{
-          display: "grid", gridTemplateColumns: "1fr 1fr",
-          padding: "3rem var(--pad) 4rem",
-          borderBottom: "1px solid rgba(245,240,232,0.08)",
-        }}>
-          <div>
-            <Label light>email me</Label>
-            <a href={`mailto:${data.contactEmail}`} style={{
-              fontFamily: "var(--font-body)", fontStyle: "italic",
-              fontSize: "clamp(1rem, 2vw, 1.5rem)", color: "#F5F0E8",
-              textDecoration: "none", lineHeight: 1.2, display: "block", transition: "opacity 0.15s",
+        {/* Links - single column, no labels, email me then linkedin then illustration */}
+        <div style={{ padding: "3rem var(--pad) 4rem" }}>
+          <a href={`mailto:${data.contactEmail}`} style={{
+            display: "block", fontFamily: "var(--font-body)", fontStyle: "italic",
+            fontSize: "clamp(1rem, 2vw, 1.5rem)", color: "#F5F0E8",
+            textDecoration: "none", marginBottom: "0.75rem", transition: "opacity 0.15s",
+          }}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.55"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
+          >email me</a>
+          {[[data.contactLinkedIn, "linkedin"], [data.contactIllustration, "illustration"]].map(([href, label]) => (
+            <a key={label} href={href} target="_blank" rel="noopener noreferrer" style={{
+              display: "block", fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "16px",
+              color: "rgba(245,240,232,0.45)", textDecoration: "none",
+              marginBottom: "0.5rem", transition: "color 0.15s",
             }}
-              onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.55"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
-            >email me</a>
-          </div>
-          <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)", paddingLeft: "3rem" }}>
-            <Label light>elsewhere</Label>
-            {[["linkedin", data.contactLinkedIn], ["illustration", data.contactIllustration]].map(([label, href]) => (
-              <div key={label} style={{ marginBottom: "0.5rem" }}>
-                <a href={href} target="_blank" rel="noopener noreferrer" style={{
-                  fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "16px",
-                  color: "rgba(245,240,232,0.45)", textDecoration: "none", transition: "color 0.15s",
-                }}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = "#F5F0E8"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(245,240,232,0.45)"; }}
-                >{label}</a>
-              </div>
-            ))}
-          </div>
+              onMouseEnter={(e) => { e.currentTarget.style.color = "#F5F0E8"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(245,240,232,0.45)"; }}
+            >{label}</a>
+          ))}
         </div>
 
-        {/* Footer bar - name + role only, no year */}
+        {/* Footer */}
         <div style={{ padding: "1.25rem var(--pad)" }}>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "rgba(245,240,232,0.25)" }}>
             Felipe Cruz &mdash; Product Designer &mdash; {year}
