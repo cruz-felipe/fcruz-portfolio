@@ -3,23 +3,22 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ScreenGallery } from "./ScreenGallery";
 
+// ── Count-up hook ──────────────────────────────────
 function useCountUp(target: number, duration = 1400) {
   const [count, setCount] = useState(0);
   const [started, setStarted] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
   useEffect(() => {
     if (!ref.current) return;
-    const observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) setStarted(true); }, { threshold: 0.5 });
-    observer.observe(ref.current);
-    return () => observer.disconnect();
+    const o = new IntersectionObserver(([e]) => { if (e.isIntersecting) setStarted(true); }, { threshold: 0.5 });
+    o.observe(ref.current); return () => o.disconnect();
   }, []);
   useEffect(() => {
     if (!started) return;
     const start = performance.now();
     const tick = (now: number) => {
       const p = Math.min((now - start) / duration, 1);
-      const e = 1 - Math.pow(1 - p, 3);
-      setCount(Math.round(e * target));
+      setCount(Math.round((1 - Math.pow(1 - p, 3)) * target));
       if (p < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
@@ -28,16 +27,19 @@ function useCountUp(target: number, duration = 1400) {
 }
 
 function AnimatedMetric({ value }: { value: string }) {
-  const numMatch = value.match(/^(\d+)/);
-  const { ref, count } = useCountUp(numMatch ? parseInt(numMatch[1]) : 0);
-  if (!numMatch) return <span>{value}</span>;
-  const suffix = value.slice(numMatch[1].length);
-  return <span><span ref={ref}>{count}</span>{suffix}</span>;
+  const m = value.match(/^(\d+)/);
+  const { ref, count } = useCountUp(m ? parseInt(m[1]) : 0);
+  if (!m) return <span>{value}</span>;
+  return <span><span ref={ref}>{count}</span>{value.slice(m[1].length)}</span>;
 }
 
+// ── Types ──────────────────────────────────────────
 interface Screen { src: string; caption: string; }
 interface Metric { value: string; label: string; }
-interface Section { title: string; body?: string | string[]; screens?: Screen[]; narrowScreens?: boolean; pullquote?: string; }
+interface Section {
+  title: string; body?: string | string[];
+  screens?: Screen[]; narrowScreens?: boolean; pullquote?: string;
+}
 interface Artifact { id: string; title: string; caption: string; component: React.ReactNode; }
 
 export interface CaseStudyData {
@@ -50,146 +52,215 @@ export interface CaseStudyData {
 
 const ALL_WORK = [
   { slug: "predictive-support-hub", index: "01", title: "Predictive Support Hub" },
-  { slug: "b2b-sales-rescue", index: "02", title: "B2B Sales Rescue" },
-  { slug: "quota-management", index: "03", title: "Quota Management" },
-  { slug: "dane-telecom", index: "04", title: "Dane Telecom" },
-  { slug: "vocabulary", index: "05", title: "Vocabulary", personal: true },
+  { slug: "b2b-sales-rescue",        index: "02", title: "B2B Sales Rescue" },
+  { slug: "quota-management",         index: "03", title: "Quota Management" },
+  { slug: "dane-telecom",             index: "04", title: "Dane Telecom" },
+  { slug: "vocabulary",               index: "05", title: "Vocabulary", personal: true },
 ];
 
-// Helper: prevent widows in text
-function noWidow(text: string): string {
-  return text.replace(/\s+(\S+)$/, "\u00a0$1");
+function noWidow(t: string) { return t.replace(/\s+(\S+)$/, "\u00a0$1"); }
+function cleanPara(t: string) {
+  return noWidow(t.replace(/ — /g, ", ").replace(/ – /g, ", "));
 }
 
-// Helper: remove dashes, prevent widows in paragraph
-function cleanPara(text: string): string {
-  return noWidow(
-    text
-      .replace(/ — /g, ", ")
-      .replace(/ – /g, ", ")
+function Label({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{
+      fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+      letterSpacing: "0.18em", textTransform: "uppercase",
+      color: "rgba(10,10,10,0.38)", marginBottom: "0.65rem",
+    }}>{children}</div>
   );
 }
 
+// ── Case layout ────────────────────────────────────
 export default function CaseLayout({ data }: { data: CaseStudyData }) {
   const [visible, setVisible] = useState(false);
-  useEffect(() => { const t = setTimeout(() => setVisible(true), 80); return () => clearTimeout(t); }, []);
+  useEffect(() => { const t = setTimeout(() => setVisible(true), 60); return () => clearTimeout(t); }, []);
 
   const sectionsRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = sectionsRef.current; if (!el) return;
     const items = el.querySelectorAll("section, .artifact-section");
-    const observer = new IntersectionObserver(
+    const o = new IntersectionObserver(
       (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); }),
-      { threshold: 0.06 }
+      { threshold: 0.05 }
     );
-    items.forEach(item => { item.classList.add("reveal"); observer.observe(item); });
-    return () => observer.disconnect();
+    items.forEach(item => { item.classList.add("reveal"); o.observe(item); });
+    return () => o.disconnect();
   }, []);
+
+  // shared
+  const hRule: React.CSSProperties = { borderBottom: "1px solid var(--border)" };
+  const padX: React.CSSProperties = { paddingLeft: "var(--pad)", paddingRight: "var(--pad)" };
 
   return (
     <>
-      {/* Fixed back nav */}
+      {/* ── Top nav bar ── */}
       <div style={{
-        position: "fixed", top: "2px", left: 0, right: 0, zIndex: 100, height: "60px",
-        padding: "0 var(--pad)", display: "flex", alignItems: "center", justifyContent: "space-between",
-        background: "rgba(255,255,255,0.94)", backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)", borderBottom: "0.5px solid var(--border)",
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+        height: "52px", ...padX,
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        background: "rgba(245,240,232,0.96)",
+        backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)",
+        borderBottom: "1px solid var(--border)",
       }}>
-        <a href="/" aria-label="Back to home" style={{
-          display: "flex", alignItems: "center", gap: "0.5rem",
-          fontFamily: "var(--font-body)", fontSize: "11px", fontWeight: 400,
-          letterSpacing: "0.1em", textTransform: "uppercase",
-          color: "var(--faint)", textDecoration: "none", transition: "color 0.2s",
+        <a href="/" style={{
+          display: "flex", alignItems: "center", gap: "0.6rem",
+          fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+          letterSpacing: "0.14em", textTransform: "uppercase",
+          color: "var(--muted)", textDecoration: "none", transition: "color 0.15s",
         }}
-          onMouseEnter={(e) => { e.currentTarget.style.color = "var(--ink)"; (e.currentTarget.querySelector("svg") as SVGElement | null)?.style.setProperty("transform", "translateX(-3px)"); }}
-          onMouseLeave={(e) => { e.currentTarget.style.color = "var(--faint)"; (e.currentTarget.querySelector("svg") as SVGElement | null)?.style.setProperty("transform", "translateX(0)"); }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = "var(--ink)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = "var(--muted)"; }}
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ transition: "transform 0.3s cubic-bezier(0.34,1.56,0.64,1)" }}>
-            <path d="M12 7H2M6 3L2 7l4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+          <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
+            <path d="M11 5H1M5 1L1 5l4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="square"/>
           </svg>
           All work
         </a>
-        <span style={{ fontFamily: "var(--font-body)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--faint)" }}>
+        <span style={{
+          fontFamily: "var(--font-mono)", fontSize: "9px",
+          letterSpacing: "0.12em", color: "var(--faint)",
+        }}>
           {data.index} / 05
         </span>
       </div>
 
-      {/* 2px red rule */}
-      <div style={{ height: "2px", background: "var(--red)", position: "fixed", top: 0, left: 0, right: 0, zIndex: 101 }} />
-
-      <main id="main-content" role="main" className="page-enter" style={{ background: "var(--white)", color: "var(--ink)", minHeight: "100vh", width: "100%", overflowX: "hidden" }}>
+      <main
+        id="main-content"
+        style={{
+          background: "var(--bg)", color: "var(--ink)",
+          minHeight: "100vh", width: "100%", overflowX: "hidden",
+          paddingTop: "52px",
+        }}
+      >
 
         {/* ── HERO ── */}
-        <section className="case-hero-inner" style={{
-          paddingTop: "calc(62px + var(--space-xl))",
-          paddingBottom: "var(--space-lg)",
-          paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
-          borderBottom: "0.5px solid var(--border)",
+        <section style={{
+          ...hRule, ...padX,
+          paddingTop: "4rem", paddingBottom: "3rem",
           opacity: visible ? 1 : 0,
-          transform: visible ? "translateY(0)" : "translateY(16px)",
-          transition: "opacity 0.7s ease, transform 0.7s ease",
+          transform: visible ? "none" : "translateY(14px)",
+          transition: "opacity 0.65s ease, transform 0.65s ease",
         }}>
           {/* Eyebrow */}
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "2.5rem" }}>
-            <div style={{ width: "4px", height: "4px", background: "var(--red)", borderRadius: "50%" }} />
-            <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--faint)" }}>
-              {data.role}{data.location ? ` · ${data.location}` : ""} · {data.year}
-            </span>
+          <div style={{
+            fontFamily: "var(--font-mono)", fontSize: "9px",
+            letterSpacing: "0.16em", textTransform: "uppercase",
+            color: "var(--muted)", marginBottom: "1.75rem",
+          }}>
+            {data.index} — {data.role}{data.location ? ` · ${data.location}` : ""} · {data.year}
           </div>
 
-          {/* Title — full width, architectural */}
+          {/* Title — Bebas, huge */}
           <h1 style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(3rem, 7vw, 8rem)",
-            fontWeight: 800, lineHeight: 0.92, letterSpacing: "-0.045em",
-            color: "var(--ink)", marginBottom: "var(--space-lg)",
+            fontSize: "clamp(3.5rem, 8vw, 10rem)",
+            lineHeight: 0.88, letterSpacing: "0.01em",
+            color: "var(--ink)", marginBottom: "3rem",
             textWrap: "balance",
-          }}>{data.title}</h1>
+          }}>
+            {data.title.toUpperCase()}
+          </h1>
 
-          {/* Below title — asymmetric: tagline wide left, role/impact narrow right */}
-          <div className="case-hero-below" style={{ display: "grid", gridTemplateColumns: "1fr 320px", gap: "var(--space-xl)", alignItems: "start" }}>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1rem, 1.5vw, 1.2rem)", fontWeight: 300, lineHeight: 1.7, color: "#333", margin: 0, textWrap: "pretty" }}>
+          {/* Two-column below title */}
+          <div className="case-hero-below" style={{
+            display: "grid", gridTemplateColumns: "1fr 300px",
+            gap: "4rem", alignItems: "start",
+          }}>
+            <p style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
+              lineHeight: 1.72, color: "rgba(10,10,10,0.7)",
+              textWrap: "pretty",
+            }}>
               {cleanPara(data.tagline)}
             </p>
             <div>
-              <div style={{ borderTop: "0.5px solid var(--border)", paddingTop: "1.25rem", marginBottom: "1.5rem" }}>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--faint)", margin: "0 0 0.5rem" }}>My role</p>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", fontWeight: 300, lineHeight: 1.72, color: "#555", margin: 0, textWrap: "pretty" }}>{cleanPara(data.roleDetail)}</p>
+              <div style={{ borderTop: "1px solid var(--border)", paddingTop: "1.25rem", marginBottom: "1.5rem" }}>
+                <Label>My role</Label>
+                <p style={{
+                  fontFamily: "var(--font-body)", fontSize: "13px",
+                  lineHeight: 1.65, color: "rgba(10,10,10,0.6)",
+                  textWrap: "pretty",
+                }}>
+                  {cleanPara(data.roleDetail)}
+                </p>
               </div>
               {data.impactSummary && (
-                <div style={{ borderTop: "0.5px solid var(--border)", paddingTop: "1.25rem" }}>
-                  <p style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--faint)", margin: "0 0 0.5rem" }}>Business impact</p>
-                  <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", fontWeight: 300, lineHeight: 1.72, color: "#555", margin: 0, textWrap: "pretty" }}>{cleanPara(data.impactSummary)}</p>
+                <div style={{ borderTop: "1px solid var(--border)", paddingTop: "1.25rem" }}>
+                  <Label>Business impact</Label>
+                  <p style={{
+                    fontFamily: "var(--font-body)", fontSize: "13px",
+                    lineHeight: 1.65, color: "rgba(10,10,10,0.6)",
+                    textWrap: "pretty",
+                  }}>
+                    {cleanPara(data.impactSummary)}
+                  </p>
                 </div>
               )}
             </div>
           </div>
         </section>
 
-        {/* ── METRICS — full bleed grid ── */}
+        {/* ── METRICS ── */}
         {data.metrics.length > 0 && (
-          <section className="metrics-section case-metrics" style={{ display: "grid", gridTemplateColumns: `repeat(${data.metrics.length}, 1fr)`, borderBottom: "0.5px solid var(--border)", width: "100%" }}>
+          <section className="case-metrics" style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${data.metrics.length}, 1fr)`,
+            ...hRule,
+          }}>
             {data.metrics.map((m, i) => (
-              <div key={i} className="metric-cell" style={{ padding: "var(--space-lg) var(--pad)", borderRight: i < data.metrics.length - 1 ? "0.5px solid var(--border)" : "none" }}>
-                <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.5rem, 4.5vw, 4rem)", fontWeight: 800, letterSpacing: "-0.05em", lineHeight: 1, marginBottom: "0.75rem" }}>
-                  <span style={{ color: "var(--red)" }}><AnimatedMetric value={m.value} /></span>
+              <div key={i} className="metric-cell" style={{
+                padding: "2.5rem var(--pad)",
+                borderRight: i < data.metrics.length - 1 ? "1px solid var(--border)" : "none",
+              }}>
+                <div style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(2.8rem, 5vw, 5.5rem)",
+                  lineHeight: 0.9, letterSpacing: "0.01em",
+                  color: "var(--ink)", marginBottom: "0.65rem",
+                }}>
+                  <AnimatedMetric value={m.value} />
                 </div>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", fontWeight: 300, color: "var(--muted)", lineHeight: 1.6, margin: 0, maxWidth: "240px", textWrap: "pretty" }}>{cleanPara(m.label)}</p>
+                <p style={{
+                  fontFamily: "var(--font-body)", fontSize: "13px",
+                  color: "var(--muted)", lineHeight: 1.6,
+                  maxWidth: "240px", textWrap: "pretty",
+                }}>
+                  {cleanPara(m.label)}
+                </p>
               </div>
             ))}
           </section>
         )}
 
         {/* ── CONTEXT ── */}
-        <section className="context-section" style={{ padding: "var(--space-lg) var(--pad)", borderBottom: "0.5px solid var(--border)" }}>
-          <div className="case-context" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-xl)", alignItems: "start" }}>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", fontWeight: 300, lineHeight: 1.82, color: "#333", margin: 0, textWrap: "pretty", maxWidth: "640px" }}>{cleanPara(data.context)}</p>
+        <section className="context-section" style={{ ...hRule, ...padX, padding: "2.5rem var(--pad)" }}>
+          <div className="case-context" style={{
+            display: "grid", gridTemplateColumns: "1fr 1fr",
+            gap: "4rem", alignItems: "start",
+          }}>
+            <p style={{
+              fontFamily: "var(--font-body)", fontSize: "15px",
+              lineHeight: 1.82, color: "rgba(10,10,10,0.68)",
+              textWrap: "pretty",
+            }}>
+              {cleanPara(data.context)}
+            </p>
             {data.showNdaNote ? (
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", fontWeight: 300, color: "var(--muted)", lineHeight: 1.75, margin: 0, textWrap: "pretty" }}>
+              <p style={{
+                fontFamily: "var(--font-body)", fontSize: "13px",
+                color: "var(--muted)", lineHeight: 1.75, textWrap: "pretty",
+              }}>
                 Client identity omitted per NDA. System documentation artifacts shown are illustrative representations of the restructure approach, not reproductions of client deliverables.
               </p>
             ) : !data.hideNda ? (
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", fontWeight: 300, color: "var(--muted)", lineHeight: 1.75, margin: 0 }}>
+              <p style={{
+                fontFamily: "var(--font-body)", fontSize: "13px",
+                color: "var(--muted)", lineHeight: 1.75,
+              }}>
                 Client identity omitted per NDA. Strategic challenges, decisions and outcomes are accurate.
               </p>
             ) : null}
@@ -200,52 +271,74 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         <div ref={sectionsRef}>
           {data.sections.map((section, si) => (
             <div key={si}>
-              {/* If this section has a pullquote, render it full-bleed BEFORE the body */}
+              {/* Pullquote — full bleed, editorial */}
               {section.pullquote && (
-                <div className="cs-pullquote-section" style={{ paddingLeft: "var(--pad)", paddingRight: "var(--pad)" }}>
+                <div className="cs-pullquote-section" style={{ ...padX }}>
                   <blockquote className="cs-pullquote">{noWidow(section.pullquote)}</blockquote>
                   <p className="cs-pullquote-attr">{section.title}</p>
                 </div>
               )}
 
-              {/* Body section — section tag above, prose below */}
+              {/* Body text */}
               {(Array.isArray(section.body) ? section.body.length > 0 : !!section.body) && (
-                <section className="case-section" style={{ padding: "var(--space-lg) var(--pad)", borderBottom: "0.5px solid var(--border)" }}>
+                <section className="case-section" style={{ ...hRule, ...padX, padding: "2.5rem var(--pad)" }}>
                   {!section.pullquote && (
-                    <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--red)", opacity: 0.55, display: "block", marginBottom: "1.75rem" }}>
+                    <div style={{
+                      fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+                      letterSpacing: "0.18em", textTransform: "uppercase",
+                      color: "var(--muted)", marginBottom: "1.5rem",
+                    }}>
                       {section.title}
-                    </span>
+                    </div>
                   )}
                   <div className="case-section-body" style={{ maxWidth: "680px" }}>
-                    {Array.isArray(section.body) ? section.body.map((para, pi) => (
-                      <p key={pi}
-                        className={pi === 0 ? "cs-lead" : "cs-body"}
-                        style={{ marginBottom: pi < (section.body as string[]).length - 1 ? "1.5rem" : 0 }}>
-                        {cleanPara(para)}
-                      </p>
-                    )) : (
-                      <p className="cs-lead">{cleanPara(section.body as string)}</p>
-                    )}
+                    {Array.isArray(section.body)
+                      ? section.body.map((para, pi) => (
+                          <p key={pi}
+                            className={pi === 0 ? "cs-lead" : "cs-body"}
+                            style={{ marginBottom: pi < (section.body as string[]).length - 1 ? "1.5rem" : 0 }}>
+                            {cleanPara(para)}
+                          </p>
+                        ))
+                      : <p className="cs-lead">{cleanPara(section.body as string)}</p>
+                    }
                   </div>
                 </section>
               )}
 
-              {/* Screens */}
+              {/* Screen gallery */}
               {section.screens && section.screens.length > 0 && (
-                <div className="screen-gallery-section" style={{ padding: "var(--space-lg) var(--pad)", borderBottom: "0.5px solid var(--border)" }}>
+                <div className="screen-gallery-section" style={{ ...hRule, ...padX, padding: "2.5rem var(--pad)" }}>
                   <ScreenGallery screens={section.screens} narrow={section.narrowScreens} />
                 </div>
               )}
 
               {/* Artifact */}
               {data.artifacts[si]?.component && (
-                <section className="artifact-section" style={{ padding: "var(--space-lg) var(--pad)", borderBottom: "0.5px solid var(--border)", background: "#fafafa" }}>
-                  <div className="artifact-scroll" style={{ marginBottom: "1.5rem", overflowX: "auto", minWidth: 0 }}>
+                <section className="artifact-section" style={{
+                  ...hRule, ...padX,
+                  padding: "2.5rem var(--pad)",
+                  background: "rgba(10,10,10,0.02)",
+                }}>
+                  <div className="artifact-scroll" style={{ marginBottom: "1.25rem", overflowX: "auto" }}>
                     {data.artifacts[si].component}
                   </div>
-                  <div className="artifact-caption" style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "2rem" }}>
-                    <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", fontWeight: 500, color: "var(--ink)", margin: 0, opacity: 0.6 }}>{data.artifacts[si].title}</p>
-                    <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", fontWeight: 300, color: "var(--muted)", margin: 0, maxWidth: "480px", textWrap: "pretty" }}>{data.artifacts[si].caption}</p>
+                  <div className="artifact-caption" style={{
+                    display: "flex", justifyContent: "space-between",
+                    alignItems: "baseline", gap: "2rem",
+                  }}>
+                    <p style={{
+                      fontFamily: "var(--font-mono)", fontSize: "10px",
+                      fontWeight: 500, color: "var(--ink)", opacity: 0.55,
+                    }}>
+                      {data.artifacts[si].title}
+                    </p>
+                    <p style={{
+                      fontFamily: "var(--font-body)", fontSize: "13px",
+                      color: "var(--muted)", maxWidth: "480px", textWrap: "pretty",
+                    }}>
+                      {data.artifacts[si].caption}
+                    </p>
                   </div>
                 </section>
               )}
@@ -254,42 +347,81 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         </div>
 
         {/* ── MORE WORK ── */}
-        <section aria-label="More work" style={{ padding: "var(--space-lg) var(--pad)", borderTop: "0.5px solid var(--border)" }}>
-          <span style={{ fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--faint)", display: "block", marginBottom: "2rem" }}>More work</span>
+        <section style={{ ...padX, padding: "3rem var(--pad)", background: "var(--ink)" }}>
+          <div style={{
+            fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+            letterSpacing: "0.18em", textTransform: "uppercase",
+            color: "rgba(245,240,232,0.3)", marginBottom: "2rem",
+          }}>
+            More work
+          </div>
           <div>
             {ALL_WORK.map((work, i) => {
               const isCurrent = work.title === data.title;
-              const isNext = ALL_WORK.findIndex(w => w.title === data.title) === i - 1;
+              const currentIdx = ALL_WORK.findIndex(w => w.title === data.title);
+              const isNext = currentIdx === i - 1;
+
               const inner = (
                 <>
-                  <span style={{ fontFamily: "var(--font-body)", fontSize: "11px", fontWeight: 400, color: "var(--faint)", minWidth: "2.5rem", flexShrink: 0, letterSpacing: "0.06em" }}>{work.index}</span>
+                  <span style={{
+                    fontFamily: "var(--font-mono)", fontSize: "9px",
+                    color: "rgba(245,240,232,0.25)", minWidth: "2.5rem",
+                    letterSpacing: "0.08em",
+                  }}>{work.index}</span>
                   <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flex: 1 }}>
-                    <span style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1rem, 1.5vw, 1.3rem)", fontWeight: 800, letterSpacing: "-0.025em", color: isCurrent ? "var(--faint)" : "var(--ink)" }}>
-                      {work.title}
+                    <span style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: "clamp(1.8rem, 3vw, 3rem)",
+                      lineHeight: 0.92, letterSpacing: "0.01em",
+                      color: isCurrent ? "rgba(245,240,232,0.2)" : "rgba(245,240,232,0.85)",
+                    }}>
+                      {work.title.toUpperCase()}
                     </span>
-                    {isNext && <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--red)", border: "0.5px solid var(--red)", padding: "2px 6px" }}>Next</span>}
-                    {work.personal && !isCurrent && <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--faint)", border: "0.5px solid var(--border)", padding: "2px 6px" }}>Personal</span>}
+                    {isNext && (
+                      <span style={{
+                        fontFamily: "var(--font-mono)", fontSize: "8px",
+                        letterSpacing: "0.12em", textTransform: "uppercase",
+                        color: "rgba(245,240,232,0.35)",
+                        border: "0.5px solid rgba(245,240,232,0.2)",
+                        padding: "2px 6px",
+                      }}>Next</span>
+                    )}
+                    {"personal" in work && work.personal && !isCurrent && (
+                      <span style={{
+                        fontFamily: "var(--font-mono)", fontSize: "8px",
+                        letterSpacing: "0.12em", textTransform: "uppercase",
+                        color: "rgba(245,240,232,0.25)",
+                        border: "0.5px solid rgba(245,240,232,0.12)",
+                        padding: "2px 6px",
+                      }}>Personal</span>
+                    )}
                   </div>
                 </>
               );
+
               const rowStyle: React.CSSProperties = {
-                display: "flex", alignItems: "center", padding: "1.1rem 0",
-                borderBottom: i < ALL_WORK.length - 1 ? "0.5px solid var(--border)" : "none",
-                textDecoration: "none", color: "var(--ink)",
-                opacity: isCurrent ? 0.3 : 1, cursor: isCurrent ? "default" : "pointer",
+                display: "flex", alignItems: "center", gap: "1.5rem",
+                padding: "1rem 0",
+                borderBottom: i < ALL_WORK.length - 1 ? "1px solid rgba(245,240,232,0.07)" : "none",
+                textDecoration: "none", color: "inherit",
+                opacity: isCurrent ? 0.35 : 1,
+                cursor: isCurrent ? "default" : "pointer",
+                transition: "opacity 0.15s",
               };
+
               return isCurrent ? (
-                <div key={work.slug} aria-current="page" style={rowStyle}>{inner}</div>
+                <div key={work.slug} style={rowStyle}>{inner}</div>
               ) : (
                 <Link key={work.slug} href={`/work/${work.slug}`} style={rowStyle}
                   onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = "var(--red)"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = "var(--ink)"; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.6"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
                 >{inner}</Link>
               );
             })}
           </div>
         </section>
+
       </main>
     </>
   );
