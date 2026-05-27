@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ScreenGallery } from "./ScreenGallery";
 
-// ── Count-up hook ──────────────────────────────────
 function useCountUp(target: number, duration = 1400) {
   const [count, setCount] = useState(0);
   const [started, setStarted] = useState(false);
@@ -33,7 +32,6 @@ function AnimatedMetric({ value }: { value: string }) {
   return <span><span ref={ref}>{count}</span>{value.slice(m[1].length)}</span>;
 }
 
-// ── Types ──────────────────────────────────────────
 interface Screen { src: string; caption: string; }
 interface Metric { value: string; label: string; }
 interface Section {
@@ -60,20 +58,9 @@ const ALL_WORK = [
 
 function noWidow(t: string) { return t.replace(/\s+(\S+)$/, "\u00a0$1"); }
 function cleanPara(t: string) {
-  return noWidow(t.replace(/ — /g, ", ").replace(/ – /g, ", "));
+  return noWidow(t.replace(/ \u2014 /g, ", ").replace(/ \u2013 /g, ", "));
 }
 
-function Label({ children }: { children: React.ReactNode }) {
-  return (
-    <div style={{
-      fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
-      letterSpacing: "0.18em", textTransform: "uppercase",
-      color: "rgba(10,10,10,0.38)", marginBottom: "0.65rem",
-    }}>{children}</div>
-  );
-}
-
-// ── Case layout ────────────────────────────────────
 export default function CaseLayout({ data }: { data: CaseStudyData }) {
   const [visible, setVisible] = useState(false);
   useEffect(() => { const t = setTimeout(() => setVisible(true), 60); return () => clearTimeout(t); }, []);
@@ -90,144 +77,141 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
     return () => o.disconnect();
   }, []);
 
-  // shared
-  const hRule: React.CSSProperties = { borderBottom: "1px solid var(--border)" };
-  const padX: React.CSSProperties = { paddingLeft: "var(--pad)", paddingRight: "var(--pad)" };
+  const B = "1px solid var(--border)";
+  const P = "var(--pad)";
 
   return (
     <>
-      {/* ── Top nav bar ── */}
-      <div style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        height: "52px", ...padX,
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        background: "rgba(245,240,232,0.96)",
-        backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)",
-        borderBottom: "1px solid var(--border)",
-      }}>
-        <a href="/" style={{
-          display: "flex", alignItems: "center", gap: "0.6rem",
-          fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
-          letterSpacing: "0.14em", textTransform: "uppercase",
-          color: "var(--muted)", textDecoration: "none", transition: "color 0.15s",
-        }}
-          onMouseEnter={(e) => { e.currentTarget.style.color = "var(--ink)"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.color = "var(--muted)"; }}
-        >
-          <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
-            <path d="M11 5H1M5 1L1 5l4 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="square"/>
-          </svg>
-          All work
-        </a>
-        <span style={{
-          fontFamily: "var(--font-mono)", fontSize: "9px",
-          letterSpacing: "0.12em", color: "var(--faint)",
-        }}>
-          {data.index} / 05
-        </span>
-      </div>
-
       <main
         id="main-content"
-        style={{
-          background: "var(--bg)", color: "var(--ink)",
-          minHeight: "100vh", width: "100%", overflowX: "hidden",
-          paddingTop: "52px",
-        }}
+        style={{ background: "var(--bg)", color: "var(--ink)", minHeight: "100vh", width: "100%", overflowX: "hidden" }}
       >
 
-        {/* ── HERO ── */}
+        {/* NAV — same pattern as homepage header */}
+        <header style={{
+          display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
+          borderBottom: B,
+          padding: `1.5rem ${P}`, alignItems: "center",
+        }}>
+          <a href="/" style={{
+            fontFamily: "var(--font-body)", fontSize: "13px",
+            color: "var(--ink)", textDecoration: "none",
+            transition: "opacity 0.15s",
+          }}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.5"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
+          >
+            felipe cruz
+          </a>
+          <div />
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <span style={{
+              fontFamily: "var(--font-mono)", fontSize: "9px",
+              letterSpacing: "0.12em", color: "var(--faint)",
+            }}>
+              {data.index} / 05
+            </span>
+          </div>
+        </header>
+
+        {/* HERO — title full width, then tagline full width below */}
         <section style={{
-          ...hRule, ...padX,
+          borderBottom: B,
+          paddingLeft: P, paddingRight: P,
           paddingTop: "4rem", paddingBottom: "3rem",
           opacity: visible ? 1 : 0,
           transform: visible ? "none" : "translateY(14px)",
           transition: "opacity 0.65s ease, transform 0.65s ease",
         }}>
-          {/* Eyebrow */}
-          <div style={{
-            fontFamily: "var(--font-mono)", fontSize: "9px",
-            letterSpacing: "0.16em", textTransform: "uppercase",
-            color: "var(--muted)", marginBottom: "1.75rem",
-          }}>
-            {data.index} — {data.role}{data.location ? ` · ${data.location}` : ""} · {data.year}
-          </div>
-
-          {/* Title - Bebas, huge */}
           <h1 style={{
             fontFamily: "var(--font-display)",
             fontSize: "clamp(3.5rem, 8vw, 10rem)",
             lineHeight: 0.88, letterSpacing: "0.01em",
-            color: "var(--ink)", marginBottom: "3rem",
+            color: "var(--ink)", marginBottom: "2.5rem",
             textWrap: "balance",
           }}>
             {data.title.toUpperCase()}
           </h1>
 
-          {/* Two-column below title */}
-          <div className="case-hero-below" style={{
-            display: "grid", gridTemplateColumns: "1fr 300px",
-            gap: "4rem", alignItems: "start",
+          {/* Tagline — full width, large serif */}
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
+            lineHeight: 1.72, color: "rgba(10,10,10,0.7)",
+            maxWidth: "820px", textWrap: "pretty",
           }}>
-            <p style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
-              lineHeight: 1.72, color: "rgba(10,10,10,0.7)",
-              textWrap: "pretty",
-            }}>
-              {cleanPara(data.tagline)}
-            </p>
-            <div>
-              <div style={{ borderTop: "1px solid var(--border)", paddingTop: "1.25rem", marginBottom: "1.5rem" }}>
-                <Label>My role</Label>
-                <p style={{
-                  fontFamily: "var(--font-body)", fontSize: "13px",
-                  lineHeight: 1.65, color: "rgba(10,10,10,0.6)",
-                  textWrap: "pretty",
-                }}>
-                  {cleanPara(data.roleDetail)}
+            {cleanPara(data.tagline)}
+          </p>
+        </section>
+
+        {/* CONTEXT — two col: left=context para, right=role+NDA */}
+        <section className="context-section" style={{
+          borderBottom: B,
+          display: "grid", gridTemplateColumns: "1fr 1fr",
+          paddingLeft: P, paddingRight: P, paddingTop: "2.5rem", paddingBottom: "2.5rem",
+          gap: "4rem", alignItems: "start",
+        }}>
+          <p style={{
+            fontFamily: "var(--font-body)", fontSize: "15px",
+            lineHeight: 1.82, color: "rgba(10,10,10,0.68)", textWrap: "pretty",
+          }}>
+            {cleanPara(data.context)}
+          </p>
+          <div>
+            <div style={{ marginBottom: "1.5rem" }}>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "var(--muted)", marginBottom: "0.5rem" }}>
+                My role
+              </div>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "rgba(10,10,10,0.6)", textWrap: "pretty" }}>
+                {cleanPara(data.roleDetail)}
+              </p>
+            </div>
+            {data.impactSummary && (
+              <div style={{ marginBottom: "1.5rem" }}>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "var(--muted)", marginBottom: "0.5rem" }}>
+                  Business impact
+                </div>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "rgba(10,10,10,0.6)", textWrap: "pretty" }}>
+                  {cleanPara(data.impactSummary)}
                 </p>
               </div>
-              {data.impactSummary && (
-                <div style={{ borderTop: "1px solid var(--border)", paddingTop: "1.25rem" }}>
-                  <Label>Business impact</Label>
-                  <p style={{
-                    fontFamily: "var(--font-body)", fontSize: "13px",
-                    lineHeight: 1.65, color: "rgba(10,10,10,0.6)",
-                    textWrap: "pretty",
-                  }}>
-                    {cleanPara(data.impactSummary)}
-                  </p>
-                </div>
-              )}
-            </div>
+            )}
+            {!data.hideNda && (
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--faint)", lineHeight: 1.65, textWrap: "pretty" }}>
+                {data.showNdaNote
+                  ? "Client identity omitted per NDA. Artifacts shown are illustrative representations, not reproductions of client deliverables."
+                  : "Client identity omitted per NDA. Strategic challenges, decisions and outcomes are accurate."
+                }
+              </p>
+            )}
           </div>
         </section>
 
-        {/* ── METRICS ── */}
+        {/* METRICS — Bebas numbers, label ABOVE in mono */}
         {data.metrics.length > 0 && (
           <section className="case-metrics" style={{
             display: "grid",
             gridTemplateColumns: `repeat(${data.metrics.length}, 1fr)`,
-            ...hRule,
+            borderBottom: B,
           }}>
             {data.metrics.map((m, i) => (
               <div key={i} className="metric-cell" style={{
-                padding: "2.5rem var(--pad)",
-                borderRight: i < data.metrics.length - 1 ? "1px solid var(--border)" : "none",
+                paddingLeft: P, paddingRight: P,
+                paddingTop: "2.5rem", paddingBottom: "2.5rem",
+                borderRight: i < data.metrics.length - 1 ? B : "none",
               }}>
                 <div style={{
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(2.8rem, 5vw, 5.5rem)",
                   lineHeight: 0.9, letterSpacing: "0.01em",
-                  color: "var(--ink)", marginBottom: "0.65rem",
+                  color: "var(--ink)", marginBottom: "0.75rem",
                 }}>
                   <AnimatedMetric value={m.value} />
                 </div>
                 <p style={{
                   fontFamily: "var(--font-body)", fontSize: "13px",
                   color: "var(--muted)", lineHeight: 1.6,
-                  maxWidth: "240px", textWrap: "pretty",
+                  maxWidth: "260px", textWrap: "pretty",
                 }}>
                   {cleanPara(m.label)}
                 </p>
@@ -236,62 +220,54 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
           </section>
         )}
 
-        {/* ── CONTEXT ── */}
-        <section className="context-section" style={{ ...hRule, ...padX, padding: "2.5rem var(--pad)" }}>
-          <div className="case-context" style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr",
-            gap: "4rem", alignItems: "start",
-          }}>
-            <p style={{
-              fontFamily: "var(--font-body)", fontSize: "15px",
-              lineHeight: 1.82, color: "rgba(10,10,10,0.68)",
-              textWrap: "pretty",
-            }}>
-              {cleanPara(data.context)}
-            </p>
-            {data.showNdaNote ? (
-              <p style={{
-                fontFamily: "var(--font-body)", fontSize: "13px",
-                color: "var(--muted)", lineHeight: 1.75, textWrap: "pretty",
-              }}>
-                Client identity omitted per NDA. System documentation artifacts shown are illustrative representations of the restructure approach, not reproductions of client deliverables.
-              </p>
-            ) : !data.hideNda ? (
-              <p style={{
-                fontFamily: "var(--font-body)", fontSize: "13px",
-                color: "var(--muted)", lineHeight: 1.75,
-              }}>
-                Client identity omitted per NDA. Strategic challenges, decisions and outcomes are accurate.
-              </p>
-            ) : null}
-          </div>
-        </section>
-
-        {/* ── BODY SECTIONS ── */}
+        {/* BODY SECTIONS */}
         <div ref={sectionsRef}>
           {data.sections.map((section, si) => (
             <div key={si}>
-              {/* Pullquote - full bleed, editorial */}
+
+              {/* Pullquote — large italic, no border, generous padding */}
               {section.pullquote && (
-                <div className="cs-pullquote-section" style={{ ...padX }}>
-                  <blockquote className="cs-pullquote">{noWidow(section.pullquote)}</blockquote>
-                  <p className="cs-pullquote-attr">{section.title}</p>
+                <div style={{
+                  borderBottom: B,
+                  paddingLeft: P, paddingRight: P,
+                  paddingTop: "4rem", paddingBottom: "4rem",
+                }}>
+                  <blockquote style={{
+                    fontFamily: "var(--font-body)", fontStyle: "italic",
+                    fontSize: "clamp(1.5rem, 3vw, 2.2rem)",
+                    lineHeight: 1.3, color: "var(--ink)",
+                    maxWidth: "820px", textWrap: "pretty",
+                    marginBottom: "1.5rem",
+                  }}>
+                    {noWidow(section.pullquote)}
+                  </blockquote>
+                  <div style={{
+                    fontFamily: "var(--font-mono)", fontSize: "9px",
+                    letterSpacing: "0.14em", textTransform: "uppercase" as const,
+                    color: "var(--muted)",
+                  }}>
+                    {section.title}
+                  </div>
                 </div>
               )}
 
-              {/* Body text */}
+              {/* Body text — section title as mono label, then prose */}
               {(Array.isArray(section.body) ? section.body.length > 0 : !!section.body) && (
-                <section className="case-section" style={{ ...hRule, ...padX, padding: "2.5rem var(--pad)" }}>
+                <section className="case-section reveal" style={{
+                  borderBottom: B,
+                  paddingLeft: P, paddingRight: P,
+                  paddingTop: "2.5rem", paddingBottom: "2.5rem",
+                }}>
                   {!section.pullquote && (
                     <div style={{
                       fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
-                      letterSpacing: "0.18em", textTransform: "uppercase",
+                      letterSpacing: "0.18em", textTransform: "uppercase" as const,
                       color: "var(--muted)", marginBottom: "1.5rem",
                     }}>
                       {section.title}
                     </div>
                   )}
-                  <div className="case-section-body" style={{ maxWidth: "680px" }}>
+                  <div style={{ maxWidth: "680px" }}>
                     {Array.isArray(section.body)
                       ? section.body.map((para, pi) => (
                           <p key={pi}
@@ -308,49 +284,57 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
 
               {/* Screen gallery */}
               {section.screens && section.screens.length > 0 && (
-                <div className="screen-gallery-section" style={{ ...hRule, ...padX, padding: "2.5rem var(--pad)" }}>
+                <div className="screen-gallery-section reveal" style={{
+                  borderBottom: B,
+                  paddingLeft: P, paddingRight: P,
+                  paddingTop: "2.5rem", paddingBottom: "2.5rem",
+                }}>
                   <ScreenGallery screens={section.screens} narrow={section.narrowScreens} />
                 </div>
               )}
 
-              {/* Artifact */}
+              {/* Artifact — dark bg */}
               {data.artifacts[si]?.component && (
-                <section className="artifact-section" style={{
-                  ...hRule, ...padX,
-                  padding: "2.5rem var(--pad)",
-                  background: "rgba(10,10,10,0.02)",
+                <section className="artifact-section reveal" style={{
+                  borderBottom: B,
+                  paddingLeft: P, paddingRight: P,
+                  paddingTop: "2.5rem", paddingBottom: "2.5rem",
+                  background: "#141414",
                 }}>
-                  <div className="artifact-scroll" style={{ marginBottom: "1.25rem", overflowX: "auto" }}>
+                  <div className="artifact-scroll" style={{ marginBottom: "1.5rem", overflowX: "auto" }}>
                     {data.artifacts[si].component}
                   </div>
-                  <div className="artifact-caption" style={{
-                    display: "flex", justifyContent: "space-between",
-                    alignItems: "baseline", gap: "2rem",
-                  }}>
-                    <p style={{
-                      fontFamily: "var(--font-mono)", fontSize: "10px",
-                      fontWeight: 500, color: "var(--ink)", opacity: 0.55,
+                  {(data.artifacts[si].title || data.artifacts[si].caption) && (
+                    <div className="artifact-caption" style={{
+                      display: "flex", justifyContent: "space-between",
+                      alignItems: "baseline", gap: "2rem",
                     }}>
-                      {data.artifacts[si].title}
-                    </p>
-                    <p style={{
-                      fontFamily: "var(--font-body)", fontSize: "13px",
-                      color: "var(--muted)", maxWidth: "480px", textWrap: "pretty",
-                    }}>
-                      {data.artifacts[si].caption}
-                    </p>
-                  </div>
+                      <p style={{
+                        fontFamily: "var(--font-mono)", fontSize: "10px",
+                        color: "rgba(245,240,232,0.35)", letterSpacing: "0.08em",
+                      }}>
+                        {data.artifacts[si].title}
+                      </p>
+                      <p style={{
+                        fontFamily: "var(--font-body)", fontSize: "13px",
+                        color: "rgba(245,240,232,0.3)", maxWidth: "480px", textWrap: "pretty",
+                      }}>
+                        {data.artifacts[si].caption}
+                      </p>
+                    </div>
+                  )}
                 </section>
               )}
+
             </div>
           ))}
         </div>
 
-        {/* ── MORE WORK ── */}
-        <section style={{ ...padX, padding: "3rem var(--pad)", background: "var(--ink)" }}>
+        {/* MORE WORK — full black, same as homepage contact */}
+        <section style={{ background: "var(--ink)", paddingLeft: P, paddingRight: P, paddingTop: "3rem", paddingBottom: "3rem" }}>
           <div style={{
             fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
-            letterSpacing: "0.18em", textTransform: "uppercase",
+            letterSpacing: "0.18em", textTransform: "uppercase" as const,
             color: "rgba(245,240,232,0.3)", marginBottom: "2rem",
           }}>
             More work
@@ -366,7 +350,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                   <span style={{
                     fontFamily: "var(--font-mono)", fontSize: "9px",
                     color: "rgba(245,240,232,0.25)", minWidth: "2.5rem",
-                    letterSpacing: "0.08em",
+                    letterSpacing: "0.08em", flexShrink: 0,
                   }}>{work.index}</span>
                   <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flex: 1 }}>
                     <span style={{
@@ -380,19 +364,17 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                     {isNext && (
                       <span style={{
                         fontFamily: "var(--font-mono)", fontSize: "8px",
-                        letterSpacing: "0.12em", textTransform: "uppercase",
+                        letterSpacing: "0.12em", textTransform: "uppercase" as const,
                         color: "rgba(245,240,232,0.35)",
-                        border: "0.5px solid rgba(245,240,232,0.2)",
-                        padding: "2px 6px",
+                        border: "0.5px solid rgba(245,240,232,0.2)", padding: "2px 6px",
                       }}>Next</span>
                     )}
                     {"personal" in work && work.personal && !isCurrent && (
                       <span style={{
                         fontFamily: "var(--font-mono)", fontSize: "8px",
-                        letterSpacing: "0.12em", textTransform: "uppercase",
+                        letterSpacing: "0.12em", textTransform: "uppercase" as const,
                         color: "rgba(245,240,232,0.25)",
-                        border: "0.5px solid rgba(245,240,232,0.12)",
-                        padding: "2px 6px",
+                        border: "0.5px solid rgba(245,240,232,0.12)", padding: "2px 6px",
                       }}>Personal</span>
                     )}
                   </div>
