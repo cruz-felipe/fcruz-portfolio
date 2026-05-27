@@ -42,13 +42,13 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
   return (
     <div ref={ref} style={{
       borderBottom: "1px solid var(--border)",
-      paddingTop: "2rem", paddingBottom: "2rem",
+      paddingTop: "3rem", paddingBottom: "3rem",
       opacity: vis ? 1 : 0,
       transform: vis ? "none" : "translateY(12px)",
       transition: `opacity 0.45s ease ${i * 55}ms, transform 0.45s ease ${i * 55}ms`,
     }}>
       <Link href={`/work/${card.id}`} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
-        <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", marginBottom: "0.4rem" }}>
+        <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", marginBottom: "0.5rem" }}>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.12em", color: "var(--faint)" }}>
             {card.index}
           </span>
@@ -59,7 +59,7 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
             <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "var(--faint)", opacity: 0.7 }}>personal</span>
           )}
         </div>
-        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "2rem", marginBottom: "0.75rem" }}>
+        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "2rem", marginBottom: "1rem" }}>
           <div
             style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.4rem, 4.5vw, 4.8rem)", lineHeight: 0.92, letterSpacing: "0.01em", color: "var(--ink)", transition: "opacity 0.15s" }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = "0.55"; }}
@@ -113,12 +113,13 @@ export default function Page({ data }: { data: PageData }) {
         </nav>
       </header>
 
-      {/* HERO */}
+      {/* HERO — three columns, flush to nav */}
       <section className="hero-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
         padding: "3rem var(--pad)",
       }}>
+        {/* Col 1: bio + currently */}
         <div style={{ paddingRight: "3rem" }}>
           <Label>bio</Label>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", lineHeight: 1.72, color: "rgba(10,10,10,0.72)", marginBottom: "2.5rem", textWrap: "pretty" }}>
@@ -130,8 +131,8 @@ export default function Page({ data }: { data: PageData }) {
           </p>
         </div>
 
+        {/* Col 2: numbers — no label, numbers start immediately */}
         <div className="hero-col2" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem", paddingRight: "3rem" }}>
-          <Label>numbers</Label>
           {[
             { value: "11", label: "years building enterprise products" },
             { value: "9", label: "countries" },
@@ -145,10 +146,8 @@ export default function Page({ data }: { data: PageData }) {
           ))}
         </div>
 
+        {/* Col 3: skills only — no quote */}
         <div className="hero-col3" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem" }}>
-          <p style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)", lineHeight: 1.75, color: "rgba(10,10,10,0.55)", marginBottom: "2.5rem", textWrap: "pretty" }}>
-            &ldquo;{data.heroHeadline}&rdquo;
-          </p>
           <Label>skills</Label>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.2rem" }}>
             {data.skills.map(s => (
@@ -158,7 +157,7 @@ export default function Page({ data }: { data: PageData }) {
         </div>
       </section>
 
-      {/* WORK BLEED TITLE */}
+      {/* WORK BLEED — WORK col1, empty col2, description col3 */}
       <div id="work" className="bleed-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
@@ -172,21 +171,14 @@ export default function Page({ data }: { data: PageData }) {
         }}>
           WORK
         </div>
-        <div className="bleed-col2" style={{
-          borderLeft: "1px solid var(--border)", paddingLeft: "3rem",
-          fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)",
-          lineHeight: 0.86, letterSpacing: "0.01em", color: "var(--ink)", paddingBottom: "0.06em",
-          opacity: mounted ? 1 : 0, transform: mounted ? "none" : "translateY(16px)",
-          transition: "opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s",
-        }}>
-          CASE<br />STUDIES
-        </div>
+        {/* Col 2: empty */}
+        <div className="bleed-col2" style={{ borderLeft: "1px solid var(--border)" }} />
+        {/* Col 3: description, bottom-aligned */}
         <div className="bleed-col3" style={{
           borderLeft: "1px solid var(--border)", paddingLeft: "3rem",
           display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: "1.5rem",
-          opacity: mounted ? 1 : 0, transition: "opacity 0.6s ease 0.3s",
+          opacity: mounted ? 1 : 0, transition: "opacity 0.6s ease 0.2s",
         }}>
-          <Label>selected projects</Label>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--muted)", lineHeight: 1.65, textWrap: "pretty" }}>
             Enterprise product design across BSS/OSS, telecom infrastructure, B2B and B2C. NDA-constrained where noted.
           </p>
@@ -200,7 +192,7 @@ export default function Page({ data }: { data: PageData }) {
         ))}
       </section>
 
-      {/* ABOUT BLEED TITLE */}
+      {/* ABOUT BLEED — ABOUT col1, empty col2, empty col3 */}
       <div id="about" className="bleed-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
@@ -212,14 +204,7 @@ export default function Page({ data }: { data: PageData }) {
         }}>
           ABOUT
         </div>
-        <div className="bleed-col2" style={{
-          borderLeft: "1px solid var(--border)", paddingLeft: "3rem",
-          display: "flex", alignItems: "flex-end", paddingBottom: "1.5rem",
-        }}>
-          <p style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "clamp(1rem, 1.6vw, 1.3rem)", lineHeight: 1.45, color: "rgba(10,10,10,0.6)", textWrap: "pretty" }}>
-            Most design problems are really communication failures. Between design and engineering, between what was decided and what actually shipped.
-          </p>
-        </div>
+        <div className="bleed-col2" style={{ borderLeft: "1px solid var(--border)" }} />
         <div className="bleed-col3" style={{ borderLeft: "1px solid var(--border)" }} />
       </div>
 
@@ -229,6 +214,7 @@ export default function Page({ data }: { data: PageData }) {
         borderBottom: "1px solid var(--border)",
         padding: "3rem var(--pad)",
       }}>
+        {/* Col 1: bio + beyond */}
         <div style={{ paddingRight: "3rem" }}>
           <Label>long bio</Label>
           {[data.aboutBio1, data.aboutBio2, data.aboutBio3].map((t, i) => (
@@ -242,6 +228,7 @@ export default function Page({ data }: { data: PageData }) {
           </div>
         </div>
 
+        {/* Col 2: experience + education */}
         <div className="about-col2" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem", paddingRight: "3rem" }}>
           <Label>experience</Label>
           {data.experience.map((job, i) => (
@@ -266,6 +253,7 @@ export default function Page({ data }: { data: PageData }) {
           </div>
         </div>
 
+        {/* Col 3: photo + skills */}
         <div className="about-col3" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem" }}>
           <div style={{ marginBottom: "2rem" }}>
             <img src="/photo.jpg" alt="Felipe Cruz" style={{ width: "100%", display: "block", objectFit: "cover", objectPosition: "center top", aspectRatio: "3/4" }} />
@@ -281,6 +269,7 @@ export default function Page({ data }: { data: PageData }) {
 
       {/* CONTACT */}
       <section id="contact" style={{ background: "var(--ink)" }}>
+        {/* LET'S TALK bleed — same pattern, no col2/col3 content */}
         <div className="contact-bleed" style={{
           display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
           borderBottom: "1px solid rgba(245,240,232,0.08)",
@@ -289,17 +278,15 @@ export default function Page({ data }: { data: PageData }) {
           <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)", lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8", paddingBottom: "0.06em" }}>
             LET&apos;S<br />TALK
           </div>
-          <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)", paddingLeft: "3rem", display: "flex", alignItems: "flex-end", paddingBottom: "2rem" }}>
-            <p style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "clamp(1rem, 1.6vw, 1.3rem)", lineHeight: 1.5, color: "rgba(245,240,232,0.45)", textWrap: "pretty" }}>
-              Open to senior IC and lead roles at companies building products people actually use.
-            </p>
-          </div>
+          <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)" }} />
           <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)" }} />
         </div>
 
+        {/* Links — two cols: email left, elsewhere right */}
         <div className="contact-grid" style={{
-          display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-          padding: "3rem var(--pad)",
+          display: "grid", gridTemplateColumns: "1fr 1fr",
+          padding: "3rem var(--pad) 4rem",
+          borderBottom: "1px solid rgba(245,240,232,0.08)",
         }}>
           <div>
             <Label light>email me</Label>
@@ -326,19 +313,13 @@ export default function Page({ data }: { data: PageData }) {
               </div>
             ))}
           </div>
-          <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)", paddingLeft: "3rem" }}>
-            <Label light>location</Label>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "rgba(245,240,232,0.4)", lineHeight: 1.65 }}>
-              São Paulo, Brazil.<br />Available remote and on-site.
-            </p>
-          </div>
         </div>
 
-        <div style={{ borderTop: "1px solid rgba(245,240,232,0.08)", padding: "1.25rem var(--pad)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        {/* Footer bar — name + role only, no year */}
+        <div style={{ padding: "1.25rem var(--pad)" }}>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "rgba(245,240,232,0.25)" }}>
-            Felipe Cruz &mdash; Senior UI Designer, Team Lead
+            Felipe Cruz &mdash; Senior UI Designer, Team Lead &mdash; {year}
           </span>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "rgba(245,240,232,0.18)" }}>{year}</span>
         </div>
       </section>
 
