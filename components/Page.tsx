@@ -95,9 +95,13 @@ export default function Page({ data }: { data: PageData }) {
 
       {/* NAV */}
       <header style={{
+        position: "sticky", top: 0, zIndex: 100,
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
         padding: "1.5rem var(--pad)", alignItems: "center",
+        background: "rgba(245,240,232,0.96)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
       }}>
         <div style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--ink)" }}>felipe cruz</div>
         <div />
@@ -261,9 +265,14 @@ export default function Page({ data }: { data: PageData }) {
           </div>
         </div>
 
-        {/* Col 3: photo only */}
         <div className="about-col3" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem" }}>
-          <img src="/photo.jpg" alt="Felipe Cruz" style={{ width: "100%", display: "block", objectFit: "cover", objectPosition: "center top", aspectRatio: "3/4" }} />
+          <img src="/photo.jpg" alt="Felipe Cruz" style={{ width: "100%", display: "block", objectFit: "cover", objectPosition: "center top", aspectRatio: "3/4", marginBottom: "2rem" }} />
+          <Label>expertise</Label>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+            {data.skills.map((s: string) => (
+              <span key={s} style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "rgba(10,10,10,0.65)", lineHeight: 1.7 }}>{s}</span>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -284,8 +293,7 @@ export default function Page({ data }: { data: PageData }) {
           <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)" }} />
         </div>
 
-        {/* Single column links - no labels, no dividers */}
-        <div style={{ padding: "3rem var(--pad) 4rem" }}>
+        <div style={{ borderTop: "1px solid rgba(245,240,232,0.1)", padding: "3rem var(--pad) 4rem" }}>
           <a href={`mailto:${data.contactEmail}`} style={{
             display: "block", fontFamily: "var(--font-body)", fontStyle: "italic",
             fontSize: "clamp(1rem, 2vw, 1.5rem)", color: "#F5F0E8",
@@ -306,9 +314,12 @@ export default function Page({ data }: { data: PageData }) {
           ))}
         </div>
 
-        <div style={{ padding: "1.25rem var(--pad)" }}>
+        <div style={{ padding: "1.25rem var(--pad)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "rgba(245,240,232,0.25)" }}>
-            Felipe Cruz &mdash; Product Designer &mdash; {year}
+            Felipe Cruz &mdash; Product Designer
+          </span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "rgba(245,240,232,0.25)" }}>
+            {year}
           </span>
         </div>
       </section>
