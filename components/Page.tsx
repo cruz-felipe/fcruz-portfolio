@@ -211,7 +211,6 @@ export default function Page({ data }: { data: PageData }) {
       {/* ABOUT CONTENT */}
       <section className="about-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-        borderBottom: "1px solid var(--border)",
         padding: "3rem var(--pad)",
       }}>
         {/* Col 1: bio + beyond */}
@@ -275,7 +274,7 @@ export default function Page({ data }: { data: PageData }) {
           borderBottom: "1px solid rgba(245,240,232,0.08)",
           padding: "0 var(--pad)", overflow: "hidden",
         }}>
-          <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)", lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8", paddingBottom: "0.06em" }}>
+          <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)", lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8", paddingBottom: "0.06em", margin-top: ˜-15px˜ }}>
             LET&apos;S<br />TALK
           </div>
           <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)" }} />
@@ -288,8 +287,7 @@ export default function Page({ data }: { data: PageData }) {
           padding: "3rem var(--pad) 4rem",
           borderBottom: "1px solid rgba(245,240,232,0.08)",
         }}>
-          <div>
-            <Label light>email me</Label>
+          <div>            
             <a href={`mailto:${data.contactEmail}`} style={{
               fontFamily: "var(--font-body)", fontStyle: "italic",
               fontSize: "clamp(1rem, 2vw, 1.5rem)", color: "#F5F0E8",
@@ -297,10 +295,9 @@ export default function Page({ data }: { data: PageData }) {
             }}
               onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.55"; }}
               onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
-            >{data.contactEmail}</a>
+            >email me</a>
           </div>
           <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)", paddingLeft: "3rem" }}>
-            <Label light>elsewhere</Label>
             {[["linkedin", data.contactLinkedIn], ["illustration", data.contactIllustration]].map(([label, href]) => (
               <div key={label} style={{ marginBottom: "0.5rem" }}>
                 <a href={href} target="_blank" rel="noopener noreferrer" style={{
@@ -318,7 +315,7 @@ export default function Page({ data }: { data: PageData }) {
         {/* Footer bar — name + role only, no year */}
         <div style={{ padding: "1.25rem var(--pad)" }}>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "rgba(245,240,232,0.25)" }}>
-            Felipe Cruz &mdash; Senior UI Designer, Team Lead &mdash; {year}
+            Felipe Cruz &mdash; Product Designer &mdash; {year}
           </span>
         </div>
       </section>
