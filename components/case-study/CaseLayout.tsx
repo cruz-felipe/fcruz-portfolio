@@ -92,9 +92,13 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
 
       {/* NAV */}
       <header style={{
+        position: "sticky", top: 0, zIndex: 100,
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
         padding: "1.5rem var(--pad)", alignItems: "center",
+        background: "rgba(245,240,232,0.96)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
           <a href="/" style={{
