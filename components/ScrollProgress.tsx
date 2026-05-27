@@ -20,28 +20,26 @@ export default function ScrollProgress() {
 
   return (
     <>
-      {/* Scroll progress bar */}
+      {/* Progress bar — lives inside the 2px red rule at top */}
       <div style={{
         position: "fixed", top: 0, left: 0, right: 0, height: "2px",
-        zIndex: 9999, pointerEvents: "none",
-        background: "transparent",
+        zIndex: 9999, pointerEvents: "none", background: "rgba(13,13,13,0.15)",
       }}>
         <div style={{
-          height: "100%",
-          width: `${progress}%`,
+          height: "100%", width: `${progress}%`,
           background: "var(--red)",
           transition: "width 0.1s linear",
         }} />
       </div>
 
-      {/* Back to top */}
+      {/* Back to top — square, Bauhaus */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         aria-label="Back to top"
         style={{
           position: "fixed", bottom: "2rem", right: "2rem",
-          width: "40px", height: "40px", borderRadius: "50%",
-          background: "var(--ink)", color: "var(--paper)",
+          width: "36px", height: "36px",
+          background: "var(--ink)", color: "var(--white)",
           border: "none", cursor: "pointer",
           display: "flex", alignItems: "center", justifyContent: "center",
           opacity: atBottom ? 1 : 0,
@@ -50,9 +48,11 @@ export default function ScrollProgress() {
           transition: "opacity 0.3s ease, transform 0.3s ease",
           zIndex: 998,
         }}
+        onMouseEnter={(e) => (e.currentTarget.style.background = "var(--red)")}
+        onMouseLeave={(e) => (e.currentTarget.style.background = "var(--ink)")}
       >
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M7 11V3M3 7l4-4 4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M6 10V2M2 6l4-4 4 4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="square" />
         </svg>
       </button>
     </>

@@ -1,107 +1,265 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
 
-const SKILLS = [
-  "Product Design","Design Systems","BSS / OSS","Team Leadership",
-  "Cross-functional Influence","UX Research","Interaction Design",
-  "Design Ops","Telecom B2B & B2C","Stakeholder Management",
-  "Figma","Illustration & Concept Art",
-];
-
-const EXPERIENCE = [
-  { role: "Senior UI Designer, Group Leader", company: "Netcracker Technology", period: "Aug 2023 — Present", note: "Joined as Senior UI Designer. Took on Group Leader responsibilities for the Brazil design team. Cross-functional alignment, design system governance, and IC work on global OSS/BSS products." },
-  { role: "Senior Experience Designer", company: "EPAM Systems", period: "Aug 2022 — Aug 2023", note: "UX strategy and interaction design for enterprise clients across industries. Design systems, usability evaluations, and alignment between design, product and engineering teams." },
-  { role: "UX/UI Designer, Group Leader", company: "Netcracker Technology", period: "Dec 2018 — Aug 2022", note: "Started as UX/UI Designer, promoted to Group Leader. Full-cycle product design on OSS/BSS telecom platforms across multiple countries." },
-  { role: "UX Mentor", company: "CareerFoundry", period: "Feb 2021 — Feb 2026", note: "Mentored designers through career transitions with portfolio reviews, interview preparation and feedback on what the industry actually rewards." },
-  { role: "Penciler", company: "MSP Estúdios", period: "Apr 2026 — Present", note: "Working within the visual language and narrative universe of established IP." },
-];
-
-const EDUCATION = [
-  { degree: "Interaction Design", school: "UC San Diego" },
-  { degree: "Bachelor, Industrial Design", school: "Estácio" },
-];
-
-function useVisible() {
+function useVisible(threshold = 0.06) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.06 });
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      { threshold }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [threshold]);
   return { ref, visible };
 }
-
-const SL = { fontFamily: "var(--font-body)", fontSize: "10px", fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase" as const, color: "var(--faint)", display: "block", marginBottom: "1.5rem" };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function About({ data }: { data: any }) {
   const { ref, visible } = useVisible();
-  return (
-    <section id="about" aria-label="About Felipe Cruz" ref={ref} style={{
-      padding: "var(--space-xl) var(--pad)",
-      borderTop: "0.5px solid var(--border)",
-      opacity: visible ? 1 : 0,
-      transform: visible ? "translateY(0)" : "translateY(24px)",
-      transition: "opacity 0.7s ease, transform 0.7s ease",
-    }}>
-      {/* Section label */}
-      <span style={SL}>About</span>
 
-      {/* Top: photo + bio */}
-      <div className="about-top" style={{ alignItems: "flex-start", marginBottom: "var(--space-lg)" }}>
+  const skills: string[] = data.skills || [];
+  const experience: Array<{ role: string; company: string; period: string; note: string }> = data.experience || [];
+  const education: Array<{ degree: string; school: string }> = data.education || [];
+
+  return (
+    <section
+      id="about"
+      aria-label="About Felipe Cruz"
+      ref={ref}
+      style={{
+        padding: "var(--space-xl) var(--pad)",
+        borderTop: "0.5px solid var(--border)",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(24px)",
+        transition: "opacity 0.75s ease, transform 0.75s ease",
+      }}
+    >
+      {/* Section header */}
+      <div style={{ display: "flex", alignItems: "center", gap: "1.25rem", marginBottom: "4rem" }}>
+        <div style={{ width: "20px", height: "2px", background: "var(--red)" }} />
+        <span style={{
+          fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+          letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--faint)",
+        }}>
+          About
+        </span>
+      </div>
+
+      {/* Photo + Bio */}
+      <div className="about-top" style={{ alignItems: "flex-start" }}>
         <div className="about-photo-col">
-          <div style={{ width: "100%", maxWidth: "220px", position: "relative", overflow: "hidden" }}>
-            <img src="/photo.jpg" alt="Felipe Cruz" style={{ width: "100%", display: "block", objectFit: "cover", objectPosition: "center top", aspectRatio: "3/4" }} />
-            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "2px", background: "var(--red)" }} />
+          <div style={{
+            width: "100%", maxWidth: "260px",
+            position: "relative",
+            overflow: "hidden",
+          }}>
+            <img
+              src="/photo.jpg"
+              alt="Felipe Cruz sketching in Tiradentes, Brazil"
+              style={{
+                width: "100%", display: "block",
+                objectFit: "cover", objectPosition: "center top",
+                aspectRatio: "3/4",
+              }}
+            />
+            {/* Red rule at bottom of photo — Bauhaus accent */}
+            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "3px", background: "var(--red)" }} />
           </div>
         </div>
 
-        <div className="about-bio-col">
-          {[data.aboutBio1, data.aboutBio2, data.aboutBio3].filter(Boolean).map((p: string, i: number) => (
-            <p key={i} style={{ fontFamily: "var(--font-body)", fontSize: i === 0 ? "clamp(1rem,1.3vw,1.1rem)" : "14px", fontWeight: 300, lineHeight: 1.82, color: i === 0 ? "#222" : "#555", marginBottom: "1.25rem" }}>{p}</p>
+        <div className="about-bio-col" style={{ maxWidth: "740px" }}>
+          {/* H2 — large, condensed, Bauhaus weight */}
+          <h2 style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(2.2rem, 4vw, 4.2rem)",
+            fontWeight: 800, letterSpacing: "-0.03em",
+            lineHeight: 1, color: "var(--ink)",
+            marginBottom: "2.5rem",
+          }}>
+            Felipe Cruz
+          </h2>
+
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontSize: "clamp(0.95rem, 1.3vw, 1.08rem)",
+            fontWeight: 300, lineHeight: 1.78,
+            color: "var(--ink)", marginBottom: "1.25rem", opacity: 0.88,
+            textWrap: "pretty",
+          }}>
+            {data.aboutBio1}
+          </p>
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontSize: "15px", fontWeight: 300, lineHeight: 1.78,
+            color: "var(--ink)", opacity: 0.70, marginBottom: "1.25rem",
+            textWrap: "pretty",
+          }}>
+            {data.aboutBio2}
+          </p>
+          <p style={{
+            fontFamily: "var(--font-body)",
+            fontSize: "15px", fontWeight: 300, lineHeight: 1.78,
+            color: "var(--ink)", opacity: 0.70, marginBottom: "2.5rem",
+            textWrap: "pretty",
+          }}>
+            {data.aboutBio3}
+          </p>
+
+          {/* Beyond label */}
+          <div style={{
+            display: "flex", alignItems: "center", gap: "1rem",
+            marginBottom: "1.25rem",
+          }}>
+            <div style={{ width: "14px", height: "2px", background: "var(--red)" }} />
+            <span style={{
+              fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+              letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--faint)",
+            }}>
+              {data.aboutBeyondLabel || "Beyond the work"}
+            </span>
+          </div>
+
+          {[data.aboutBeyond1, data.aboutBeyond2, data.aboutBeyond3].filter(Boolean).map((text: string, i: number) => (
+            <p key={i} style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "15px", fontWeight: 300, lineHeight: 1.78,
+              color: "var(--ink)", opacity: 0.68,
+              marginBottom: i < 2 ? "1rem" : "2.5rem",
+              textWrap: "pretty",
+            }}>
+              {text}
+            </p>
           ))}
 
-          <span style={{ ...SL, marginTop: "0.5rem" }}>{data.aboutBeyondLabel || "Beyond the work"}</span>
-          {[data.aboutBeyond1, data.aboutBeyond2, data.aboutBeyond3].filter(Boolean).map((p: string, i: number) => (
-            <p key={i} style={{ fontFamily: "var(--font-body)", fontSize: "14px", fontWeight: 300, lineHeight: 1.82, color: "#555", marginBottom: "1.25rem" }}>{p}</p>
-          ))}
-
-          <span style={{ ...SL, marginTop: "0.5rem" }}>Expertise</span>
+          {/* Skills grid */}
+          <div style={{ marginBottom: "0.75rem", display: "flex", alignItems: "center", gap: "1rem" }}>
+            <div style={{ width: "14px", height: "2px", background: "var(--red)" }} />
+            <span style={{
+              fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+              letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--faint)",
+            }}>
+              Expertise
+            </span>
+          </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
-            {(data.skills || SKILLS).map((s: string) => (
-              <span key={s} style={{ fontFamily: "var(--font-body)", fontSize: "11px", fontWeight: 400, color: "#555", background: "#f4f4f4", padding: "5px 12px", letterSpacing: "0.01em" }}>{s}</span>
+            {skills.map((skill: string) => (
+              <span key={skill} style={{
+                fontFamily: "var(--font-mono)", fontSize: "10px",
+                fontWeight: 400, letterSpacing: "0.04em",
+                color: "var(--ink)",
+                background: "rgba(13,13,13,0.05)",
+                border: "0.5px solid var(--border-heavy)",
+                padding: "4px 10px",
+              }}>
+                {skill}
+              </span>
             ))}
           </div>
         </div>
       </div>
 
       {/* Experience + Education */}
-      <div className="about-bottom" style={{ borderTop: "0.5px solid var(--border)", paddingTop: "var(--space-lg)" }}>
+      <div
+        className="about-bottom"
+        style={{
+          marginTop: "4rem",
+          paddingTop: "var(--space-lg)",
+          borderTop: "0.5px solid var(--border)",
+        }}
+      >
+        {/* Experience */}
         <div>
-          <span style={SL}>Experience</span>
-          {(data.experience || EXPERIENCE).map((job: {role:string;company:string;period:string;note:string}, i: number) => (
-            <div key={i} className="experience-entry" style={{ padding: "1.25rem 0", borderBottom: i < (data.experience || EXPERIENCE).length - 1 ? "0.5px solid var(--border)" : "none" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.75rem" }}>
+            <div style={{ width: "14px", height: "2px", background: "var(--red)" }} />
+            <span style={{
+              fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+              letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--faint)",
+            }}>
+              Experience
+            </span>
+          </div>
+          {experience.map((job, i) => (
+            <div key={i} className="experience-entry" style={{
+              display: "grid", gridTemplateColumns: "1fr auto",
+              gap: "1rem", padding: "1.4rem 0",
+              borderBottom: i < experience.length - 1 ? "0.5px solid var(--border)" : "none",
+            }}>
               <div>
-                <div style={{ fontFamily: "var(--font-display)", fontSize: "14px", fontWeight: 700, color: "var(--ink)", marginBottom: "2px" }}>{job.role}</div>
-                <div style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--faint)", marginBottom: "4px" }}>{job.company}</div>
-                <div style={{ fontFamily: "var(--font-body)", fontSize: "13px", fontWeight: 300, color: "#666", lineHeight: 1.65 }}>{job.note}</div>
+                <div style={{
+                  fontFamily: "var(--font-display)", fontSize: "14px",
+                  fontWeight: 700, color: "var(--ink)", marginBottom: "0.15rem",
+                  letterSpacing: "0",
+                }}>
+                  {job.role}
+                </div>
+                <div style={{
+                  fontFamily: "var(--font-body)", fontSize: "12px",
+                  color: "var(--red)", marginBottom: "0.35rem",
+                  fontWeight: 500,
+                }}>
+                  {job.company}
+                </div>
+                <div style={{
+                  fontFamily: "var(--font-body)", fontSize: "13px",
+                  color: "var(--ink)", opacity: 0.6,
+                  lineHeight: 1.55,
+                  textWrap: "pretty",
+                }}>
+                  {job.note}
+                </div>
               </div>
-              <span className="experience-period" style={{ fontFamily: "var(--font-body)", fontSize: "11px", color: "var(--faint)", whiteSpace: "nowrap", paddingTop: "2px" }}>{job.period}</span>
+              <span className="experience-period" style={{
+                fontFamily: "var(--font-mono)", fontSize: "10px",
+                color: "var(--faint)", whiteSpace: "nowrap", paddingTop: "2px",
+                letterSpacing: "0.04em",
+              }}>
+                {job.period}
+              </span>
             </div>
           ))}
         </div>
 
+        {/* Education */}
         <div>
-          <span style={SL}>Education</span>
-          {(data.education || EDUCATION).map((ed: {degree:string;school:string}, i: number, arr: {degree:string;school:string}[]) => (
-            <div key={i} style={{ padding: "1.25rem 0", borderBottom: i < arr.length - 1 ? "0.5px solid var(--border)" : "none" }}>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: "14px", fontWeight: 700, color: "var(--ink)", marginBottom: "2px" }}>{ed.degree}</div>
-              <div style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--faint)" }}>{ed.school}</div>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.75rem" }}>
+            <div style={{ width: "14px", height: "2px", background: "var(--red)" }} />
+            <span style={{
+              fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+              letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--faint)",
+            }}>
+              Education
+            </span>
+          </div>
+          {education.map((ed, i) => (
+            <div key={i} style={{
+              padding: "1.4rem 0",
+              borderBottom: i < education.length - 1 ? "0.5px solid var(--border)" : "none",
+            }}>
+              <div style={{
+                fontFamily: "var(--font-display)", fontSize: "14px",
+                fontWeight: 700, color: "var(--ink)", marginBottom: "0.15rem",
+              }}>
+                {ed.degree}
+              </div>
+              <div style={{
+                fontFamily: "var(--font-body)", fontSize: "12px",
+                color: "var(--faint)",
+              }}>
+                {ed.school}
+              </div>
             </div>
           ))}
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", fontWeight: 300, color: "var(--faint)", lineHeight: 1.65, marginTop: "1.5rem" }}>
-            Company names and client details are omitted across this portfolio in compliance with active NDAs.
+
+          <p style={{
+            fontFamily: "var(--font-mono)", fontSize: "10px",
+            color: "var(--faint)", lineHeight: 1.65,
+            marginTop: "1.75rem",
+            textWrap: "pretty",
+          }}>
+            Company names and client details are omitted across this portfolio
+            in compliance with active NDAs.
           </p>
         </div>
       </div>
