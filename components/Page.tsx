@@ -274,7 +274,7 @@ export default function Page({ data }: { data: PageData }) {
           borderBottom: "1px solid rgba(245,240,232,0.08)",
           padding: "0 var(--pad)", overflow: "hidden",
         }}>
-          <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)", lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8", paddingBottom: "0.06em", margin-top: ˜-15px˜ }}>
+          <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)", lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8", paddingBottom: "0.06em", margin-top: "-15px" }}>
             LET&apos;S<br />TALK
           </div>
           <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)" }} />
