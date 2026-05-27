@@ -61,6 +61,16 @@ function cleanPara(t: string) {
   return noWidow(t.replace(/ \u2014 /g, ", ").replace(/ \u2013 /g, ", "));
 }
 
+function MonoLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{
+      fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+      letterSpacing: "0.18em", textTransform: "uppercase" as const,
+      color: "rgba(10,10,10,0.38)", marginBottom: "0.6rem",
+    }}>{children}</div>
+  );
+}
+
 export default function CaseLayout({ data }: { data: CaseStudyData }) {
   const [visible, setVisible] = useState(false);
   useEffect(() => { const t = setTimeout(() => setVisible(true), 60); return () => clearTimeout(t); }, []);
@@ -68,343 +78,350 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
   const sectionsRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = sectionsRef.current; if (!el) return;
-    const items = el.querySelectorAll("section, .artifact-section");
+    const items = el.querySelectorAll(".reveal-item");
     const o = new IntersectionObserver(
-      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); }),
-      { threshold: 0.05 }
+      (entries) => entries.forEach(e => { if (e.isIntersecting) (e.target as HTMLElement).style.opacity = "1", (e.target as HTMLElement).style.transform = "none"; }),
+      { threshold: 0.04 }
     );
-    items.forEach(item => { item.classList.add("reveal"); o.observe(item); });
+    items.forEach(item => { o.observe(item); });
     return () => o.disconnect();
   }, []);
 
-  const B = "1px solid var(--border)";
-  const P = "var(--pad)";
-
   return (
-    <>
-      <main
-        id="main-content"
-        style={{ background: "var(--bg)", color: "var(--ink)", minHeight: "100vh", width: "100%", overflowX: "hidden" }}
-      >
+    <main id="main-content" style={{ background: "var(--bg)", color: "var(--ink)", minHeight: "100vh", width: "100%", overflowX: "hidden" }}>
 
-        {/* NAV — same pattern as homepage header */}
-        <header style={{
-          display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-          borderBottom: B,
-          padding: `1.5rem ${P}`, alignItems: "center",
+      {/* NAV */}
+      <header style={{
+        display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
+        borderBottom: "1px solid var(--border)",
+        padding: "1.5rem var(--pad)", alignItems: "center",
+      }}>
+        <a href="/" style={{
+          fontFamily: "var(--font-body)", fontSize: "13px",
+          color: "var(--ink)", textDecoration: "none", transition: "opacity 0.15s",
+        }}
+          onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.45"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
+        >
+          felipe cruz
+        </a>
+        <div />
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.12em", color: "var(--faint)" }}>
+            {data.index} / 05
+          </span>
+        </div>
+      </header>
+
+      {/* HERO */}
+      <section style={{
+        borderBottom: "1px solid var(--border)",
+        paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
+        paddingTop: "4rem", paddingBottom: "3rem",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "none" : "translateY(14px)",
+        transition: "opacity 0.65s ease, transform 0.65s ease",
+      }}>
+        <h1 style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(3.5rem, 8vw, 10rem)",
+          lineHeight: 0.88, letterSpacing: "0.01em",
+          color: "var(--ink)", marginBottom: "2.5rem",
+          textWrap: "balance",
         }}>
-          <a href="/" style={{
-            fontFamily: "var(--font-body)", fontSize: "13px",
-            color: "var(--ink)", textDecoration: "none",
-            transition: "opacity 0.15s",
-          }}
-            onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.5"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
-          >
-            felipe cruz
-          </a>
-          <div />
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <span style={{
-              fontFamily: "var(--font-mono)", fontSize: "9px",
-              letterSpacing: "0.12em", color: "var(--faint)",
-            }}>
-              {data.index} / 05
-            </span>
+          {data.title.toUpperCase()}
+        </h1>
+        <p style={{
+          fontFamily: "var(--font-body)",
+          fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
+          lineHeight: 1.72, color: "rgba(10,10,10,0.68)",
+          maxWidth: "820px", textWrap: "pretty",
+        }}>
+          {cleanPara(data.tagline)}
+        </p>
+      </section>
+
+      {/* CONTEXT - two col */}
+      <section className="context-section" style={{
+        borderBottom: "1px solid var(--border)",
+        display: "grid", gridTemplateColumns: "1fr 1fr",
+        paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
+        paddingTop: "2.5rem", paddingBottom: "2.5rem",
+        gap: "4rem", alignItems: "start",
+      }}>
+        <p style={{
+          fontFamily: "var(--font-body)", fontSize: "15px",
+          lineHeight: 1.82, color: "rgba(10,10,10,0.68)", textWrap: "pretty",
+        }}>
+          {cleanPara(data.context)}
+        </p>
+        <div>
+          <div style={{ marginBottom: "1.5rem" }}>
+            <MonoLabel>My role</MonoLabel>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "rgba(10,10,10,0.6)", textWrap: "pretty" }}>
+              {cleanPara(data.roleDetail)}
+            </p>
           </div>
-        </header>
-
-        {/* HERO — title full width, then tagline full width below */}
-        <section style={{
-          borderBottom: B,
-          paddingLeft: P, paddingRight: P,
-          paddingTop: "4rem", paddingBottom: "3rem",
-          opacity: visible ? 1 : 0,
-          transform: visible ? "none" : "translateY(14px)",
-          transition: "opacity 0.65s ease, transform 0.65s ease",
-        }}>
-          <h1 style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(3.5rem, 8vw, 10rem)",
-            lineHeight: 0.88, letterSpacing: "0.01em",
-            color: "var(--ink)", marginBottom: "2.5rem",
-            textWrap: "balance",
-          }}>
-            {data.title.toUpperCase()}
-          </h1>
-
-          {/* Tagline — full width, large serif */}
-          <p style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
-            lineHeight: 1.72, color: "rgba(10,10,10,0.7)",
-            maxWidth: "820px", textWrap: "pretty",
-          }}>
-            {cleanPara(data.tagline)}
-          </p>
-        </section>
-
-        {/* CONTEXT — two col: left=context para, right=role+NDA */}
-        <section className="context-section" style={{
-          borderBottom: B,
-          display: "grid", gridTemplateColumns: "1fr 1fr",
-          paddingLeft: P, paddingRight: P, paddingTop: "2.5rem", paddingBottom: "2.5rem",
-          gap: "4rem", alignItems: "start",
-        }}>
-          <p style={{
-            fontFamily: "var(--font-body)", fontSize: "15px",
-            lineHeight: 1.82, color: "rgba(10,10,10,0.68)", textWrap: "pretty",
-          }}>
-            {cleanPara(data.context)}
-          </p>
-          <div>
+          {data.impactSummary && (
             <div style={{ marginBottom: "1.5rem" }}>
-              <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "var(--muted)", marginBottom: "0.5rem" }}>
-                My role
-              </div>
+              <MonoLabel>Business impact</MonoLabel>
               <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "rgba(10,10,10,0.6)", textWrap: "pretty" }}>
-                {cleanPara(data.roleDetail)}
+                {cleanPara(data.impactSummary)}
               </p>
             </div>
-            {data.impactSummary && (
-              <div style={{ marginBottom: "1.5rem" }}>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "var(--muted)", marginBottom: "0.5rem" }}>
-                  Business impact
-                </div>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "rgba(10,10,10,0.6)", textWrap: "pretty" }}>
-                  {cleanPara(data.impactSummary)}
-                </p>
-              </div>
-            )}
-            {!data.hideNda && (
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--faint)", lineHeight: 1.65, textWrap: "pretty" }}>
-                {data.showNdaNote
-                  ? "Client identity omitted per NDA. Artifacts shown are illustrative representations, not reproductions of client deliverables."
-                  : "Client identity omitted per NDA. Strategic challenges, decisions and outcomes are accurate."
-                }
-              </p>
-            )}
-          </div>
-        </section>
+          )}
+          {!data.hideNda && (
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--faint)", lineHeight: 1.65, textWrap: "pretty" }}>
+              {data.showNdaNote
+                ? "Client identity omitted per NDA. Artifacts are illustrative representations, not reproductions of client deliverables."
+                : "Client identity omitted per NDA. Strategic challenges, decisions and outcomes are accurate."
+              }
+            </p>
+          )}
+        </div>
+      </section>
 
-        {/* METRICS — Bebas numbers, label ABOVE in mono */}
-        {data.metrics.length > 0 && (
-          <section className="case-metrics" style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(${data.metrics.length}, 1fr)`,
-            borderBottom: B,
-          }}>
-            {data.metrics.map((m, i) => (
-              <div key={i} className="metric-cell" style={{
-                paddingLeft: P, paddingRight: P,
-                paddingTop: "2.5rem", paddingBottom: "2.5rem",
-                borderRight: i < data.metrics.length - 1 ? B : "none",
+      {/* METRICS */}
+      {data.metrics.length > 0 && (
+        <section className="case-metrics" style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${data.metrics.length}, 1fr)`,
+          borderBottom: "1px solid var(--border)",
+        }}>
+          {data.metrics.map((m, i) => (
+            <div key={i} className="metric-cell" style={{
+              paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
+              paddingTop: "2.5rem", paddingBottom: "2.5rem",
+              borderRight: i < data.metrics.length - 1 ? "1px solid var(--border)" : "none",
+            }}>
+              <div style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(2.8rem, 5vw, 5.5rem)",
+                lineHeight: 0.9, letterSpacing: "0.01em",
+                color: "var(--ink)", marginBottom: "0.75rem",
               }}>
-                <div style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "clamp(2.8rem, 5vw, 5.5rem)",
-                  lineHeight: 0.9, letterSpacing: "0.01em",
-                  color: "var(--ink)", marginBottom: "0.75rem",
-                }}>
-                  <AnimatedMetric value={m.value} />
-                </div>
-                <p style={{
-                  fontFamily: "var(--font-body)", fontSize: "13px",
-                  color: "var(--muted)", lineHeight: 1.6,
-                  maxWidth: "260px", textWrap: "pretty",
-                }}>
-                  {cleanPara(m.label)}
-                </p>
+                <AnimatedMetric value={m.value} />
               </div>
-            ))}
-          </section>
-        )}
+              <p style={{
+                fontFamily: "var(--font-body)", fontSize: "13px",
+                color: "var(--muted)", lineHeight: 1.6,
+                maxWidth: "260px", textWrap: "pretty",
+              }}>
+                {cleanPara(m.label)}
+              </p>
+            </div>
+          ))}
+        </section>
+      )}
 
-        {/* BODY SECTIONS */}
-        <div ref={sectionsRef}>
-          {data.sections.map((section, si) => (
-            <div key={si}>
+      {/* BODY SECTIONS */}
+      <div ref={sectionsRef}>
+        {data.sections.map((section, si) => (
+          <div key={si}>
 
-              {/* Pullquote — large italic, no border, generous padding */}
-              {section.pullquote && (
-                <div style={{
-                  borderBottom: B,
-                  paddingLeft: P, paddingRight: P,
-                  paddingTop: "4rem", paddingBottom: "4rem",
+            {/* Pullquote */}
+            {section.pullquote && (
+              <div style={{
+                borderBottom: "1px solid var(--border)",
+                paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
+                paddingTop: "4rem", paddingBottom: "4rem",
+              }}>
+                <blockquote style={{
+                  fontFamily: "var(--font-body)", fontStyle: "italic",
+                  fontSize: "clamp(1.5rem, 3vw, 2.2rem)",
+                  lineHeight: 1.3, color: "var(--ink)",
+                  maxWidth: "820px", textWrap: "pretty", marginBottom: "1.5rem",
                 }}>
-                  <blockquote style={{
-                    fontFamily: "var(--font-body)", fontStyle: "italic",
-                    fontSize: "clamp(1.5rem, 3vw, 2.2rem)",
-                    lineHeight: 1.3, color: "var(--ink)",
-                    maxWidth: "820px", textWrap: "pretty",
-                    marginBottom: "1.5rem",
-                  }}>
-                    {noWidow(section.pullquote)}
-                  </blockquote>
+                  {noWidow(section.pullquote)}
+                </blockquote>
+                <div style={{
+                  fontFamily: "var(--font-mono)", fontSize: "9px",
+                  letterSpacing: "0.14em", textTransform: "uppercase" as const,
+                  color: "var(--muted)",
+                }}>
+                  {section.title}
+                </div>
+              </div>
+            )}
+
+            {/* Body text */}
+            {(Array.isArray(section.body) ? section.body.length > 0 : !!section.body) && (
+              <section className="case-section reveal-item" style={{
+                borderBottom: "1px solid var(--border)",
+                paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
+                paddingTop: "2.5rem", paddingBottom: "2.5rem",
+                opacity: 0, transform: "translateY(10px)",
+                transition: "opacity 0.5s ease, transform 0.5s ease",
+              }}>
+                {!section.pullquote && (
                   <div style={{
-                    fontFamily: "var(--font-mono)", fontSize: "9px",
-                    letterSpacing: "0.14em", textTransform: "uppercase" as const,
-                    color: "var(--muted)",
+                    fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+                    letterSpacing: "0.18em", textTransform: "uppercase" as const,
+                    color: "var(--muted)", marginBottom: "1.5rem",
                   }}>
                     {section.title}
                   </div>
+                )}
+                <div style={{ maxWidth: "680px" }}>
+                  {Array.isArray(section.body)
+                    ? section.body.map((para, pi) => (
+                        <p key={pi}
+                          className={pi === 0 ? "cs-lead" : "cs-body"}
+                          style={{ marginBottom: pi < (section.body as string[]).length - 1 ? "1.5rem" : 0 }}>
+                          {cleanPara(para)}
+                        </p>
+                      ))
+                    : <p className="cs-lead">{cleanPara(section.body as string)}</p>
+                  }
                 </div>
-              )}
+              </section>
+            )}
 
-              {/* Body text — section title as mono label, then prose */}
-              {(Array.isArray(section.body) ? section.body.length > 0 : !!section.body) && (
-                <section className="case-section reveal" style={{
-                  borderBottom: B,
-                  paddingLeft: P, paddingRight: P,
-                  paddingTop: "2.5rem", paddingBottom: "2.5rem",
-                }}>
-                  {!section.pullquote && (
-                    <div style={{
-                      fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
-                      letterSpacing: "0.18em", textTransform: "uppercase" as const,
-                      color: "var(--muted)", marginBottom: "1.5rem",
-                    }}>
-                      {section.title}
-                    </div>
-                  )}
-                  <div style={{ maxWidth: "680px" }}>
-                    {Array.isArray(section.body)
-                      ? section.body.map((para, pi) => (
-                          <p key={pi}
-                            className={pi === 0 ? "cs-lead" : "cs-body"}
-                            style={{ marginBottom: pi < (section.body as string[]).length - 1 ? "1.5rem" : 0 }}>
-                            {cleanPara(para)}
-                          </p>
-                        ))
-                      : <p className="cs-lead">{cleanPara(section.body as string)}</p>
-                    }
-                  </div>
-                </section>
-              )}
+            {/* Screen gallery */}
+            {section.screens && section.screens.length > 0 && (
+              <div className="screen-gallery-section reveal-item" style={{
+                borderBottom: "1px solid var(--border)",
+                paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
+                paddingTop: "2.5rem", paddingBottom: "2.5rem",
+                opacity: 0, transform: "translateY(10px)",
+                transition: "opacity 0.5s ease, transform 0.5s ease",
+              }}>
+                <ScreenGallery screens={section.screens} narrow={section.narrowScreens} />
+              </div>
+            )}
 
-              {/* Screen gallery */}
-              {section.screens && section.screens.length > 0 && (
-                <div className="screen-gallery-section reveal" style={{
-                  borderBottom: B,
-                  paddingLeft: P, paddingRight: P,
-                  paddingTop: "2.5rem", paddingBottom: "2.5rem",
-                }}>
-                  <ScreenGallery screens={section.screens} narrow={section.narrowScreens} />
+            {/* Artifact - bg matches artifact type: keep light bg so SVG text stays readable */}
+            {data.artifacts[si]?.component && (
+              <section className="artifact-section reveal-item" style={{
+                borderBottom: "1px solid var(--border)",
+                paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
+                paddingTop: "2.5rem", paddingBottom: "2.5rem",
+                background: "#F0EFE9",
+                opacity: 0, transform: "translateY(10px)",
+                transition: "opacity 0.5s ease, transform 0.5s ease",
+              }}>
+                <div className="artifact-scroll" style={{ marginBottom: "1.25rem", overflowX: "auto" }}>
+                  {data.artifacts[si].component}
                 </div>
-              )}
-
-              {/* Artifact — dark bg */}
-              {data.artifacts[si]?.component && (
-                <section className="artifact-section reveal" style={{
-                  borderBottom: B,
-                  paddingLeft: P, paddingRight: P,
-                  paddingTop: "2.5rem", paddingBottom: "2.5rem",
-                  background: "#141414",
-                }}>
-                  <div className="artifact-scroll" style={{ marginBottom: "1.5rem", overflowX: "auto" }}>
-                    {data.artifacts[si].component}
-                  </div>
-                  {(data.artifacts[si].title || data.artifacts[si].caption) && (
-                    <div className="artifact-caption" style={{
-                      display: "flex", justifyContent: "space-between",
-                      alignItems: "baseline", gap: "2rem",
+                {(data.artifacts[si].title || data.artifacts[si].caption) && (
+                  <div className="artifact-caption" style={{
+                    display: "flex", justifyContent: "space-between",
+                    alignItems: "baseline", gap: "2rem",
+                    paddingTop: "1rem", borderTop: "1px solid rgba(10,10,10,0.1)",
+                  }}>
+                    <p style={{
+                      fontFamily: "var(--font-mono)", fontSize: "10px",
+                      color: "rgba(10,10,10,0.45)", letterSpacing: "0.08em", flexShrink: 0,
                     }}>
-                      <p style={{
-                        fontFamily: "var(--font-mono)", fontSize: "10px",
-                        color: "rgba(245,240,232,0.35)", letterSpacing: "0.08em",
-                      }}>
-                        {data.artifacts[si].title}
-                      </p>
-                      <p style={{
-                        fontFamily: "var(--font-body)", fontSize: "13px",
-                        color: "rgba(245,240,232,0.3)", maxWidth: "480px", textWrap: "pretty",
-                      }}>
-                        {data.artifacts[si].caption}
-                      </p>
-                    </div>
-                  )}
-                </section>
-              )}
+                      {data.artifacts[si].title}
+                    </p>
+                    <p style={{
+                      fontFamily: "var(--font-body)", fontSize: "13px",
+                      color: "var(--muted)", maxWidth: "480px", textWrap: "pretty",
+                    }}>
+                      {data.artifacts[si].caption}
+                    </p>
+                  </div>
+                )}
+              </section>
+            )}
 
-            </div>
-          ))}
+          </div>
+        ))}
+      </div>
+
+      {/* MORE WORK */}
+      <section style={{
+        background: "var(--ink)",
+        paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
+        paddingTop: "3rem", paddingBottom: "3rem",
+      }}>
+        <div style={{
+          fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+          letterSpacing: "0.18em", textTransform: "uppercase" as const,
+          color: "rgba(245,240,232,0.3)", marginBottom: "2rem",
+        }}>
+          More work
         </div>
+        {ALL_WORK.map((work, i) => {
+          const isCurrent = work.title === data.title;
+          const currentIdx = ALL_WORK.findIndex(w => w.title === data.title);
+          const isNext = currentIdx === i - 1;
 
-        {/* MORE WORK — full black, same as homepage contact */}
-        <section style={{ background: "var(--ink)", paddingLeft: P, paddingRight: P, paddingTop: "3rem", paddingBottom: "3rem" }}>
-          <div style={{
-            fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
-            letterSpacing: "0.18em", textTransform: "uppercase" as const,
-            color: "rgba(245,240,232,0.3)", marginBottom: "2rem",
-          }}>
-            More work
-          </div>
-          <div>
-            {ALL_WORK.map((work, i) => {
-              const isCurrent = work.title === data.title;
-              const currentIdx = ALL_WORK.findIndex(w => w.title === data.title);
-              const isNext = currentIdx === i - 1;
-
-              const inner = (
-                <>
+          const rowContent = (
+            <>
+              <span style={{
+                fontFamily: "var(--font-mono)", fontSize: "9px",
+                color: "rgba(245,240,232,0.25)", minWidth: "2.5rem", flexShrink: 0,
+                letterSpacing: "0.08em",
+              }}>{work.index}</span>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flex: 1 }}>
+                <span style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(1.8rem, 3vw, 3rem)",
+                  lineHeight: 0.92, letterSpacing: "0.01em",
+                  color: isCurrent ? "rgba(245,240,232,0.2)" : "rgba(245,240,232,0.85)",
+                }}>
+                  {work.title.toUpperCase()}
+                </span>
+                {isNext && (
                   <span style={{
-                    fontFamily: "var(--font-mono)", fontSize: "9px",
-                    color: "rgba(245,240,232,0.25)", minWidth: "2.5rem",
-                    letterSpacing: "0.08em", flexShrink: 0,
-                  }}>{work.index}</span>
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flex: 1 }}>
-                    <span style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "clamp(1.8rem, 3vw, 3rem)",
-                      lineHeight: 0.92, letterSpacing: "0.01em",
-                      color: isCurrent ? "rgba(245,240,232,0.2)" : "rgba(245,240,232,0.85)",
-                    }}>
-                      {work.title.toUpperCase()}
-                    </span>
-                    {isNext && (
-                      <span style={{
-                        fontFamily: "var(--font-mono)", fontSize: "8px",
-                        letterSpacing: "0.12em", textTransform: "uppercase" as const,
-                        color: "rgba(245,240,232,0.35)",
-                        border: "0.5px solid rgba(245,240,232,0.2)", padding: "2px 6px",
-                      }}>Next</span>
-                    )}
-                    {"personal" in work && work.personal && !isCurrent && (
-                      <span style={{
-                        fontFamily: "var(--font-mono)", fontSize: "8px",
-                        letterSpacing: "0.12em", textTransform: "uppercase" as const,
-                        color: "rgba(245,240,232,0.25)",
-                        border: "0.5px solid rgba(245,240,232,0.12)", padding: "2px 6px",
-                      }}>Personal</span>
-                    )}
-                  </div>
-                </>
-              );
+                    fontFamily: "var(--font-mono)", fontSize: "8px",
+                    letterSpacing: "0.12em", textTransform: "uppercase" as const,
+                    color: "rgba(245,240,232,0.35)",
+                    border: "0.5px solid rgba(245,240,232,0.2)", padding: "2px 6px",
+                  }}>Next</span>
+                )}
+                {"personal" in work && work.personal && !isCurrent && (
+                  <span style={{
+                    fontFamily: "var(--font-mono)", fontSize: "8px",
+                    letterSpacing: "0.12em", textTransform: "uppercase" as const,
+                    color: "rgba(245,240,232,0.25)",
+                    border: "0.5px solid rgba(245,240,232,0.12)", padding: "2px 6px",
+                  }}>Personal</span>
+                )}
+              </div>
+              {!isCurrent && (
+                <svg width="20" height="14" viewBox="0 0 20 14" fill="none" style={{
+                  flexShrink: 0, opacity: 0,
+                  transition: "opacity 0.15s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1)",
+                }} className="work-arrow">
+                  <path d="M0 7h18M12 1l6 6-6 6" stroke="rgba(245,240,232,0.7)" strokeWidth="1.2" strokeLinecap="square"/>
+                </svg>
+              )}
+            </>
+          );
 
-              const rowStyle: React.CSSProperties = {
-                display: "flex", alignItems: "center", gap: "1.5rem",
-                padding: "1rem 0",
-                borderBottom: i < ALL_WORK.length - 1 ? "1px solid rgba(245,240,232,0.07)" : "none",
-                textDecoration: "none", color: "inherit",
-                opacity: isCurrent ? 0.35 : 1,
-                cursor: isCurrent ? "default" : "pointer",
-                transition: "opacity 0.15s",
-              };
+          const rowStyle: React.CSSProperties = {
+            display: "flex", alignItems: "center", gap: "1.5rem",
+            padding: "1rem 0",
+            borderBottom: i < ALL_WORK.length - 1 ? "1px solid rgba(245,240,232,0.07)" : "none",
+            textDecoration: "none", color: "inherit",
+            opacity: isCurrent ? 0.35 : 1,
+            cursor: isCurrent ? "default" : "pointer",
+            transition: "opacity 0.15s",
+          };
 
-              return isCurrent ? (
-                <div key={work.slug} style={rowStyle}>{inner}</div>
-              ) : (
-                <Link key={work.slug} href={`/work/${work.slug}`} style={rowStyle}
-                  onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
-                  onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.6"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
-                >{inner}</Link>
-              );
-            })}
-          </div>
-        </section>
+          return isCurrent ? (
+            <div key={work.slug} style={rowStyle}>{rowContent}</div>
+          ) : (
+            <Link key={work.slug} href={`/work/${work.slug}`} style={rowStyle}
+              onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.opacity = "0.7";
+                const arrow = e.currentTarget.querySelector(".work-arrow") as HTMLElement | null;
+                if (arrow) { arrow.style.opacity = "1"; arrow.style.transform = "translateX(4px)"; }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.opacity = "1";
+                const arrow = e.currentTarget.querySelector(".work-arrow") as HTMLElement | null;
+                if (arrow) { arrow.style.opacity = "0"; arrow.style.transform = "none"; }
+              }}
+            >{rowContent}</Link>
+          );
+        })}
+      </section>
 
-      </main>
-    </>
+    </main>
   );
 }

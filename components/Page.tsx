@@ -47,7 +47,16 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
       transform: vis ? "none" : "translateY(12px)",
       transition: `opacity 0.45s ease ${i * 55}ms, transform 0.45s ease ${i * 55}ms`,
     }}>
-      <Link href={`/work/${card.id}`} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
+      <Link href={`/work/${card.id}`} style={{ textDecoration: "none", color: "inherit", display: "block" }}
+        onMouseEnter={(e) => {
+          const arr = e.currentTarget.querySelector(".wi-arrow") as SVGElement | null;
+          if (arr) { arr.style.opacity = "1"; arr.style.transform = "translateX(6px)"; }
+        }}
+        onMouseLeave={(e) => {
+          const arr = e.currentTarget.querySelector(".wi-arrow") as SVGElement | null;
+          if (arr) { arr.style.opacity = "0"; arr.style.transform = "none"; }
+        }}
+      >
         <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", marginBottom: "0.5rem" }}>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.12em", color: "var(--faint)" }}>
             {card.index}
@@ -59,13 +68,15 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
             <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "var(--faint)", opacity: 0.7 }}>personal</span>
           )}
         </div>
-        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "2rem", marginBottom: "1rem" }}>
-          <div
-            style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.4rem, 4.5vw, 4.8rem)", lineHeight: 0.92, letterSpacing: "0.01em", color: "var(--ink)", transition: "opacity 0.15s" }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = "0.55"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = "1"; }}
-          >
-            {card.title.toUpperCase()}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "2rem", marginBottom: "1rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.4rem, 4.5vw, 4.8rem)", lineHeight: 0.92, letterSpacing: "0.01em", color: "var(--ink)" }}>
+              {card.title.toUpperCase()}
+            </div>
+            <svg className="wi-arrow" width="24" height="14" viewBox="0 0 24 14" fill="none"
+              style={{ flexShrink: 0, opacity: 0, transition: "opacity 0.2s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1)" }}>
+              <path d="M0 7h22M16 1l6 6-6 6" stroke="var(--ink)" strokeWidth="1.3" strokeLinecap="square"/>
+            </svg>
           </div>
           <div style={{ flexShrink: 0, textAlign: "right" }}>
             {[card.metric1, card.metric2].filter(Boolean).map(m => (
@@ -113,7 +124,7 @@ export default function Page({ data }: { data: PageData }) {
         </nav>
       </header>
 
-      {/* HERO — three columns, flush to nav */}
+      {/* HERO - three columns, flush to nav */}
       <section className="hero-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
@@ -131,8 +142,9 @@ export default function Page({ data }: { data: PageData }) {
           </p>
         </div>
 
-        {/* Col 2: numbers — no label, numbers start immediately */}
+        {/* Col 2: numbers */}
         <div className="hero-col2" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem", paddingRight: "3rem" }}>
+          <Label>numbers</Label>
           {[
             { value: "11", label: "years building enterprise products" },
             { value: "9", label: "countries" },
@@ -146,8 +158,11 @@ export default function Page({ data }: { data: PageData }) {
           ))}
         </div>
 
-        {/* Col 3: skills only — no quote */}
+        {/* Col 3: quote + skills */}
         <div className="hero-col3" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem" }}>
+          <p style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "clamp(0.9rem, 1.1vw, 1rem)", lineHeight: 1.75, color: "rgba(10,10,10,0.5)", marginBottom: "2rem", textWrap: "pretty" }}>
+            &ldquo;{data.heroHeadline}&rdquo;
+          </p>
           <Label>skills</Label>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.2rem" }}>
             {data.skills.map(s => (
@@ -157,7 +172,7 @@ export default function Page({ data }: { data: PageData }) {
         </div>
       </section>
 
-      {/* WORK BLEED — WORK col1, empty col2, description col3 */}
+      {/* WORK BLEED - WORK col1, empty col2, description col3 */}
       <div id="work" className="bleed-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
@@ -179,6 +194,7 @@ export default function Page({ data }: { data: PageData }) {
           display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: "1.5rem",
           opacity: mounted ? 1 : 0, transition: "opacity 0.6s ease 0.2s",
         }}>
+          <Label>selected projects</Label>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--muted)", lineHeight: 1.65, textWrap: "pretty" }}>
             Enterprise product design across BSS/OSS, telecom infrastructure, B2B and B2C. NDA-constrained where noted.
           </p>
@@ -192,7 +208,7 @@ export default function Page({ data }: { data: PageData }) {
         ))}
       </section>
 
-      {/* ABOUT BLEED — ABOUT col1, empty col2, empty col3 */}
+      {/* ABOUT BLEED - ABOUT col1, empty col2, empty col3 */}
       <div id="about" className="bleed-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
@@ -211,6 +227,7 @@ export default function Page({ data }: { data: PageData }) {
       {/* ABOUT CONTENT */}
       <section className="about-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
+        borderBottom: "1px solid var(--border)",
         padding: "3rem var(--pad)",
       }}>
         {/* Col 1: bio + beyond */}
@@ -268,7 +285,7 @@ export default function Page({ data }: { data: PageData }) {
 
       {/* CONTACT */}
       <section id="contact" style={{ background: "var(--ink)" }}>
-        {/* LET'S TALK bleed — same pattern, no col2/col3 content */}
+        {/* LET'S TALK bleed - same pattern, no col2/col3 content */}
         <div className="contact-bleed" style={{
           display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
           borderBottom: "1px solid rgba(245,240,232,0.08)",
@@ -281,13 +298,14 @@ export default function Page({ data }: { data: PageData }) {
           <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)" }} />
         </div>
 
-        {/* Links — two cols: email left, elsewhere right */}
+        {/* Links - two cols: email left, elsewhere right */}
         <div className="contact-grid" style={{
           display: "grid", gridTemplateColumns: "1fr 1fr",
           padding: "3rem var(--pad) 4rem",
           borderBottom: "1px solid rgba(245,240,232,0.08)",
         }}>
-          <div>            
+          <div>
+            <Label light>email me</Label>
             <a href={`mailto:${data.contactEmail}`} style={{
               fontFamily: "var(--font-body)", fontStyle: "italic",
               fontSize: "clamp(1rem, 2vw, 1.5rem)", color: "#F5F0E8",
@@ -298,6 +316,7 @@ export default function Page({ data }: { data: PageData }) {
             >email me</a>
           </div>
           <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)", paddingLeft: "3rem" }}>
+            <Label light>elsewhere</Label>
             {[["linkedin", data.contactLinkedIn], ["illustration", data.contactIllustration]].map(([label, href]) => (
               <div key={label} style={{ marginBottom: "0.5rem" }}>
                 <a href={href} target="_blank" rel="noopener noreferrer" style={{
@@ -312,7 +331,7 @@ export default function Page({ data }: { data: PageData }) {
           </div>
         </div>
 
-        {/* Footer bar — name + role only, no year */}
+        {/* Footer bar - name + role only, no year */}
         <div style={{ padding: "1.25rem var(--pad)" }}>
           <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "rgba(245,240,232,0.25)" }}>
             Felipe Cruz &mdash; Product Designer &mdash; {year}
