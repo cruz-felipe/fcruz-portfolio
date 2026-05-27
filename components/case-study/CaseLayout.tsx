@@ -153,7 +153,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
             {data.index} — {data.role}{data.location ? ` · ${data.location}` : ""} · {data.year}
           </div>
 
-          {/* Title — Bebas, huge */}
+          {/* Title - Bebas, huge */}
           <h1 style={{
             fontFamily: "var(--font-display)",
             fontSize: "clamp(3.5rem, 8vw, 10rem)",
@@ -271,7 +271,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         <div ref={sectionsRef}>
           {data.sections.map((section, si) => (
             <div key={si}>
-              {/* Pullquote — full bleed, editorial */}
+              {/* Pullquote - full bleed, editorial */}
               {section.pullquote && (
                 <div className="cs-pullquote-section" style={{ ...padX }}>
                   <blockquote className="cs-pullquote">{noWidow(section.pullquote)}</blockquote>

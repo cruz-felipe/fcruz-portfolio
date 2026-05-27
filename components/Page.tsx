@@ -159,10 +159,10 @@ export default function Page({ data }: { data: PageData }) {
       </header>
 
       {/* ══════════════════════════════════════════════
-          HERO — three columns
+          HERO - three columns
       ══════════════════════════════════════════════ */}
       <section className="hero-grid" style={{ ...grid3, ...hRule, padding: "3rem var(--pad)" }}>
-        {/* Col 1 — bio + currently */}
+        {/* Col 1 - bio + currently */}
         <div style={{ paddingRight: "3rem" }}>
           <Label>bio</Label>
           <p style={{
@@ -183,7 +183,7 @@ export default function Page({ data }: { data: PageData }) {
           </p>
         </div>
 
-        {/* Col 2 — numbers */}
+        {/* Col 2 - numbers */}
         <div className="hero-col2" style={{ ...col2border, paddingRight: "3rem" }}>
           <Label>numbers</Label>
           {[
@@ -207,7 +207,7 @@ export default function Page({ data }: { data: PageData }) {
           ))}
         </div>
 
-        {/* Col 3 — headline quote + skills */}
+        {/* Col 3 - headline quote + skills */}
         <div className="hero-col3" style={{ ...col3border }}>
           <p style={{
             fontFamily: "var(--font-body)", fontStyle: "italic",
@@ -315,10 +315,10 @@ export default function Page({ data }: { data: PageData }) {
       </div>
 
       {/* ══════════════════════════════════════════════
-          ABOUT CONTENT — three columns
+          ABOUT CONTENT - three columns
       ══════════════════════════════════════════════ */}
       <section className="about-grid" style={{ ...grid3, ...hRule, padding: "3rem var(--pad)" }}>
-        {/* Col 1 — bio text */
+        {/* Col 1 - bio text */
         <div style={{ paddingRight: "3rem" }}>
           <Label>long bio</Label>
           {[data.aboutBio1, data.aboutBio2, data.aboutBio3].map((t, i) => (
@@ -340,7 +340,7 @@ export default function Page({ data }: { data: PageData }) {
           </div>
         </div>
 
-        {/* Col 2 — experience + education */}
+        {/* Col 2 - experience + education */}
         <div className="about-col2" style={{ ...col2border, paddingRight: "3rem" }}>
           <Label>experience</Label>
           {data.experience.map((job, i) => (
@@ -398,7 +398,7 @@ export default function Page({ data }: { data: PageData }) {
           </div>
         </div>
 
-        {/* Col 3 — photo + skills */}
+        {/* Col 3 - photo + skills */}
         <div className="about-col3" style={{ ...col3border }}>
           <div style={{ marginBottom: "2rem" }}>
             <img
@@ -424,7 +424,7 @@ export default function Page({ data }: { data: PageData }) {
       </section>
 
       {/* ══════════════════════════════════════════════
-          CONTACT — black bg
+          CONTACT - black bg
       ══════════════════════════════════════════════ */}
       <section id="contact" style={{ background: "var(--ink)" }}>
         {/* LET'S TALK bleed */}
