@@ -54,7 +54,7 @@
       "pullquote": "",
       "body": [
         "Most agents used a small set of predefined configurations. Only major clients required custom plans. The product had been designed for the complex case and applied it to everyone.",
-        "The three steps are shown below. Step 1 handles market selection and product catalog. Step 2 is the quotation view where pricing is calculated and approval initiated. Step 3 handles geographic and address-level configuration. Each step replaced what previously required switching between separate tools."
+        "Time-to-proposal dropped from 60 minutes to 15. Seven tools became one flow. New agent onboarding went from three days to half a day. The product had been designed for the complex case and applied it to everyone. The fix was to design for how agents actually worked."
       ],
       "screens": [
         {
@@ -70,14 +70,6 @@
           "caption": "Step 3: Geographic configuration. Address-level product assignment with on-net technology details surfaced inline."
         }
       ]
-    },
-    {
-      "title": "What I would do differently",
-      "pullquote": "",
-      "body": [
-        "An MVP scope from the start rather than a prioritised list of improvements. The matrix was the right tool for sequencing. But sequencing a long list is still a long list."
-      ],
-      "screens": []
     }
   ],
   "metaTitle": "B2B Sales Rescue / Felipe Cruz",

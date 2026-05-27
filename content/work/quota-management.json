@@ -100,8 +100,7 @@
       "pullquote": "",
       "body": [
         "The platform covers three modules across 13 end-to-end user flows, each with full validation states, empty states and error handling. Quota management gives agents visibility into consumption at the client and partner level, with manual adjustment controls and threshold alerts. API usage monitoring surfaces rate limit status and consumption trends. Change requests route through a configurable multi-level approval flow with a full audit log.",
-        "The platform is pending client-side deployment. The delay is on the client's timeline. I used the time since handoff to work through edge cases and handoff refinements with developers and business analysts. That is the kind of detail work that only surfaces when someone is actually trying to build from your files.",
-        "If I were doing this engagement again, workshops would have a topic roadmap with hard scope boundaries per session. When a discussion deviated from the agenda, I would name it directly: this needs to be resolved internally first. That is not a confrontational move. It is a respectful one."
+        "The platform is pending client-side deployment. The delay is on the client's timeline. I used the time since handoff to work through edge cases and handoff refinements with developers and business analysts. That is the kind of detail work that only surfaces when someone is actually trying to build from your files."
       ],
       "screens": []
     }

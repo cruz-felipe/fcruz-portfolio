@@ -98,16 +98,6 @@
         "The AI integration judgment is the part I would point to in a larger product context. Claude operates at the edge, not at the centre. The core mechanic is instant and offline-capable. The AI layer adds value only when the user opts in. That is a product architecture decision as much as a UX one, and it scales."
       ],
       "screens": []
-    },
-    {
-      "title": "What this taught me about AI in products",
-      "pullquote": "AI as enrichment, not dependency. The app works without it. The AI layer adds value only when the user opts in.",
-      "body": [
-        "The cultural tip feature is opt-in. It surfaces usage context, register notes, memorable associations. The core mechanic does not need it.",
-        "That distinction is a product architecture decision as much as a UX one. An AI layer that sits in the critical path of every interaction creates latency, dependency and a worse experience when the API is slow. An AI layer at the edge adds value without imposing it. I would apply the same principle at enterprise scale: AI enriches the workflow at the moment the user chooses, not at every moment by default."
-      ],
-      "screens": [],
-      "narrowScreens": true
     }
   ],
   "metaTitle": "Vocabulary / Felipe Cruz",

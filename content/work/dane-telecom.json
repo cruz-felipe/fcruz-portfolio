@@ -84,10 +84,10 @@
       ]
     },
     {
-      "title": "What I would do differently",
+      "title": "The principle",
       "pullquote": "",
       "body": [
-        "Map the system state and the roadmap on day one, before any other work. The assumption that a large company has mature governance is almost always wrong. Verify."
+        "Map the system state and the roadmap on day one, before any other work."
       ],
       "screens": []
     }
