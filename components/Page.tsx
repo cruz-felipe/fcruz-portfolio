@@ -6,6 +6,7 @@ interface WorkCard {
   id: string; index: string; title: string; blurb: string;
   metric1: string; metric2: string; tag: string;
   weight: string; personal: boolean; image: string;
+  hidden?: boolean;
 }
 interface PageData {
   heroHeadline: string; heroBio: string;
@@ -40,7 +41,7 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
 
   return (
     <div ref={ref} className="work-item" style={{
-      borderBottom: "1px solid var(--border)",
+      borderTop: i > 0 ? "1px solid var(--border)" : "none",
       paddingTop: "4rem", paddingBottom: "4rem",
       opacity: vis ? 1 : 0,
       transform: vis ? "none" : "translateY(12px)",
@@ -103,18 +104,26 @@ export default function Page({ data }: { data: PageData }) {
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
       }}>
-        <div style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--ink)" }}>felipe cruz</div>
+        <a href="/" style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--ink)", textDecoration: "none" }}>felipe cruz</a>
         <div />
         <nav className="nav-links" style={{ display: "flex", gap: "2.5rem", justifyContent: "flex-end" }}>
-          {[["work", "#work"], ["about", "#about"], ["contact", "#contact"]].map(([label, href]) => (
-            <a key={label} href={href} style={{
-              fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 500,
-              letterSpacing: "0.16em", textTransform: "lowercase",
-              color: "var(--muted)", textDecoration: "none", transition: "color 0.15s",
-            }}
+          {[["work", "work"], ["about", "about"], ["contact", "contact"]].map(([label, id]) => (
+            <button key={label}
+              onClick={() => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const y = el.getBoundingClientRect().top + window.scrollY - 72;
+                window.scrollTo({ top: y, behavior: "smooth" });
+              }}
+              style={{
+                fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 500,
+                letterSpacing: "0.16em", textTransform: "lowercase",
+                color: "var(--muted)", background: "none", border: "none",
+                cursor: "pointer", transition: "color 0.15s", padding: 0,
+              }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "var(--ink)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = "var(--muted)"; }}
-            >{label}</a>
+            >{label}</button>
           ))}
         </nav>
         {/* Mobile menu button */}
@@ -148,17 +157,23 @@ export default function Page({ data }: { data: PageData }) {
           fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.14em",
           textTransform: "uppercase", color: "rgba(245,240,232,0.5)",
         }}>close</button>
-        {[["work", "#work"], ["about", "#about"], ["contact", "#contact"]].map(([label, href], i) => (
-          <a key={label} href={href}
-            onClick={() => { const m = document.getElementById("mobile-nav"); if (m) m.style.display = "none"; }}
+        {[["work", "work"], ["about", "about"], ["contact", "contact"]].map(([label, id], i) => (
+          <button key={label}
+            onClick={() => {
+              const m = document.getElementById("mobile-nav"); if (m) m.style.display = "none";
+              const el = document.getElementById(id);
+              if (!el) return;
+              const y = el.getBoundingClientRect().top + window.scrollY - 72;
+              window.scrollTo({ top: y, behavior: "smooth" });
+            }}
             style={{
               fontFamily: "var(--font-display)", fontSize: "clamp(3rem, 15vw, 5rem)",
               lineHeight: 1, letterSpacing: "0.01em",
-              color: "#F5F0E8", textDecoration: "none",
-              display: "block", padding: "0.5rem 0",
+              color: "#F5F0E8", textDecoration: "none", background: "none", border: "none",
+              display: "block", padding: "0.5rem 0", cursor: "pointer", textAlign: "left",
               opacity: 0, animation: `mobileNavIn 0.3s ease ${i * 60}ms forwards`,
             }}
-          >{label.toUpperCase()}</a>
+          >{label.toUpperCase()}</button>
         ))}
         <style>{`
           @keyframes mobileNavIn {
@@ -251,7 +266,7 @@ export default function Page({ data }: { data: PageData }) {
 
       {/* WORK LIST */}
       <section style={{ padding: "0 var(--pad)", borderBottom: "1px solid var(--border)" }}>
-        {data.workCards.map((card, i) => (
+        {data.workCards.filter(c => !c.hidden).map((card, i) => (
           <WorkItem key={card.id} card={card} i={i} />
         ))}
       </section>

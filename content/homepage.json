@@ -133,6 +133,19 @@
       "tag": "Personal · Next.js · Claude API",
       "weight": "secondary",
       "personal": true,
+      "image": "",
+      "hidden": true
+    },
+    {
+      "id": "taekwondo-learning-app",
+      "index": "05",
+      "title": "Taekwondo Learning App",
+      "blurb": "A printed handout with 10 belt grades of content. I replaced it with a structured app for mid-class lookup, self-study, and exam preparation.",
+      "metric1": "14 weekly users",
+      "metric2": "Personal",
+      "tag": "Consumer Product · Solo · 2025",
+      "weight": "secondary",
+      "personal": true,
       "image": ""
     }
   ]

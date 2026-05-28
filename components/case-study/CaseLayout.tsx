@@ -53,7 +53,7 @@ const ALL_WORK = [
   { slug: "b2b-sales-rescue",        index: "02", title: "B2B Sales Rescue" },
   { slug: "quota-management",         index: "03", title: "Quota Management" },
   { slug: "dane-telecom",             index: "04", title: "Dane Telecom" },
-  { slug: "vocabulary",               index: "05", title: "Vocabulary", personal: true },
+  { slug: "taekwondo-learning-app",   index: "05", title: "Taekwondo Learning App", personal: true },
 ];
 
 function noWidow(t: string) { return t.replace(/\s+(\S+)$/, "\u00a0$1"); }
@@ -101,15 +101,6 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         WebkitBackdropFilter: "blur(12px)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
-          <a href="/" style={{
-            fontFamily: "var(--font-body)", fontSize: "13px",
-            color: "var(--ink)", textDecoration: "none", transition: "opacity 0.15s",
-          }}
-            onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.45"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
-          >
-            felipe cruz
-          </a>
           <a href="/" style={{
             display: "flex", alignItems: "center", gap: "0.4rem",
             fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,

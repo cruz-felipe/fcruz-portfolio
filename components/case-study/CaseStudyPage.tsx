@@ -72,11 +72,11 @@ export default function CaseStudyPage({ data, slug }: Props) {
       pullquote: s.pullquote || undefined,
       body: s.body,
       screens: s.screens?.length ? s.screens : undefined,
-      narrowScreens: slug === "vocabulary",
+      narrowScreens: slug === "vocabulary" || slug === "taekwondo-learning-app",
     })),
     artifacts: ARTIFACTS[slug] ?? [],
-    hideNda: slug === "vocabulary",
-    wideHero: slug === "vocabulary",
+    hideNda: slug === "vocabulary" || slug === "taekwondo-learning-app",
+    wideHero: false,
   };
 
   return <CaseLayout data={caseData} />;
