@@ -66,7 +66,7 @@ function MonoLabel({ children }: { children: React.ReactNode }) {
     <div style={{
       fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
       letterSpacing: "0.18em", textTransform: "uppercase" as const,
-      color: "rgba(10,10,10,0.38)", marginBottom: "0.6rem",
+      color: "rgba(10,10,10,0.62)", marginBottom: "0.6rem",
     }}>{children}</div>
   );
 }
@@ -145,7 +145,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         <p style={{
           fontFamily: "var(--font-body)",
           fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
-          lineHeight: 1.72, color: "rgba(10,10,10,0.68)",
+          lineHeight: 1.72, color: "rgba(10,10,10,0.75)",
           maxWidth: "820px", textWrap: "pretty",
         }}>
           {cleanPara(data.tagline)}
@@ -162,27 +162,27 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
       }}>
         <p style={{
           fontFamily: "var(--font-body)", fontSize: "15px",
-          lineHeight: 1.82, color: "rgba(10,10,10,0.68)", textWrap: "pretty",
+          lineHeight: 1.82, color: "rgba(10,10,10,0.75)", textWrap: "pretty",
         }}>
           {cleanPara(data.context)}
         </p>
         <div>
           <div style={{ marginBottom: "1.5rem" }}>
             <MonoLabel>My role</MonoLabel>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "rgba(10,10,10,0.6)", textWrap: "pretty" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "rgba(10,10,10,0.65)", textWrap: "pretty" }}>
               {cleanPara(data.roleDetail)}
             </p>
           </div>
           {data.impactSummary && (
             <div style={{ marginBottom: "1.5rem" }}>
               <MonoLabel>Business impact</MonoLabel>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "rgba(10,10,10,0.6)", textWrap: "pretty" }}>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "rgba(10,10,10,0.65)", textWrap: "pretty" }}>
                 {cleanPara(data.impactSummary)}
               </p>
             </div>
           )}
           {!data.hideNda && (
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--faint)", lineHeight: 1.65, textWrap: "pretty" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "rgba(10,10,10,0.62)", lineHeight: 1.65, textWrap: "pretty" }}>
               {data.showNdaNote
                 ? "Client identity omitted per NDA. Artifacts are illustrative representations, not reproductions of client deliverables."
                 : "Client identity omitted per NDA. Strategic challenges, decisions and outcomes are accurate."
@@ -215,7 +215,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
               </div>
               <p style={{
                 fontFamily: "var(--font-body)", fontSize: "13px",
-                color: "var(--muted)", lineHeight: 1.6,
+                color: "rgba(10,10,10,0.62)", lineHeight: 1.6,
                 maxWidth: "260px", textWrap: "pretty",
               }}>
                 {cleanPara(m.label)}
@@ -248,7 +248,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                 <div style={{
                   fontFamily: "var(--font-mono)", fontSize: "9px",
                   letterSpacing: "0.14em", textTransform: "uppercase" as const,
-                  color: "var(--muted)",
+                  color: "rgba(10,10,10,0.62)",
                 }}>
                   {section.title}
                 </div>
@@ -268,7 +268,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                   <div style={{
                     fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
                     letterSpacing: "0.18em", textTransform: "uppercase" as const,
-                    color: "var(--muted)", marginBottom: "1.5rem",
+                    color: "rgba(10,10,10,0.62)", marginBottom: "1.5rem",
                   }}>
                     {section.title}
                   </div>
@@ -327,7 +327,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                     </p>
                     <p style={{
                       fontFamily: "var(--font-body)", fontSize: "13px",
-                      color: "var(--muted)", maxWidth: "480px", textWrap: "pretty",
+                      color: "rgba(10,10,10,0.62)", maxWidth: "480px", textWrap: "pretty",
                     }}>
                       {data.artifacts[si].caption}
                     </p>

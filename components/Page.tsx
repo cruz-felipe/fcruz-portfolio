@@ -218,7 +218,7 @@ export default function Page({ data }: { data: PageData }) {
           borderLeft: "1px solid var(--border)", padding: "3rem 0 3rem 3rem",
           display: "flex", flexDirection: "column", justifyContent: "flex-end",          
         }}>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(0.9rem, 1.1vw, 1rem)", lineHeight: 1.75, color: "rgba(10,10,10,0.5)", textWrap: "pretty" }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(0.9rem, 1.1vw, 1rem)", lineHeight: 1.75, color: "rgba(10,10,10,0.65)", textWrap: "pretty" }}>
             {data.heroHeadline}
           </p>
         </div>
@@ -288,7 +288,7 @@ export default function Page({ data }: { data: PageData }) {
           <div style={{ marginTop: "1.75rem" }}>
             <Label>beyond the work</Label>
             {[data.aboutBeyond1, data.aboutBeyond2, data.aboutBeyond3].filter(Boolean).map((t, i) => (
-              <p key={i} style={{ fontFamily: "var(--font-body)", fontSize: "14px", lineHeight: 1.72, color: "rgba(10,10,10,0.55)", marginBottom: "1rem", textWrap: "pretty" }}>{t}</p>
+              <p key={i} style={{ fontFamily: "var(--font-body)", fontSize: "14px", lineHeight: 1.72, color: "rgba(10,10,10,0.65)", marginBottom: "1rem", textWrap: "pretty" }}>{t}</p>
             ))}
           </div>
         </div>
