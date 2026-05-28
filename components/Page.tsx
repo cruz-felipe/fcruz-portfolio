@@ -260,7 +260,7 @@ export default function Page({ data }: { data: PageData }) {
       <div id="about" className="bleed-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
         borderBottom: "1px solid var(--border)",
-        padding: "0 var(--pad)", overflow: "hidden",
+        padding: "0 var(--pad)", overflow: "hidden", paddingTop: "3rem", paddingBottom: "3rem",
       }}>
         <div style={{
           fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)",
@@ -268,8 +268,6 @@ export default function Page({ data }: { data: PageData }) {
         }}>
           ABOUT
         </div>
-        <div className="bleed-col2" style={{ borderLeft: "1px solid var(--border)" }} />
-        <div className="bleed-col3" style={{ borderLeft: "1px solid var(--border)" }} />
       </div>
 
       {/* ABOUT CONTENT */}
@@ -295,7 +293,7 @@ export default function Page({ data }: { data: PageData }) {
           {data.experience.map((job, i) => (
             <div key={i} style={{ paddingBottom: "1.5rem", marginBottom: "1.5rem", borderBottom: i < data.experience.length - 1 ? "1px solid var(--border)" : "none" }}>
               <div style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: "14px", color: "var(--ink)", marginBottom: "0.1rem" }}>{job.role}</div>
-              <div style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--red)", marginBottom: "0.15rem" }}>{job.company}</div>
+              <div style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--ink)", marginBottom: "0.15rem" }}>{job.company}</div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.08em", color: "var(--faint)", marginBottom: "0.55rem" }}>{job.period}</div>
               <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.6, color: "rgba(10,10,10,0.55)", textWrap: "pretty" }}>{job.note}</p>
             </div>
@@ -334,7 +332,7 @@ export default function Page({ data }: { data: PageData }) {
           <div style={{
             fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)",
             lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8",
-            paddingBottom: "0.06em", marginTop: "-15px",
+            paddingBottom: "3rem", marginTop: "-15px",
           }}>
             <a href={`mailto:${data.contactEmail}`} style={{
             transition: "opacity 0.15s",
@@ -343,8 +341,6 @@ export default function Page({ data }: { data: PageData }) {
             onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
           >LET&apos;S<br />TALK</a>
           </div>
-          <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)" }} />
-          <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)" }} />
         </div>
 
         <div style={{ borderTop: "1px solid rgba(245,240,232,0.1)", padding: "3rem var(--pad) 4rem" }}>
