@@ -240,7 +240,7 @@ export default function Page({ data }: { data: PageData }) {
         <div className="bleed-col3" style={{
           borderLeft: "1px solid var(--border)", paddingLeft: "3rem",
           display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: "3rem",
-          opacity: mounted ? 1 : 0, transition: "opacity 0.6s ease 0.2s",
+          opacity: mounted ? 1 : 0, transition: "opacity 0.6s ease 0.2s", innerWidth: "22rem",
         }}>
           <Label>selected projects</Label>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--muted)", lineHeight: 1.65, textWrap: "pretty" }}>
