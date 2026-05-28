@@ -347,7 +347,7 @@ export default function Page({ data }: { data: PageData }) {
           <div style={{
             fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)",
             lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8",
-            paddingBottom: "3rem", marginTop: "-15px",
+            paddingBottom: "3rem", marginTop: "-15px",width: "80rem",
           }}>
             <a href={`mailto:${data.contactEmail}`} style={{
             transition: "opacity 0.15s",
@@ -358,7 +358,7 @@ export default function Page({ data }: { data: PageData }) {
           </div>
         </div>
 
-        <div style={{ borderTop: "1px solid rgba(245,240,232,0.1)", padding: "3rem var(--pad) 4rem", width: "15%", }}>
+        <div style={{ padding: "3rem var(--pad) 4rem", width: "15%", }}>
           <a href={`mailto:${data.contactEmail}`} style={{
             display: "block", fontFamily: "var(--font-body)", fontStyle: "italic",
             fontSize: "clamp(1rem, 2vw, 1.5rem)", color: "#F5F0E8",
