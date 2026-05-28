@@ -40,7 +40,8 @@
       "pullquote": "",
       "body": [
         "The client's management pushed back. Two releases had shipped. Having an external team arrive and say parts needed reworking was not a comfortable conversation.",
-        "We scored every finding on two axes: criticality by Nielsen's severity scale, and effort by design and development cost combined. The output was not a list of problems. It was a roadmap argument. Low-effort, high-criticality fixes first, slotted into the existing release schedule so the rework did not require stopping. The constraint that turned the room was not the severity scores. It was the framing that the system had to keep running. We were not proposing a replacement. We were proposing fixes that could be absorbed into releases that were already scheduled. Management agreed to incremental changes over a reviewed and approved roadmap."
+        "We scored every finding on two axes: criticality by Nielsen's severity scale, and effort by design and development cost combined. The output was not a list of problems. It was a roadmap argument. Low-effort, high-criticality fixes first, slotted into the existing release schedule so the rework did not require stopping. The constraint that turned the room was not the severity scores. It was the framing that the system had to keep running. We were not proposing a replacement. We were proposing fixes that could be absorbed into releases that were already scheduled. Management agreed to incremental changes over a reviewed and approved roadmap.",
+        "Management agreed to incremental changes absorbed into the existing release schedule. That was the specific outcome: not a redesign project, not a new budget line — fixes slotted into releases that were already planned. The constraint was the argument. The roadmap was the proof."
       ],
       "screens": [
         {
@@ -54,7 +55,9 @@
       "pullquote": "",
       "body": [
         "Most agents used a small set of predefined configurations. Only major clients required custom plans. The product had been designed for the complex case and applied it to everyone.",
-        "Time-to-proposal dropped from 60 minutes to 15. Seven tools became one flow. New agent onboarding went from three days to half a day. The product had been designed for the complex case and applied it to everyone. The fix was to design for how agents actually worked."
+        "The flow runs on desktop and tablet. Sales agents work from office machines during client visits; the tablet version was validated on-site. Mobile was out of scope by product decision — the client's CRM infrastructure did not support mobile authentication at the time. That constraint was documented and accepted in the first stakeholder review.",
+        "Time-to-proposal dropped from 60 minutes to 15. Seven tools became one flow. New agent onboarding went from three days to half a day. The product had been designed for the complex case and applied it to everyone. The fix was to design for how agents actually worked.",
+        "The express flow was designed for keyboard operability throughout. Sales agents move quickly between fields during client calls — mouse navigation at that speed creates errors. Tab order follows the logical quote-building sequence. Every state change — product added, pricing calculated, approval triggered — produces a visible focus indicator so the agent always knows where they are in the flow."
       ],
       "screens": [
         {

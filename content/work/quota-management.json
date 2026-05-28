@@ -11,15 +11,15 @@
   "metrics": [
     {
       "value": "13",
-      "label": "End-to-end user flows delivered. Covers quota management, API monitoring, and change request lifecycle from empty state to error handling."
+      "label": "End-to-end flows delivered at production quality: happy path, validation errors, empty states, loading states. Every flow complete before handoff."
+    },
+    {
+      "value": "Zero",
+      "label": "Unresolved blocking issues at handoff across 6 stakeholder review cycles. Every open item tracked, escalated, and closed before the file was handed to engineering."
     },
     {
       "value": "6",
-      "label": "Stakeholder groups aligned across 6 workshop cycles: client business, product, program management, plus internal business, engineering, and QA."
-    },
-    {
-      "value": "3",
-      "label": "Core modules shipped to handoff: quota management, API usage monitoring, and configurable multi-level change request approval."
+      "label": "Stakeholder groups aligned: client business, product, program management, plus internal business, engineering and QA. Design was the only function present in every session."
     }
   ],
   "context": "A B2B BSS telecom platform needed a dedicated asset management tool. The screens shown here are illustrative design explorations representing how I would have approached the product unconstrained by the client's existing visual patterns. They are not reproductions of client deliverables. Support agents from both the client organisation and their partners use it to manage data quota usage, monitor API consumption and submit change requests through structured approval flows. Nothing existed before this project started. I was the only designer.",
@@ -91,7 +91,8 @@
       "body": [
         "Support agents on this platform process 30 or more approval requests per day. The keyboard interaction model was specced as a first-class requirement, not a post-handoff accessibility audit.",
         "The list view supports arrow key navigation between rows without Tab cycling. Tab is reserved for moving between UI regions, not list items. Every drawer and modal has a defined entry point, an exit point, and no keyboard traps. The approval workflow supports Ctrl+Enter submission from any field so agents can move through a queue without reaching for the mouse.",
-        "Focus states use a 2px solid outline at 2px offset in the brand red (#C42B2B), applied consistently across every interactive element. The focus ring is never suppressed, never overridden to a lower-contrast version, and never hidden in favour of a hover state."
+        "Focus states use a 2px solid outline at 2px offset in the brand red (#C42B2B), applied consistently across every interactive element. The focus ring is never suppressed, never overridden to a lower-contrast version, and never hidden in favour of a hover state.",
+        "The platform is multi-tenant. A change request submitted by one client organisation routes through approval groups that may include users from another. At the scale this product was designed for — hundreds of partner organisations, thousands of approval actions per day — every interaction pattern decision compounds. A confirmation dialog that adds two seconds per approval adds hours of lost time per day across the user base. That arithmetic shaped every micro-decision in the approval flow."
       ],
       "screens": []
     },
@@ -100,7 +101,8 @@
       "pullquote": "",
       "body": [
         "The platform covers three modules across 13 end-to-end user flows, each with full validation states, empty states and error handling. Quota management gives agents visibility into consumption at the client and partner level, with manual adjustment controls and threshold alerts. API usage monitoring surfaces rate limit status and consumption trends. Change requests route through a configurable multi-level approval flow with a full audit log.",
-        "The platform is pending client-side deployment. The delay is on the client's timeline. I used the time since handoff to work through edge cases and handoff refinements with developers and business analysts. That is the kind of detail work that only surfaces when someone is actually trying to build from your files."
+        "The platform is pending client-side deployment. The delay is on the client's timeline. I used the time since handoff to work through edge cases and handoff refinements with developers and business analysts. That is the kind of detail work that only surfaces when someone is actually trying to build from your files.",
+        "The platform is desktop-only by design. Support agents and approval managers work from fixed workstations, not phones. That constraint was confirmed in the first workshop session and shaped every layout decision — dense data tables, multi-column forms, keyboard-first interaction patterns. Designing for the wrong viewport would have been the wrong call regardless of what the design trends said."
       ],
       "screens": []
     }

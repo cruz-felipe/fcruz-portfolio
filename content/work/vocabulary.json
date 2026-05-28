@@ -18,8 +18,8 @@
       "label": "Learning modes: recognition (source word to translation) and recall (type the original from the translation). Recall is harder and stickier."
     },
     {
-      "value": "Daily",
-      "label": "Used every day by me and a small group of friends. The only success metric that mattered for a tool built to scratch my own itch."
+      "value": "Solo",
+      "label": "Every decision was mine: architecture, AI integration, interaction design, deployment, scope. Used daily by me and a small group of friends across four languages. The only success metric that mattered: I still open it every morning."
     }
   ],
   "context": "I was using Duolingo to study Spanish and Russian. It works for gamified progress but not for what I actually needed: sitting down with a set of words and drilling them until they stick. Every dedicated flashcard app I tried had too much friction, too much structure I did not ask for, or none of the vocabulary I needed for work. Building my own was faster than settling.",
@@ -29,7 +29,9 @@
       "pullquote": "",
       "body": [
         "I learn by seeing the Portuguese word and trying to produce the translation. A friend learns the opposite. He sees the translated word and types the original. Neither method is better. They are different mental models for how vocabulary anchors itself.",
-        "Recognition mode shows the source word and flips to reveal the translation. Recall mode shows the translated word and requires you to type the original. Recall is harder because typing forces active retrieval rather than passive recognition. The synonym layer exists because marking a valid synonym as wrong is counterproductive. The app accepts it and notes the distinction."
+        "Recognition mode shows the source word and flips to reveal the translation. Recall mode shows the translated word and requires you to type the original. Recall is harder because typing forces active retrieval rather than passive recognition. The synonym layer exists because marking a valid synonym as wrong is counterproductive. The app accepts it and notes the distinction.",
+        "The product is mobile-only by design. Every layout decision assumes portrait, one hand, 10-second sessions. Cards that require scrolling to read fail the use case. Text entry that requires switching keyboards fails the use case. The constraints of the platform shaped the product more than any design preference.",
+        "Accessibility on a mobile flashcard app is primarily a contrast and target size problem. Every card meets 4.5:1 contrast ratio for text. Every interactive element is at minimum 44px in either dimension. The color-coded language system uses color as a navigation aid, not as the sole carrier of meaning — every language has a color and a name label."
       ],
       "screens": [
         {
