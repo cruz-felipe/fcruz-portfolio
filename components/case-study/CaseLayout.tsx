@@ -349,7 +349,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         <div style={{
           fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
           letterSpacing: "0.18em", textTransform: "uppercase" as const,
-          color: "rgba(245,240,232,0.3)", marginBottom: "2rem",
+          color: "rgba(245,240,232,1)", marginBottom: "2rem",
         }}>
           More work
         </div>
@@ -370,7 +370,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(1.8rem, 3vw, 3rem)",
                   lineHeight: 0.92, letterSpacing: "0.01em",
-                  color: isCurrent ? "rgba(245,240,232,0.2)" : "rgba(255,255,255,1)",
+                  color: isCurrent ? "rgba(255,255,255,1)" : "rgba(245,240,232,0.85)",
                 }}>
                   {work.title.toUpperCase()}
                 </span>
