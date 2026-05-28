@@ -123,6 +123,7 @@ export default function ResponsiveStyles() {
         .contact-bleed { grid-template-columns: 1fr !important; }
         .contact-bleed > div:not(:first-child) { display: none !important; }
         #getintouch { margin-top: -5px; }
+        #emailme { width: 100%; }
 
         /* ── Case study nav ── */
         .case-nav {
