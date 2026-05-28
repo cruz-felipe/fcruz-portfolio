@@ -209,7 +209,7 @@ export default function Page({ data }: { data: PageData }) {
           </p>
         </div>
 
-        <div className="hero-col2" style={{ min-height: "35rem", padding: "3rem", }}>
+        <div className="hero-col2" style={{ minheight: "35rem", padding: "3rem", }}>
           
         </div>
 
