@@ -350,12 +350,7 @@ export default function Page({ data }: { data: PageData }) {
             lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8",
             paddingBottom: "3rem", marginTop: "-15px",width: "80rem",
           }}>
-            <a href={`mailto:${data.contactEmail}`} style={{
-            transition: "opacity 0.15s",
-          }}
-            onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.55"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
-          >get in touch</a>
+           get in touch
           </div>
         </div>
 
