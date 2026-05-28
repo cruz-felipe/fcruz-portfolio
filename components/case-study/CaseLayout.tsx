@@ -153,7 +153,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
       </section>
 
       {/* CONTEXT - two col */}
-      <section className="context-section" style={{
+      <section className="context-section case-context" style={{
         borderBottom: "1px solid var(--border)",
         display: "grid", gridTemplateColumns: "1fr 1fr",
         paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
