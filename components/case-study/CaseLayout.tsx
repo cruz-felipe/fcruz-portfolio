@@ -349,7 +349,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         <div style={{
           fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
           letterSpacing: "0.18em", textTransform: "uppercase" as const,
-          color: "rgba(245,240,232,1)", marginBottom: "2rem",
+          color: "rgba(245,240,232,.5)", marginBottom: "2rem",
         }}>
           More work
         </div>
@@ -385,7 +385,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                     fontFamily: "var(--font-mono)", fontSize: "8px",
                     letterSpacing: "0.12em", textTransform: "uppercase" as const,
                     color: "rgba(245,240,232,0.35)",
-                    border: "0.5px solid rgba(245,240,232,0.2)", padding: "2px 6px",
+                    border: "0.5px solid rgba(245,240,232,1)", padding: "2px 6px",
                   }}>Next</span>
                 )}
                 {"personal" in work && work.personal && !isCurrent && (
@@ -393,7 +393,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                     fontFamily: "var(--font-mono)", fontSize: "8px",
                     letterSpacing: "0.12em", textTransform: "uppercase" as const,
                     color: "rgba(245,240,232,0.25)",
-                    border: "0.5px solid rgba(245,240,232,0.12)", padding: "2px 6px",
+                    border: "0.5px solid rgba(245,240,232,1)", padding: "2px 6px",
                   }}>Personal</span>
                 )}
               </div>
@@ -402,7 +402,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                   flexShrink: 0, opacity: 0,
                   transition: "opacity 0.15s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1)",
                 }} className="work-arrow">
-                  <path d="M0 7h18M12 1l6 6-6 6" stroke="rgba(245,240,232,0.7)" strokeWidth="1.2" strokeLinecap="square"/>
+                  <path d="M0 7h18M12 1l6 6-6 6" stroke="rgba(245,240,232,1)" strokeWidth="1.2" strokeLinecap="square"/>
                 </svg>
               )}
             </>
