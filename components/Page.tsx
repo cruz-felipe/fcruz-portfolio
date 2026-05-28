@@ -179,8 +179,10 @@ export default function Page({ data }: { data: PageData }) {
         borderBottom: "1px solid var(--border)",
         padding: "3rem var(--pad)",
         alignItems: "stretch",
+        paddingtop: "0",
+        paddingBottom: "0",
       }}>
-        <div style={{ paddingRight: "3rem" }}>
+        <div style={{ padding: "3rem 3rem 3rem 0",}}>
           <Label>bio</Label>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", lineHeight: 1.72, color: "rgba(10,10,10,0.72)", marginBottom: "2.5rem", textWrap: "pretty" }}>
             {data.heroBio}
@@ -191,7 +193,7 @@ export default function Page({ data }: { data: PageData }) {
           </p>
         </div>
 
-        <div className="hero-col2" style={{ borderLeft: "1px solid var(--border)", paddingLeft: "3rem", paddingRight: "3rem" }}>
+        <div className="hero-col2" style={{ borderLeft: "1px solid var(--border)", padding: "3rem", }}>
           <Label>numbers</Label>
           {[
             { value: "11", label: "years building enterprise products" },
@@ -208,11 +210,11 @@ export default function Page({ data }: { data: PageData }) {
 
         {/* Col 3: quote bottom-aligned */}
         <div className="hero-col3" style={{
-          borderLeft: "1px solid var(--border)", paddingLeft: "3rem",
-          display: "flex", flexDirection: "column", justifyContent: "flex-end",
+          borderLeft: "1px solid var(--border)", padding: "3rem 0 3rem 3rem",
+          display: "flex", flexDirection: "column", justifyContent: "flex-end",          
         }}>
-          <p style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: "clamp(0.9rem, 1.1vw, 1rem)", lineHeight: 1.75, color: "rgba(10,10,10,0.5)", textWrap: "pretty" }}>
-            &ldquo;{data.heroHeadline}&rdquo;
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(0.9rem, 1.1vw, 1rem)", lineHeight: 1.75, color: "rgba(10,10,10,0.5)", textWrap: "pretty" }}>
+            {data.heroHeadline}
           </p>
         </div>
       </section>
@@ -229,7 +231,7 @@ export default function Page({ data }: { data: PageData }) {
       }}>
         <div style={{
           fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)",
-          lineHeight: 0.86, letterSpacing: "0.01em", color: "var(--ink)", paddingBottom: "3rem", paddingTop: "3rem",
+          lineHeight: 0.86, letterSpacing: "0.01em", color: "var(--ink)", paddingBottom: "3rem", paddingTop: "3rem",paddingLeft: "27.33rem",
           opacity: mounted ? 1 : 0, transform: mounted ? "none" : "translateY(16px)",
           transition: "opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s",
         }}>
@@ -242,7 +244,7 @@ export default function Page({ data }: { data: PageData }) {
         }}>
           <Label>selected projects</Label>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--muted)", lineHeight: 1.65, textWrap: "pretty" }}>
-            Enterprise product design across BSS/OSS, telecom infrastructure, B2B and B2C. NDA-constrained where noted.
+            Product design across BSS/OSS, eCommerce, native mobile, B2B and B2C. NDA-constrained where noted.
           </p>
         </div>
       </div>
