@@ -1,13 +1,11 @@
-/* ── Self-hosted Bebas Neue Pro Bold ── */
-/* Drop BebasNeuePro-Bold.woff2 into public/fonts/ to activate */
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
-@font-face {
-  font-family: 'Bebas Neue';
-  src: url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
+:root {
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body:    'EB Garamond', serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+  /* rest of your vars */
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap');
