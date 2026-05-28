@@ -209,19 +209,22 @@ export default function Page({ data }: { data: PageData }) {
           </p>
         </div>
 
-        <div className="hero-col2" style={{ borderLeft: "1px solid var(--border)", padding: "3rem", }}>
-          <Label>numbers</Label>
-          {[
-            { value: "11", label: "years building products" },
-            { value: "9", label: "countries" },
-            { value: "1M+", label: "end users on products I have contributed to" },
-            { value: "32\u21921", label: "legacy tools into one workspace" },
-          ].map(({ value, label }) => (
-            <div key={value} style={{ marginBottom: "1.75rem" }}>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem, 4.5vw, 5rem)", lineHeight: 0.88, letterSpacing: "0.02em", color: "var(--ink)" }}>{value}</div>
-              <div style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "var(--muted)", marginTop: "0.2rem" }}>{label}</div>
-            </div>
-          ))}
+        <div className="hero-col2" style={{ borderLeft: "1px solid var(--border)", padding: "3rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+          <div>
+            <Label>discipline</Label>
+            {[
+              "UX & Interaction Design",
+              "Design Systems",
+              "AI Product Integration",
+              "BSS / OSS Telecom",
+              "B2B Enterprise",
+              "Team Leadership",
+            ].map((item) => (
+              <div key={item} style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "rgba(10,10,10,0.55)", lineHeight: 1.6, paddingBottom: "0.35rem" }}>
+                {item}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Col 3: quote bottom-aligned */}
@@ -350,7 +353,12 @@ export default function Page({ data }: { data: PageData }) {
             lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8",
             paddingBottom: "3rem", marginTop: "-15px",width: "80rem",
           }}>
-           get in touch
+            <a href={`mailto:${data.contactEmail}`} style={{
+            transition: "opacity 0.15s",
+          }}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.55"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
+          >get in touch</a>
           </div>
         </div>
 

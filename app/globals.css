@@ -2,17 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  --font-display: 'Bebas Neue', sans-serif;
-  --font-body:    'EB Garamond', serif;
-  --font-mono:    'IBM Plex Mono', monospace;
-  /* rest of your vars */
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap');
-
-
-:root {
-  /* ── Palette ── */
   --bg:      #F5F0E8;
   --ink:     #0A0A0A;
   --muted:   rgba(10,10,10,0.45);
@@ -20,12 +9,10 @@
   --border:  rgba(10,10,10,0.13);
   --red:     #C42B2B;
 
-  /* ── Type — uses Pro Bold if font file present, falls back to free weight ── */
   --font-display: 'Bebas Neue', sans-serif;
   --font-body:    'EB Garamond', serif;
   --font-mono:    'IBM Plex Mono', monospace;
 
-  /* ── Layout ── */
   --pad:    4rem;
   --pad-sm: 1.5rem;
 }
@@ -58,7 +45,6 @@ p { text-wrap: pretty; }
 }
 .skip-link:focus { top: 0; }
 
-/* ── Reveal ── */
 .reveal {
   opacity: 0; transform: translateY(10px);
   transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16,1,0.3,1);
@@ -68,7 +54,6 @@ p { text-wrap: pretty; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
-/* ── Case study global styles ── */
 .cs-lead {
   font-family: var(--font-body);
   font-size: clamp(1rem, 1.3vw, 1.05rem);
