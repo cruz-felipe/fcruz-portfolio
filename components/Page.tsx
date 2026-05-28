@@ -354,7 +354,7 @@ export default function Page({ data }: { data: PageData }) {
           }}
             onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.55"; }}
             onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
-          >LET&apos;S<br />TALK</a>
+          >get in touch</a>
           </div>
         </div>
 
