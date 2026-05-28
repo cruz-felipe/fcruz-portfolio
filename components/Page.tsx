@@ -104,7 +104,8 @@ export default function Page({ data }: { data: PageData }) {
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
       }}>
-        <a href="/" style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--ink)", textDecoration: "none" }}>felipe cruz</a>
+        <a href="/" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+          style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--ink)", textDecoration: "none", cursor: "pointer" }}>felipe cruz</a>
         <div />
         <nav className="nav-links" style={{ display: "flex", gap: "2.5rem", justifyContent: "flex-end" }}>
           {[["work", "work"], ["about", "about"], ["contact", "contact"]].map(([label, id]) => (

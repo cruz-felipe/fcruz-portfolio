@@ -133,7 +133,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         transform: visible ? "none" : "translateY(14px)",
         transition: "opacity 0.65s ease, transform 0.65s ease",
       }}>
-        <h1 style={{
+        <h1 className="case-hero-title" style={{
           fontFamily: "var(--font-display)",
           fontSize: "clamp(3.5rem, 8vw, 10rem)",
           lineHeight: 0.88, letterSpacing: "0.01em",
@@ -232,7 +232,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
 
             {/* Pullquote */}
             {section.pullquote && (
-              <div style={{
+              <div className="case-pullquote-block" style={{
                 borderBottom: "1px solid var(--border)",
                 paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
                 paddingTop: "4rem", paddingBottom: "4rem",
@@ -419,9 +419,9 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
           };
 
           return isCurrent ? (
-            <div key={work.slug} style={rowStyle}>{rowContent}</div>
+<div key={work.slug} className="more-work-row" style={rowStyle}>{rowContent}</div>
           ) : (
-            <Link key={work.slug} href={`/work/${work.slug}`} style={rowStyle}
+<Link key={work.slug} className="more-work-row" href={`/work/${work.slug}`} style={rowStyle}
               onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
               onMouseEnter={(e) => {
                 e.currentTarget.style.opacity = "0.7";

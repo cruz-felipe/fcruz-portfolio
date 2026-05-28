@@ -153,6 +153,29 @@ export default function ResponsiveStyles() {
         .screen-gallery.narrow.count-2 { grid-template-columns: 1fr !important; }
       }
 
+
+        /* ── Case hero title: looser line-height on small screens ── */
+        .case-hero-title { line-height: 1 !important; margin-bottom: 1.5rem !important; }
+
+        /* ── Pullquote block: tighter vertical padding on mobile ── */
+        .case-pullquote-block { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+
+        /* ── Pullquote font size: readable on 375px ── */
+        .case-pullquote-block blockquote { font-size: 1.35rem !important; }
+
+        /* ── More work rows: ensure 48px tap target ── */
+        .more-work-row { min-height: 48px !important; align-items: center !important; padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; }
+
+        /* ── More work title: tighter on mobile ── */
+        .more-work-row span[style*="font-family: var(--font-display)"] { font-size: 1.6rem !important; }
+
+        /* ── Artifact scroll: add padding buffer so scrollbar doesn't clip content ── */
+        .artifact-scroll { padding-bottom: 0.5rem !important; }
+
+        /* ── Body text: slightly larger on small screens for readability ── */
+        .cs-body { font-size: 16px !important; }
+        .cs-lead { font-size: 1rem !important; }
+
       /* ── 420px ── */
       @media (max-width: 420px) {
         :root { --pad: 1rem; }
