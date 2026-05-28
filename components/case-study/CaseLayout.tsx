@@ -303,7 +303,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
 
             {/* Artifact - bg matches artifact type: keep light bg so SVG text stays readable */}
             {data.artifacts[si]?.component && (
-              <section className="artifact-section reveal-item" style={{
+              <section className="artifact-section reveal-item" style={{                
                 paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
                 paddingTop: "2.5rem", paddingBottom: "2.5rem", marginBottom: "3rem",
                 background: "#F0EFE9",
