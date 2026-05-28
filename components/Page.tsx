@@ -198,7 +198,7 @@ export default function Page({ data }: { data: PageData }) {
         paddingTop: "0",
         paddingBottom: "0",
       }}>
-        <div style={{ padding: "3rem 3rem 3rem 0",}}>
+        <div style={{ padding: "3rem 3rem 3rem 0",alignContent: "end",}}>
           <Label>bio</Label>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", lineHeight: 1.72, color: "rgba(10,10,10,0.72)", marginBottom: "2.5rem", textWrap: "pretty" }}>
             {data.heroBio}
@@ -236,7 +236,7 @@ export default function Page({ data }: { data: PageData }) {
       }}>
         <div style={{
           fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)",
-          lineHeight: 0.86, letterSpacing: "0.01em", color: "var(--ink)", paddingBottom: "3rem", paddingTop: "3rem",paddingRight: "27.33rem",
+          lineHeight: 0.86, letterSpacing: "0.01em", color: "var(--ink)", paddingBottom: "3rem", paddingTop: "3rem",paddingRight: "47.37rem",
           opacity: mounted ? 1 : 0, transform: mounted ? "none" : "translateY(16px)",
           transition: "opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s",
         }}>
@@ -269,7 +269,7 @@ export default function Page({ data }: { data: PageData }) {
       }}>
         <div style={{
           fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)",
-          lineHeight: 0.86, letterSpacing: "0.01em", color: "var(--ink)", paddingBottom: "0.06em",
+          lineHeight: 0.86, letterSpacing: "0.01em", color: "var(--ink)",
         }}>
           ABOUT
         </div>
