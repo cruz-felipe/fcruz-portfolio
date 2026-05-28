@@ -238,7 +238,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                 paddingTop: "4rem", paddingBottom: "4rem",
               }}>
                 <blockquote style={{
-                  fontFamily: "var(--font-body)", fontStyle: "italic",
+                  fontFamily: "var(--font-body)",
                   fontSize: "clamp(1.5rem, 3vw, 2.2rem)",
                   lineHeight: 1.3, color: "var(--ink)",
                   maxWidth: "820px", textWrap: "pretty", marginBottom: "1.5rem",
