@@ -3,8 +3,8 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Bebas Neue Pro';
-  src: url('/fonts/BebasNeuePro-Bold.woff2') format('woff2');
+  font-family: 'Bebas Neue';
+  src: url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -23,7 +23,7 @@
   --red:     #C42B2B;
 
   /* ── Type — uses Pro Bold if font file present, falls back to free weight ── */
-  --font-display: 'Bebas Neue Pro', 'Bebas Neue', sans-serif;
+  --font-display: 'Bebas Neue', sans-serif;
   --font-body:    'EB Garamond', serif;
   --font-mono:    'IBM Plex Mono', monospace;
 
