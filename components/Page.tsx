@@ -179,7 +179,7 @@ export default function Page({ data }: { data: PageData }) {
         borderBottom: "1px solid var(--border)",
         padding: "3rem var(--pad)",
         alignItems: "stretch",
-        paddingtop: "0",
+        paddingTop: "0",
         paddingBottom: "0",
       }}>
         <div style={{ padding: "3rem 3rem 3rem 0",}}>
