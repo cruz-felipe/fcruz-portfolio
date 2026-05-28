@@ -370,7 +370,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(1.8rem, 3vw, 3rem)",
                   lineHeight: 0.92, letterSpacing: "0.01em",
-                  color: isCurrent ? "rgba(255,255,255,0.7)" : "rgba(255,255,255,0.7)",
+                  color: isCurrent ? "rgba(255,255,255,1)" : "rgba(245,240,232,0.85)",
                 }}>
                   {work.title.toUpperCase()}
                 </span>
@@ -424,12 +424,12 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
             <Link key={work.slug} href={`/work/${work.slug}`} style={rowStyle}
               onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
               onMouseEnter={(e) => {
-                e.currentTarget.style.opacity = "1";
+                e.currentTarget.style.opacity = "0.7";
                 const arrow = e.currentTarget.querySelector(".work-arrow") as HTMLElement | null;
                 if (arrow) { arrow.style.opacity = "1"; arrow.style.transform = "translateX(4px)"; }
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.opacity = "0.7";
+                e.currentTarget.style.opacity = "1";
                 const arrow = e.currentTarget.querySelector(".work-arrow") as HTMLElement | null;
                 if (arrow) { arrow.style.opacity = "0"; arrow.style.transform = "none"; }
               }}
