@@ -370,7 +370,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                   fontFamily: "var(--font-display)",
                   fontSize: "clamp(1.8rem, 3vw, 3rem)",
                   lineHeight: 0.92, letterSpacing: "0.01em",
-                  color: isCurrent ? "rgba(245,240,232,0.2)" : "rgba(245,240,232,0.85)",
+                  color: isCurrent ? "rgba(245,240,232,0.2)" : "rgba(255,255,255,1)",
                 }}>
                   {work.title.toUpperCase()}
                 </span>
