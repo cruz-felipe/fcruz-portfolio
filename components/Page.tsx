@@ -274,7 +274,6 @@ export default function Page({ data }: { data: PageData }) {
       {/* ABOUT CONTENT */}
       <section className="about-grid" style={{
         display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-        borderBottom: "1px solid var(--border)",
         padding: "4rem var(--pad)",
       }}>
         <div style={{ paddingRight: "3rem" }}>
@@ -336,7 +335,10 @@ export default function Page({ data }: { data: PageData }) {
             lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8",
             paddingBottom: "0.06em", marginTop: "-15px",
           }}>
-            LET&apos;S<br />TALK
+            <a href={`mailto:${data.contactEmail}`} 
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.55"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
+          >LET&apos;S<br />TALK</a>
           </div>
           <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)" }} />
           <div style={{ borderLeft: "1px solid rgba(245,240,232,0.08)" }} />
