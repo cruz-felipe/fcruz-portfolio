@@ -88,7 +88,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
   }, []);
 
   return (
-    <main id="main-content" style={{ background: "var(--bg)", color: "var(--ink)", minHeight: "100vh", width: "100%", overflowX: "hidden" }}>
+    <main id="main-content" style={{ background: "var(--bg)", color: "var(--ink)", minHeight: "100vh", width: "100%", overflowX: "clip" }}>
 
       {/* NAV */}
       <header className="case-nav" style={{
