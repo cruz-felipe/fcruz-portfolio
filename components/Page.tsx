@@ -344,7 +344,7 @@ export default function Page({ data }: { data: PageData }) {
           display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
           padding: "0 var(--pad)", overflow: "hidden",
         }}>
-          <div style={{
+          <div id="getintouch" style={{
             fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)",
             lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8",
             paddingBottom: "3rem", marginTop: "-15px",width: "80rem",
