@@ -103,13 +103,13 @@ export default function Page({ data }: { data: PageData }) {
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
       }}>
-        <div style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--ink)" }}>felipe cruz</div>
+        <div style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--ink)" }}>felipe cruz</div>
         <div />
         <nav className="nav-links" style={{ display: "flex", gap: "2.5rem", justifyContent: "flex-end" }}>
           {[["work", "#work"], ["about", "#about"], ["contact", "#contact"]].map(([label, href]) => (
             <a key={label} href={href} style={{
-              fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
-              letterSpacing: "0.16em", textTransform: "uppercase",
+              fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 500,
+              letterSpacing: "0.16em", textTransform: "lowercase",
               color: "var(--muted)", textDecoration: "none", transition: "color 0.15s",
             }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "var(--ink)"; }}
