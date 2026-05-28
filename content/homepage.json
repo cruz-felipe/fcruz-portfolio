@@ -82,7 +82,7 @@
       "blurb": "3,000 support agents navigating 32 legacy tools on every call. I replaced the ecosystem with a single AI-integrated workspace.",
       "metric1": "70% AHT reduction",
       "metric2": "32→1 consolidation",
-      "tag": "AI System Design · Telecom · 2022",
+      "tag": "AI System Design · Telecom",
       "weight": "featured",
       "personal": false,
       "image": "/hub/workspace.png"
@@ -94,7 +94,7 @@
       "blurb": "Sales agents needed 7 tools and 3 days of training to close one deal. I reduced that to a single flow and half a day.",
       "metric1": "75% quote acceleration",
       "metric2": "83% faster onboarding",
-      "tag": "Enterprise UX · Research · 2023",
+      "tag": "Enterprise UX · Research",
       "weight": "primary",
       "personal": false,
       "image": ""
@@ -106,7 +106,7 @@
       "blurb": "A greenfield B2B asset management platform. No prior product. Designed from workshop sessions to production-ready flows as the solo designer.",
       "metric1": "13 flows",
       "metric2": "3 modules",
-      "tag": "Greenfield Product · BSS · 2024",
+      "tag": "Greenfield Product · BSS",
       "weight": "primary",
       "personal": false,
       "image": ""
@@ -118,7 +118,7 @@
       "blurb": "Three months on-site in Copenhagen. The client did not need better components. They needed a designer who understood what was coming next.",
       "metric1": "50% faster handoff",
       "metric2": "32% velocity boost",
-      "tag": "Design System · Copenhagen · 2023",
+      "tag": "Design System · Copenhagen",
       "weight": "secondary",
       "personal": false,
       "image": ""

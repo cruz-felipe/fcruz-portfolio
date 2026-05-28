@@ -5,7 +5,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 
 export const metadata: Metadata = {
   title: "Felipe Cruz — Senior Product Designer",
-  description: "Eleven years designing enterprise products at global scale. BSS/OSS, telecom, B2B and B2C across 9 countries.",
+  description: "Eleven years designing products at global scale. BSS/OSS, telecom, B2B and B2C across 9 countries.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "32x32" },
