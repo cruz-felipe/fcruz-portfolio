@@ -156,9 +156,6 @@ export default function ResponsiveStyles() {
         .screen-gallery.count-2 { grid-template-columns: 1fr !important; }
         .screen-gallery.narrow,
         .screen-gallery.narrow.count-2 { grid-template-columns: 1fr !important; }
-      }
-
-
         /* ── Case hero title ── */
         .case-hero-title { line-height: 1 !important; margin-bottom: 1.5rem !important; }
         /* ── Pullquote block ── */
