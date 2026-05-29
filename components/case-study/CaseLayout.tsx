@@ -41,7 +41,7 @@ interface Section {
 interface Artifact { id: string; title: string; caption: string; component: React.ReactNode; }
 
 export interface CaseStudyData {
-  index: string; title: string; tagline: string; role: string;
+  slug?: string; index: string; title: string; tagline: string; role: string;
   roleDetail: string; impactSummary?: string; context: string;
   year: string; location?: string; metrics: Metric[];
   sections: Section[]; artifacts: Artifact[];
@@ -53,7 +53,7 @@ const ALL_WORK = [
   { slug: "b2b-sales-rescue",        index: "02", title: "B2B Sales Rescue" },
   { slug: "quota-management",         index: "03", title: "Quota Management" },
   { slug: "dane-telecom",             index: "04", title: "Dane Telecom" },
-  { slug: "taekwondo-learning-app",   index: "05", title: "Taekwondo Learning App", personal: true },
+  { slug: "taekwondo-learning-app",   index: "05", title: "TKD Learning App", personal: true },
 ];
 
 function noWidow(t: string) { return t.replace(/\s+(\S+)$/, "\u00a0$1"); }
@@ -144,7 +144,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         </h1>
         <p style={{
           fontFamily: "var(--font-body)",
-          fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
+          fontSize: "clamp(1.1rem, 1.5vw, 1.25rem)",
           lineHeight: 1.72, color: "rgba(10,10,10,0.75)",
           maxWidth: "820px", textWrap: "pretty",
         }}>
@@ -161,7 +161,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         gap: "4rem", alignItems: "start",
       }}>
         <p style={{
-          fontFamily: "var(--font-body)", fontSize: "15px",
+          fontFamily: "var(--font-body)", fontSize: "17px",
           lineHeight: 1.82, color: "rgba(10,10,10,0.75)", textWrap: "pretty",
         }}>
           {cleanPara(data.context)}
@@ -169,20 +169,20 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         <div>
           <div style={{ marginBottom: "1.5rem" }}>
             <MonoLabel>My role</MonoLabel>
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "rgba(10,10,10,0.65)", textWrap: "pretty" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", lineHeight: 1.7, color: "rgba(10,10,10,0.65)", textWrap: "pretty" }}>
               {cleanPara(data.roleDetail)}
             </p>
           </div>
           {data.impactSummary && (
             <div style={{ marginBottom: "1.5rem" }}>
               <MonoLabel>Business impact</MonoLabel>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.65, color: "rgba(10,10,10,0.65)", textWrap: "pretty" }}>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", lineHeight: 1.7, color: "rgba(10,10,10,0.65)", textWrap: "pretty" }}>
                 {cleanPara(data.impactSummary)}
               </p>
             </div>
           )}
           {!data.hideNda && (
-            <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "rgba(10,10,10,0.62)", lineHeight: 1.65, textWrap: "pretty" }}>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "rgba(10,10,10,0.62)", lineHeight: 1.7, textWrap: "pretty" }}>
               {data.showNdaNote
                 ? "Client identity omitted per NDA. Artifacts are illustrative representations, not reproductions of client deliverables."
                 : "Client identity omitted per NDA. Strategic challenges, decisions and outcomes are accurate."
@@ -214,8 +214,8 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                 <AnimatedMetric value={m.value} />
               </div>
               <p style={{
-                fontFamily: "var(--font-body)", fontSize: "13px",
-                color: "rgba(10,10,10,0.62)", lineHeight: 1.6,
+                fontFamily: "var(--font-body)", fontSize: "15px",
+                color: "rgba(10,10,10,0.62)", lineHeight: 1.65,
                 maxWidth: "260px", textWrap: "pretty",
               }}>
                 {cleanPara(m.label)}
@@ -354,7 +354,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
           More work
         </div>
         {ALL_WORK.map((work, i) => {
-          const isCurrent = work.title === data.title;
+          const isCurrent = data.slug ? work.slug === data.slug : work.title === data.title;
           const currentIdx = ALL_WORK.findIndex(w => w.title === data.title);
           const isNext = currentIdx === i - 1;
 

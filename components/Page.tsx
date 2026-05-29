@@ -200,11 +200,11 @@ export default function Page({ data }: { data: PageData }) {
       }}>
         <div style={{ padding: "3rem 3rem 3rem 0",alignContent: "end",}}>
           <Label>bio</Label>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", lineHeight: 1.72, color: "rgba(10,10,10,0.72)", marginBottom: "2.5rem", textWrap: "pretty" }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "17px", lineHeight: 1.75, color: "rgba(10,10,10,0.72)", marginBottom: "2.5rem", textWrap: "pretty" }}>
             {data.heroBio}
           </p>
           <Label>currently</Label>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "14px", lineHeight: 1.6, color: "rgba(10,10,10,0.6)", textWrap: "pretty" }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "16px", lineHeight: 1.65, color: "rgba(10,10,10,0.6)", textWrap: "pretty" }}>
             {data.heroCurrentRole}<br />{data.heroCurrentCompany}
           </p>
         </div>
@@ -248,7 +248,7 @@ export default function Page({ data }: { data: PageData }) {
           opacity: mounted ? 1 : 0, transition: "opacity 0.6s ease 0.2s", width: "22rem",
         }}>
           <Label>selected projects</Label>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--muted)", lineHeight: 1.65, textWrap: "pretty" }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "17px", color: "var(--muted)", lineHeight: 1.7, textWrap: "pretty" }}>
             Product design across BSS/OSS, eCommerce, B2B and B2C. NDA-constrained where noted.
           </p>
         </div>
@@ -283,12 +283,12 @@ export default function Page({ data }: { data: PageData }) {
         <div style={{ paddingRight: "3rem" }}>
           <Label>long bio</Label>
           {[data.aboutBio1, data.aboutBio2, data.aboutBio3].map((t, i) => (
-            <p key={i} style={{ fontFamily: "var(--font-body)", fontSize: "15px", lineHeight: 1.78, color: "rgba(10,10,10,0.7)", marginBottom: "1.25rem", textWrap: "pretty" }}>{t}</p>
+            <p key={i} style={{ fontFamily: "var(--font-body)", fontSize: "17px", lineHeight: 1.8, color: "rgba(10,10,10,0.7)", marginBottom: "1.25rem", textWrap: "pretty" }}>{t}</p>
           ))}
           <div style={{ marginTop: "1.75rem" }}>
             <Label>beyond the work</Label>
             {[data.aboutBeyond1, data.aboutBeyond2, data.aboutBeyond3].filter(Boolean).map((t, i) => (
-              <p key={i} style={{ fontFamily: "var(--font-body)", fontSize: "14px", lineHeight: 1.72, color: "rgba(10,10,10,0.65)", marginBottom: "1rem", textWrap: "pretty" }}>{t}</p>
+              <p key={i} style={{ fontFamily: "var(--font-body)", fontSize: "16px", lineHeight: 1.75, color: "rgba(10,10,10,0.65)", marginBottom: "1rem", textWrap: "pretty" }}>{t}</p>
             ))}
           </div>
         </div>
@@ -300,7 +300,7 @@ export default function Page({ data }: { data: PageData }) {
               <div style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: "14px", color: "var(--ink)", marginBottom: "0.1rem" }}>{job.role}</div>
               <div style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--ink)", marginBottom: "0.15rem" }}>{job.company}</div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.08em", color: "var(--faint)", marginBottom: "0.55rem" }}>{job.period}</div>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "13px", lineHeight: 1.6, color: "rgba(10,10,10,0.55)", textWrap: "pretty" }}>{job.note}</p>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", lineHeight: 1.65, color: "rgba(10,10,10,0.55)", textWrap: "pretty" }}>{job.note}</p>
             </div>
           ))}
           <div style={{ marginTop: "0.5rem" }}>

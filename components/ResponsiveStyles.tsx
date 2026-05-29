@@ -87,7 +87,6 @@ export default function ResponsiveStyles() {
           border-left: none !important; padding-left: 0 !important;
           border-top: 1px solid var(--border) !important; padding-top: 2rem !important;
           padding-right: 0 !important;
-          display: none !important;
         }
         .hero-col3 {
           border-left: none !important; padding-left: 0 !important;

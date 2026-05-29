@@ -55,13 +55,13 @@ p { text-wrap: pretty; }
 
 .cs-lead {
   font-family: var(--font-body);
-  font-size: clamp(1rem, 1.3vw, 1.05rem);
+  font-size: clamp(1.1rem, 1.5vw, 1.2rem);
   line-height: 1.82; color: var(--ink);
   margin-bottom: 1.5rem; text-wrap: pretty;
 }
 .cs-body {
   font-family: var(--font-body);
-  font-size: 15px; line-height: 1.9; color: #333; text-wrap: pretty;
+  font-size: 17px; line-height: 1.88; color: #333; text-wrap: pretty;
 }
 .cs-body + .cs-body { margin-top: 1.5rem; }
 
@@ -69,12 +69,13 @@ p { text-wrap: pretty; }
   border-top: 1px solid var(--border);
   padding: 4rem var(--pad);
   width: 100%;
+  border-left: 4px solid var(--red);
 }
 .cs-pullquote {
   font-family: var(--font-body); font-style: italic;
-  font-size: clamp(1.4rem, 2.8vw, 2rem);
-  line-height: 1.35; color: var(--ink);
-  max-width: 820px; text-wrap: pretty;
+  font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+  line-height: 1.28; color: var(--ink);
+  max-width: 860px; text-wrap: pretty;
 }
 .cs-pullquote-attr {
   font-family: var(--font-mono); font-size: 10px;

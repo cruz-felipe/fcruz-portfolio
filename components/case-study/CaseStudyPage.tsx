@@ -51,6 +51,7 @@ interface Props {
 
 export default function CaseStudyPage({ data, slug }: Props) {
   const caseData: CaseStudyData = {
+    slug,
     index: data.index,
     title: data.title,
     tagline: data.tagline,
