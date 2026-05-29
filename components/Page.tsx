@@ -232,7 +232,7 @@ export default function Page({ data }: { data: PageData }) {
           </p>
         </div>
 
-        <div className="hero-col2" style={{ minHeight: "35rem", borderLeft: "1px solid var(--border)" }} />
+        <div className="hero-col2" style={{ minHeight: "35rem", }} />
 
         {/* Col 3: quote bottom-aligned */}
         <div className="hero-col3" style={{
