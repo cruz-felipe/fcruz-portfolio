@@ -64,7 +64,7 @@ function cleanPara(t: string) {
 function MonoLabel({ children }: { children: React.ReactNode }) {
   return (
     <div style={{
-      fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+      fontFamily: "var(--font-mono)", fontSize: "10px", fontWeight: 500,
       letterSpacing: "0.18em", textTransform: "uppercase" as const,
       color: "rgba(10,10,10,0.62)", marginBottom: "0.6rem",
     }}>{children}</div>
@@ -103,7 +103,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
           <a href="/" style={{
             display: "flex", alignItems: "center", gap: "0.4rem",
-            fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+            fontFamily: "var(--font-mono)", fontSize: "10px", fontWeight: 500,
             letterSpacing: "0.14em", textTransform: "uppercase" as const,
             color: "var(--muted)", textDecoration: "none", transition: "color 0.15s",
           }}
@@ -118,7 +118,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         </div>
         <div className="case-nav-middle" />
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.12em", color: "var(--faint)" }}>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.12em", color: "var(--faint)" }}>
             {data.index} / 05
           </span>
         </div>
@@ -340,7 +340,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         paddingTop: "3rem", paddingBottom: "3rem",
       }}>
         <div style={{
-          fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+          fontFamily: "var(--font-mono)", fontSize: "10px", fontWeight: 500,
           letterSpacing: "0.18em", textTransform: "uppercase" as const,
           color: "rgba(245,240,232,.5)", marginBottom: "2rem",
         }}>
@@ -354,7 +354,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
           const rowContent = (
             <>
               <span style={{
-                fontFamily: "var(--font-mono)", fontSize: "9px",
+                fontFamily: "var(--font-mono)", fontSize: "10px",
                 color: "rgba(245,240,232,0.25)", minWidth: "2.5rem", flexShrink: 0,
                 letterSpacing: "0.08em",
               }}>{work.index}</span>
@@ -375,7 +375,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                 )}
                 {isNext && (
                   <span style={{
-                    fontFamily: "var(--font-mono)", fontSize: "8px",
+                    fontFamily: "var(--font-mono)", fontSize: "10px",
                     letterSpacing: "0.12em", textTransform: "uppercase" as const,
                     color: "rgba(245,240,232,0.35)",
                     border: "0.5px solid rgba(245,240,232,0.5)", padding: "2px 6px",
@@ -383,7 +383,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                 )}
                 {"personal" in work && work.personal && !isCurrent && (
                   <span style={{
-                    fontFamily: "var(--font-mono)", fontSize: "8px",
+                    fontFamily: "var(--font-mono)", fontSize: "10px",
                     letterSpacing: "0.12em", textTransform: "uppercase" as const,
                     color: "rgba(245,240,232,0.25)",
                     border: "0.5px solid rgba(245,240,232,.5)", padding: "2px 6px",
