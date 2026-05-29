@@ -74,7 +74,7 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
           </div>
           <div style={{ flexShrink: 0, textAlign: "right" }}>
             {[card.metric1, card.metric2].filter(Boolean).map(m => (
-              <div key={m} style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.06em", color: "var(--muted)", lineHeight: 1.9 }}>{m}</div>
+              <div key={m} style={{ fontFamily: "var(--font-mono)", fontSize: "12px", letterSpacing: "0.05em", color: "var(--muted)", lineHeight: 1.8 }}>{m}</div>
             ))}
           </div>
         </div>
@@ -200,7 +200,7 @@ export default function Page({ data }: { data: PageData }) {
       }}>
         <div style={{ padding: "3rem 3rem 3rem 0",alignContent: "end",}}>
           <Label>bio</Label>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "17px", lineHeight: 1.75, color: "rgba(10,10,10,0.72)", marginBottom: "2.5rem", textWrap: "pretty" }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "17px", lineHeight: 1.85, color: "rgba(10,10,10,0.72)", marginBottom: "2.5rem", textWrap: "pretty" }}>
             {data.heroBio}
           </p>
           <Label>currently</Label>
@@ -209,16 +209,14 @@ export default function Page({ data }: { data: PageData }) {
           </p>
         </div>
 
-        <div className="hero-col2" style={{ minHeight: "35rem", padding: "3rem", }}>
-          
-        </div>
+        <div className="hero-col2" style={{ minHeight: "35rem", borderLeft: "1px solid var(--border)", borderRight: "1px solid var(--border)" }} />
 
         {/* Col 3: quote bottom-aligned */}
         <div className="hero-col3" style={{
           borderLeft: "1px solid var(--border)", padding: "3rem 0 3rem 3rem",
           display: "flex", flexDirection: "column", justifyContent: "flex-end",          
         }}>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(0.9rem, 1.1vw, 1rem)", lineHeight: 1.75, color: "rgba(10,10,10,0.65)", textWrap: "pretty" }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1rem, 1.3vw, 1.15rem)", lineHeight: 1.78, color: "rgba(10,10,10,0.65)", textWrap: "pretty" }}>
             {data.heroHeadline}
           </p>
         </div>
@@ -236,7 +234,7 @@ export default function Page({ data }: { data: PageData }) {
       }}>
         <div style={{
           fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)",
-          lineHeight: 0.86, letterSpacing: "0.01em", color: "var(--ink)", paddingBottom: "3rem", paddingTop: "3rem",paddingRight: "47.37rem",
+          lineHeight: 0.86, letterSpacing: "0.01em", color: "var(--ink)", paddingBottom: "3rem", paddingTop: "3rem", maxWidth: "55%",
           opacity: mounted ? 1 : 0, transform: mounted ? "none" : "translateY(16px)",
           transition: "opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s",
         }}>
@@ -300,7 +298,7 @@ export default function Page({ data }: { data: PageData }) {
               <div style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: "14px", color: "var(--ink)", marginBottom: "0.1rem" }}>{job.role}</div>
               <div style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--ink)", marginBottom: "0.15rem" }}>{job.company}</div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.08em", color: "var(--faint)", marginBottom: "0.55rem" }}>{job.period}</div>
-              <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", lineHeight: 1.65, color: "rgba(10,10,10,0.55)", textWrap: "pretty" }}>{job.note}</p>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", lineHeight: 1.65, color: "rgba(10,10,10,0.62)", textWrap: "pretty" }}>{job.note}</p>
             </div>
           ))}
           <div style={{ marginTop: "0.5rem" }}>
