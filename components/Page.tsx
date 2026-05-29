@@ -78,7 +78,7 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
             ))}
           </div>
         </div>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: "12px", lineHeight: 1.6, color: "var(--muted)", maxWidth: "480px", textWrap: "pretty" }}>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "16px", lineHeight: 1.72, color: "var(--muted)", maxWidth: "540px", textWrap: "pretty" }}>
           {card.blurb}
         </p>
       </Link>
@@ -209,7 +209,7 @@ export default function Page({ data }: { data: PageData }) {
           </p>
         </div>
 
-        <div className="hero-col2" style={{ minHeight: "35rem", borderLeft: "1px solid var(--border)", borderRight: "1px solid var(--border)" }} />
+        <div className="hero-col2" style={{ minHeight: "35rem", borderLeft: "1px solid var(--border)" }} />
 
         {/* Col 3: quote bottom-aligned */}
         <div className="hero-col3" style={{
@@ -240,10 +240,11 @@ export default function Page({ data }: { data: PageData }) {
         }}>
           WORK
         </div>        
+        <div className="bleed-col2" />
         <div className="bleed-col3" style={{
           borderLeft: "1px solid var(--border)", paddingLeft: "3rem",
           display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: "3rem",
-          opacity: mounted ? 1 : 0, transition: "opacity 0.6s ease 0.2s", width: "22rem",
+          opacity: mounted ? 1 : 0, transition: "opacity 0.6s ease 0.2s",
         }}>
           <Label>selected projects</Label>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "17px", color: "var(--muted)", lineHeight: 1.7, textWrap: "pretty" }}>

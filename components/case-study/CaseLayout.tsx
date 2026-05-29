@@ -232,21 +232,14 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
 
             {/* Pullquote */}
             {section.pullquote && (
-              <div className="case-pullquote-block" style={{
+              <div className="cs-pullquote-section case-pullquote-block" style={{
                 borderBottom: "1px solid var(--border)",
-                paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
-                paddingTop: "4rem", paddingBottom: "4rem",
               }}>
-                <blockquote style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: "clamp(1.5rem, 3vw, 2.2rem)",
-                  lineHeight: 1.3, color: "var(--ink)",
-                  maxWidth: "820px", textWrap: "pretty", marginBottom: "1.5rem",
-                }}>
+                <blockquote className="cs-pullquote" style={{ fontStyle: "italic", marginBottom: "1.5rem", paddingLeft: "0.25rem" }}>
                   {noWidow(section.pullquote)}
                 </blockquote>
                 <div style={{
-                  fontFamily: "var(--font-mono)", fontSize: "9px",
+                  fontFamily: "var(--font-mono)", fontSize: "10px",
                   letterSpacing: "0.14em", textTransform: "uppercase" as const,
                   color: "rgba(10,10,10,0.62)",
                 }}>
@@ -266,14 +259,14 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
               }}>
                 {!section.pullquote && (
                   <div style={{
-                    fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
-                    letterSpacing: "0.18em", textTransform: "uppercase" as const,
+                    fontFamily: "var(--font-mono)", fontSize: "10px", fontWeight: 500,
+                    letterSpacing: "0.16em", textTransform: "uppercase" as const,
                     color: "rgba(10,10,10,0.62)", marginBottom: "1.5rem",
                   }}>
                     {section.title}
                   </div>
                 )}
-                <div style={{ maxWidth: "680px" }}>
+                <div style={{ maxWidth: "680px", width: "100%" }}>
                   {Array.isArray(section.body)
                     ? section.body.map((para, pi) => (
                         <p key={pi}
@@ -321,7 +314,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                   }}>
                     <p style={{
                       fontFamily: "var(--font-mono)", fontSize: "10px",
-                      color: "rgba(10,10,10,0.45)", letterSpacing: "0.08em", flexShrink: 0,
+                      color: "rgba(10,10,10,0.62)", letterSpacing: "0.08em", flexShrink: 0,
                     }}>
                       {data.artifacts[si].title}
                     </p>
@@ -355,7 +348,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         </div>
         {ALL_WORK.map((work, i) => {
           const isCurrent = data.slug ? work.slug === data.slug : work.title === data.title;
-          const currentIdx = ALL_WORK.findIndex(w => w.title === data.title);
+          const currentIdx = ALL_WORK.findIndex(w => data.slug ? w.slug === data.slug : w.title === data.title);
           const isNext = currentIdx === i - 1;
 
           const rowContent = (
