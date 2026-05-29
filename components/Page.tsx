@@ -46,15 +46,38 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
       opacity: vis ? 1 : 0,
       transform: vis ? "none" : "translateY(12px)",
       transition: `opacity 0.45s ease ${i * 55}ms, transform 0.45s ease ${i * 55}ms`,
+      position: "relative",
     }}>
-      <Link href={`/work/${card.id}`} style={{ textDecoration: "none", color: "inherit", display: "block" }}
+      {/* Ghost index number — structural anchor at display scale */}
+      <div aria-hidden="true" style={{
+        position: "absolute",
+        top: "50%", left: 0,
+        transform: "translateY(-50%)",
+        fontFamily: "var(--font-display)",
+        fontSize: "clamp(8rem, 16vw, 18rem)",
+        lineHeight: 1,
+        letterSpacing: "0.01em",
+        color: "var(--ink)",
+        opacity: 0.04,
+        pointerEvents: "none",
+        userSelect: "none",
+        zIndex: 0,
+      }}>
+        {card.index}
+      </div>
+
+      <Link href={`/work/${card.id}`} style={{ textDecoration: "none", color: "inherit", display: "block", position: "relative", zIndex: 1 }}
         onMouseEnter={(e) => {
           const arr = e.currentTarget.querySelector(".wi-arrow") as SVGElement | null;
           if (arr) { arr.style.opacity = "1"; arr.style.transform = "translateX(6px)"; }
+          const ghost = e.currentTarget.parentElement?.querySelector("[aria-hidden]") as HTMLElement | null;
+          if (ghost) ghost.style.opacity = "0.07";
         }}
         onMouseLeave={(e) => {
           const arr = e.currentTarget.querySelector(".wi-arrow") as SVGElement | null;
           if (arr) { arr.style.opacity = "0"; arr.style.transform = "none"; }
+          const ghost = e.currentTarget.parentElement?.querySelector("[aria-hidden]") as HTMLElement | null;
+          if (ghost) ghost.style.opacity = "0.04";
         }}
       >
         <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", marginBottom: "0.5rem" }}>
