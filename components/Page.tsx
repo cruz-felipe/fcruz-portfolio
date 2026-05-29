@@ -42,7 +42,7 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
   return (
     <div ref={ref} className="work-item" style={{
       borderTop: i > 0 ? "1px solid var(--border)" : "none",
-      paddingTop: "4rem", paddingBottom: "4rem",
+      paddingTop: "var(--section-v)", paddingBottom: "var(--section-v)",
       opacity: vis ? 1 : 0,
       transform: vis ? "none" : "translateY(12px)",
       transition: `opacity 0.45s ease ${i * 55}ms, transform 0.45s ease ${i * 55}ms`,
@@ -310,7 +310,7 @@ export default function Page({ data }: { data: PageData }) {
                 <div style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--muted)" }}>{ed.school}</div>
               </div>
             ))}
-            <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "rgba(10,10,10,0.32)", lineHeight: 1.65, marginTop: "1.5rem", textWrap: "pretty" }}>
+            <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "rgba(10,10,10,0.62)", lineHeight: 1.65, marginTop: "1.5rem", textWrap: "pretty" }}>
               Company names and client details omitted per active NDAs.
             </p>
           </div>
@@ -336,7 +336,7 @@ export default function Page({ data }: { data: PageData }) {
           <div id="getintouch" style={{
             fontFamily: "var(--font-display)", fontSize: "clamp(5.5rem, 13vw, 15rem)",
             lineHeight: 0.86, letterSpacing: "0.01em", color: "#F5F0E8",
-            paddingBottom: "3rem", marginTop: "-15px",width: "80rem",
+            paddingBottom: "3rem", width: "80rem", alignSelf: "flex-end",
           }}>
            get in touch
           </div>

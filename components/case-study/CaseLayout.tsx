@@ -128,7 +128,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
       <section style={{
         borderBottom: "1px solid var(--border)",
         paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
-        paddingTop: "4rem", paddingBottom: "3rem",
+        paddingTop: "calc(60px + var(--section-v))", paddingBottom: "3rem",
         opacity: visible ? 1 : 0,
         transform: visible ? "none" : "translateY(14px)",
         transition: "opacity 0.65s ease, transform 0.65s ease",
@@ -157,7 +157,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
         borderBottom: "1px solid var(--border)",
         display: "grid", gridTemplateColumns: "1fr 1fr",
         paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
-        paddingTop: "2.5rem", paddingBottom: "2.5rem",
+        paddingTop: "var(--section-v)", paddingBottom: "var(--section-v)",
         gap: "4rem", alignItems: "start",
       }}>
         <p style={{
@@ -202,7 +202,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
           {data.metrics.map((m, i) => (
             <div key={i} className="metric-cell" style={{
               paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
-              paddingTop: "2.5rem", paddingBottom: "2.5rem",
+              paddingTop: "var(--section-v)", paddingBottom: "var(--section-v)",
               borderRight: i < data.metrics.length - 1 ? "1px solid var(--border)" : "none",
             }}>
               <div style={{
@@ -253,7 +253,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
               <section className="case-section reveal-item" style={{
                 borderBottom: "1px solid var(--border)",
                 paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
-                paddingTop: "2.5rem", paddingBottom: "2.5rem",
+                paddingTop: "var(--section-v)", paddingBottom: "var(--section-v)",
                 opacity: 0, transform: "translateY(10px)",
                 transition: "opacity 0.5s ease, transform 0.5s ease",
               }}>
@@ -286,7 +286,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
               <div className="screen-gallery-section reveal-item" style={{
                 borderBottom: "1px solid var(--border)",
                 paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
-                paddingTop: "2.5rem", paddingBottom: "2.5rem",
+                paddingTop: "var(--section-v)", paddingBottom: "var(--section-v)",
                 opacity: 0, transform: "translateY(10px)",
                 transition: "opacity 0.5s ease, transform 0.5s ease",
               }}>
@@ -298,7 +298,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
             {data.artifacts[si]?.component && (
               <section className="artifact-section reveal-item" style={{                
                 paddingLeft: "var(--pad)", paddingRight: "var(--pad)",
-                paddingTop: "2.5rem", paddingBottom: "2.5rem", marginBottom: "3rem",
+                paddingTop: "var(--section-v)", paddingBottom: "var(--section-v)", marginBottom: "3rem",
                 background: "#F0EFE9",
                 opacity: 0, transform: "translateY(10px)",
                 transition: "opacity 0.5s ease, transform 0.5s ease",
@@ -355,7 +355,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
             <>
               <span style={{
                 fontFamily: "var(--font-mono)", fontSize: "10px",
-                color: "rgba(245,240,232,0.25)", minWidth: "2.5rem", flexShrink: 0,
+                color: "rgba(245,240,232,0.45)", minWidth: "2.5rem", flexShrink: 0,
                 letterSpacing: "0.08em",
               }}>{work.index}</span>
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
@@ -385,7 +385,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
                   <span style={{
                     fontFamily: "var(--font-mono)", fontSize: "10px",
                     letterSpacing: "0.12em", textTransform: "uppercase" as const,
-                    color: "rgba(245,240,232,0.25)",
+                    color: "rgba(245,240,232,0.45)",
                     border: "0.5px solid rgba(245,240,232,.5)", padding: "2px 6px",
                   }}>Personal</span>
                 )}
