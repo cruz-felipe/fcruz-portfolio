@@ -235,7 +235,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
               <div className="cs-pullquote-section case-pullquote-block" style={{
                 borderBottom: "1px solid var(--border)",
               }}>
-                <blockquote className="cs-pullquote" style={{ fontStyle: "italic", marginBottom: "1.5rem", paddingLeft: "0.25rem" }}>
+                <blockquote className="cs-pullquote" style={{ marginBottom: "1.5rem" }}>
                   {noWidow(section.pullquote)}
                 </blockquote>
                 <div style={{

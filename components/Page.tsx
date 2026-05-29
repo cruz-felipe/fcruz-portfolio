@@ -23,7 +23,7 @@ interface PageData {
 function Label({ children }: { children: React.ReactNode }) {
   return (
     <div style={{
-      fontFamily: "var(--font-mono)", fontSize: "9px", fontWeight: 500,
+      fontFamily: "var(--font-mono)", fontSize: "10px", fontWeight: 500,
       letterSpacing: "0.18em", textTransform: "uppercase" as const,
       color: "rgba(10,10,10,0.4)", marginBottom: "0.65rem",
     }}>{children}</div>
@@ -58,9 +58,9 @@ function WorkItem({ card, i }: { card: WorkCard; i: number }) {
         }}
       >
         <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", marginBottom: "0.5rem" }}>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.12em", color: "var(--faint)" }}>{card.index}</span>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "var(--faint)" }}>{card.tag}</span>
-          {card.personal && <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "var(--faint)", opacity: 0.7 }}>personal</span>}
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.12em", color: "var(--faint)" }}>{card.index}</span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.1em", color: "var(--faint)" }}>{card.tag}</span>
+          {card.personal && <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--faint)", opacity: 0.7 }}>personal</span>}
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "2rem", marginBottom: "0.75rem" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
@@ -155,7 +155,7 @@ export default function Page({ data }: { data: PageData }) {
         <button aria-label="Close menu" style={{
           position: "absolute", top: "1.5rem", right: "var(--pad)",
           background: "none", border: "none", cursor: "pointer",
-          fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.14em",
+          fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.14em",
           textTransform: "uppercase", color: "rgba(245,240,232,0.5)",
         }}>close</button>
         {[["work", "work"], ["about", "about"], ["contact", "contact"]].map(([label, id], i) => (
@@ -298,7 +298,7 @@ export default function Page({ data }: { data: PageData }) {
             <div key={i} style={{ paddingBottom: "1.5rem", marginBottom: "1.5rem", borderBottom: i < data.experience.length - 1 ? "1px solid var(--border)" : "none" }}>
               <div style={{ fontFamily: "var(--font-body)", fontWeight: 500, fontSize: "14px", color: "var(--ink)", marginBottom: "0.1rem" }}>{job.role}</div>
               <div style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--ink)", marginBottom: "0.15rem" }}>{job.company}</div>
-              <div style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.08em", color: "var(--faint)", marginBottom: "0.55rem" }}>{job.period}</div>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.08em", color: "var(--faint)", marginBottom: "0.55rem" }}>{job.period}</div>
               <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", lineHeight: 1.65, color: "rgba(10,10,10,0.62)", textWrap: "pretty" }}>{job.note}</p>
             </div>
           ))}
@@ -310,7 +310,7 @@ export default function Page({ data }: { data: PageData }) {
                 <div style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--muted)" }}>{ed.school}</div>
               </div>
             ))}
-            <p style={{ fontFamily: "var(--font-mono)", fontSize: "9px", color: "rgba(10,10,10,0.32)", lineHeight: 1.65, marginTop: "1.5rem", textWrap: "pretty" }}>
+            <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "rgba(10,10,10,0.32)", lineHeight: 1.65, marginTop: "1.5rem", textWrap: "pretty" }}>
               Company names and client details omitted per active NDAs.
             </p>
           </div>
@@ -364,10 +364,10 @@ export default function Page({ data }: { data: PageData }) {
         </div>
 
         <div style={{ padding: "1.25rem var(--pad)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "rgba(245,240,232,0.25)" }}>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.1em", color: "rgba(245,240,232,0.25)" }}>
             Felipe Cruz &mdash; Product Designer
           </span>
-          <span style={{ fontFamily: "var(--font-mono)", fontSize: "9px", letterSpacing: "0.1em", color: "rgba(245,240,232,0.25)" }}>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", letterSpacing: "0.1em", color: "rgba(245,240,232,0.25)" }}>
             {year}
           </span>
         </div>
