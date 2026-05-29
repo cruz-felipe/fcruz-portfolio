@@ -226,13 +226,14 @@ export default function Page({ data }: { data: PageData }) {
           <p style={{ fontFamily: "var(--font-body)", fontSize: "17px", lineHeight: 1.85, color: "rgba(10,10,10,0.72)", marginBottom: "2.5rem", textWrap: "pretty" }}>
             {data.heroBio}
           </p>
+        </div>
+
+        <div className="hero-col2" style={{ minHeight: "35rem", borderLeft: "1px solid var(--border)" }}>
           <Label>currently</Label>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "16px", lineHeight: 1.65, color: "rgba(10,10,10,0.6)", textWrap: "pretty" }}>
             {data.heroCurrentRole}<br />{data.heroCurrentCompany}
           </p>
         </div>
-
-        <div className="hero-col2" style={{ minHeight: "35rem", borderLeft: "1px solid var(--border)" }} />
 
         {/* Col 3: quote bottom-aligned */}
         <div className="hero-col3" style={{
