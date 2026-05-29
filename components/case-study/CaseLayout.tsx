@@ -234,8 +234,19 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
             {section.pullquote && (
               <div className="cs-pullquote-section case-pullquote-block" style={{
                 borderBottom: "1px solid var(--border)",
+                padding: "var(--section-v) var(--pad)",
+                width: "100%",
               }}>
-                <blockquote className="cs-pullquote" style={{ marginBottom: "1.5rem" }}>
+                <blockquote style={{
+                  fontFamily: "var(--font-body)",
+                  fontStyle: "italic",
+                  fontSize: "clamp(1.6rem, 3.2vw, 2.8rem)",
+                  lineHeight: 1.28,
+                  color: "var(--ink)",
+                  maxWidth: "780px",
+                  textWrap: "pretty" as const,
+                  marginBottom: "1.5rem",
+                }}>
                   {noWidow(section.pullquote)}
                 </blockquote>
                 <div style={{
@@ -361,7 +372,7 @@ export default function CaseLayout({ data }: { data: CaseStudyData }) {
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                 <span style={{
                   fontFamily: "var(--font-display)",
-                  fontSize: "clamp(1.8rem, 3vw, 3rem)",
+                  fontSize: "clamp(1.4rem, 3vw, 3rem)",
                   lineHeight: 0.92, letterSpacing: "0.01em",
                   color: isCurrent ? "rgba(255,255,255,1)" : "rgba(245,240,232,0.85)",
                 }}>

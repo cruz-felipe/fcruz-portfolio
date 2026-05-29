@@ -365,7 +365,7 @@ export default function Page({ data }: { data: PageData }) {
           </div>
         </div>
 
-        <div id="emailme" style={{ padding: "3rem var(--pad) 4rem", width: "15%", }}>
+        <div id="emailme" style={{ padding: "3rem var(--pad) 4rem", }}>
           <a href={`mailto:${data.contactEmail}`} style={{
             display: "block", fontFamily: "var(--font-body)", fontStyle: "italic",
             fontSize: "clamp(1rem, 2vw, 1.5rem)", color: "#F5F0E8",

@@ -73,8 +73,6 @@ p { text-wrap: pretty; }
   .cs-body + .cs-body { margin-top: 1.5rem; }
 
   .cs-pullquote-section {
-    border-top: 1px solid var(--border);
-    padding: 4rem var(--pad);
     width: 100%;
   }
   .cs-pullquote {

@@ -28,6 +28,9 @@ export default function ResponsiveStyles() {
       .screen-gallery.narrow.count-2 { grid-template-columns: repeat(2, 320px); justify-content: center; }
       .screen-gallery.narrow.count-1 { grid-template-columns: 320px; justify-content: center; }
 
+      /* ── Work item: contain ghost number ── */
+      .work-item { overflow: hidden; position: relative; }
+
       /* ══════════════════════════════════════════
          TABLET — 900px
       ══════════════════════════════════════════ */
@@ -63,7 +66,7 @@ export default function ResponsiveStyles() {
         /* Case study */
         .case-context   { grid-template-columns: 1fr !important; gap: 2rem !important; }
         .case-hero-below { grid-template-columns: 1fr !important; gap: 2rem !important; }
-        .case-metrics { grid-template-columns: repeat(3, 1fr) !important; }
+        .case-metrics { grid-template-columns: repeat(2, 1fr) !important; }
         .screen-gallery { grid-template-columns: repeat(2, 1fr) !important; }
         .screen-gallery.narrow { grid-template-columns: repeat(2, 240px) !important; }
       }
@@ -87,6 +90,7 @@ export default function ResponsiveStyles() {
           border-left: none !important; padding-left: 0 !important;
           border-top: 1px solid var(--border) !important; padding-top: 2rem !important;
           padding-right: 0 !important;
+          display: none !important;
         }
         .hero-col3 {
           border-left: none !important; padding-left: 0 !important;
@@ -154,27 +158,27 @@ export default function ResponsiveStyles() {
       }
 
 
-        /* ── Case hero title: looser line-height on small screens ── */
+        /* ── Case hero title ── */
         .case-hero-title { line-height: 1 !important; margin-bottom: 1.5rem !important; }
-
-        /* ── Pullquote block: tighter vertical padding on mobile ── */
+        /* ── Pullquote block ── */
         .case-pullquote-block { padding-top: 2rem !important; padding-bottom: 2rem !important; }
-
-        /* ── Pullquote font size: readable on 375px ── */
         .case-pullquote-block blockquote { font-size: 1.35rem !important; }
-
-        /* ── More work rows: ensure 48px tap target ── */
+        /* ── More work rows: 48px tap target ── */
         .more-work-row { min-height: 48px !important; align-items: center !important; padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; }
-
-        /* ── More work title: tighter on mobile ── */
-        .more-work-row span[style*="font-family: var(--font-display)"] { font-size: 1.6rem !important; }
-
-        /* ── Artifact scroll: add padding buffer so scrollbar doesn't clip content ── */
+        /* ── Artifact scroll ── */
         .artifact-scroll { padding-bottom: 0.5rem !important; }
-
-        /* ── Body text: slightly larger on small screens for readability ── */
+        /* ── Body text mobile ── */
         .cs-body { font-size: 16px !important; }
         .cs-lead { font-size: 1rem !important; }
+        /* ── Ghost number: contain overflow ── */
+        .work-item { overflow: hidden !important; }
+        /* ── Work item arrow: visible on touch ── */
+        .wi-arrow { opacity: 0.35 !important; }
+        /* ── Case hero: less top padding on mobile ── */
+        .case-hero-inner { padding-top: calc(60px + 2rem) !important; }
+        /* ── More work titles: min size on narrow ── */
+        .more-work-title { font-size: 1.4rem !important; }
+      }
 
       /* ── 420px ── */
       @media (max-width: 420px) {
