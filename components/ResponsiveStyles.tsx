@@ -58,15 +58,16 @@ export default function ResponsiveStyles() {
           grid-column: 1 / -1 !important;
           border-left: none !important; border-top: 1px solid var(--border) !important;
           padding-left: 0 !important; padding-top: 2rem !important;
-          display: grid !important; grid-template-columns: 220px 1fr !important;
-          gap: 2.5rem !important; align-items: start !important;
+          display: flex !important; flex-direction: row !important;
+          gap: 2.5rem !important; align-items: flex-start !important;
         }
-        .about-col3 img { aspect-ratio: 3/4 !important; }
+        .about-col3 img { aspect-ratio: 3/4 !important; width: 180px !important; flex-shrink: 0 !important; }
 
         /* Case study */
         .case-context   { grid-template-columns: 1fr !important; gap: 2rem !important; }
         .case-hero-below { grid-template-columns: 1fr !important; gap: 2rem !important; }
-        .case-metrics { grid-template-columns: repeat(2, 1fr) !important; }
+        .case-metrics { grid-template-columns: repeat(3, 1fr) !important; }
+        .metric-cell { padding-left: 1.5rem !important; padding-right: 1.5rem !important; padding-top: 2rem !important; padding-bottom: 2rem !important; }
         .screen-gallery { grid-template-columns: repeat(2, 1fr) !important; }
         .screen-gallery.narrow { grid-template-columns: repeat(2, 240px) !important; }
       }
