@@ -85,8 +85,6 @@ p { text-wrap: pretty; }
     color: var(--ink);
     max-width: 860px;
     text-wrap: pretty;
-    border-left: 4px solid var(--red);
-    padding-left: 1.5rem;
   }
   .cs-pullquote-attr {
     font-family: var(--font-mono);
